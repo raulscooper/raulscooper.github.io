@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -932,7 +932,7 @@
   <strong>SpotClean India</strong>
   Open-source playbook · Creative Commons Attribution licence · Free to use, adapt, and share<br><br>
   This playbook may be used by anyone, anywhere, without permission.<br>
-  To contribute or build the platform: <a href="https://github.com">github.com/spotclean-india</a> (coming soon)
+  To contribute or build the platform: <a href="https://raulscooper.github.io"> github linkn a</a> (coming soon)
 </footer>
 
 <script>
