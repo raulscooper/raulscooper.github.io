@@ -1,6 +1,8 @@
-# raulscooper.github.io
+# Nayalab
 
-Open blueprints for India. Updated weekly.
+Open blueprints for India. Updated weekly. Public domain.
+
+**Live site:** https://raulscooper.github.io
 
 ---
 
@@ -9,7 +11,7 @@ Open blueprints for India. Updated weekly.
 ```
 raulscooper.github.io/
 │
-├── index.html                  ← HOME PAGE (catalog of all ideas)
+├── index.html                  ← Homepage (catalog of all ideas)
 │
 ├── spotclean/
 │   └── index.html              ← SpotClean India playbook
@@ -17,41 +19,40 @@ raulscooper.github.io/
 ├── becoming-pm/
 │   └── index.html              ← The Common Man's Road to PM
 │
-├── your-next-idea/             ← add a new folder for each new idea
+├── your-next-idea/             ← One folder per new idea
 │   └── index.html
 │
 └── README.md
 ```
 
-Each idea lives in its own folder with its own `index.html`.  
-The homepage (`index.html`) is the catalog that links to all of them.
-
 ---
 
-## How to add a new idea each week
+## How to add a new idea
 
 ### Step 1 — Create a folder
-Name it something short and URL-friendly (no spaces, lowercase):
+Short, lowercase, no spaces:
 ```
-cleaning-india/
 water-crisis/
 startup-india/
+fix-schools/
 ```
 
-### Step 2 — Add your idea's index.html
-Drop your HTML file in that folder and name it `index.html`.  
-Use the PM blueprint file as a template — same design system, same fonts.
+### Step 2 — Add your index.html
+Drop your HTML file in the folder. Use the existing idea pages as a design template.
 
 ### Step 3 — Add a card to the homepage
-Open `index.html` in the root folder.  
-Find the comment that says `<!-- add new cards below this comment -->`.  
-Copy and paste this block above that comment:
+Open the root `index.html`. Find the comment:
+```
+<!-- ADD NEW CARDS BELOW THIS LINE -->
+```
+
+Copy and paste this block above it:
 
 ```html
-<a class="card" href="YOUR-FOLDER-NAME/index.html" data-category="CATEGORY">
+<a class="card" href="YOUR-FOLDER/index.html" data-category="CATEGORY">
   <div class="card-tag">CATEGORY</div>
   <div class="card-title">YOUR TITLE</div>
-  <div class="card-desc">One or two sentences describing the idea.</div>
+  <div class="card-desc">One or two sentence description.</div>
   <div class="card-footer">
     <span class="card-date">Month Year</span>
     <span class="card-arrow">→ Read</span>
@@ -59,71 +60,73 @@ Copy and paste this block above that comment:
 </a>
 ```
 
-Replace:
-- `YOUR-FOLDER-NAME` → the folder you created in Step 1
-- `CATEGORY` → one of: `politics`, `civic`, `economy`, `governance`
-- `YOUR TITLE`, description, and date
+Replace `YOUR-FOLDER`, `CATEGORY`, `YOUR TITLE`, description, and date.
 
-### Step 4 — Commit and push
+### Step 4 — Push
 ```bash
 git add .
-git commit -m "Add: [your idea title]"
+git commit -m "Add: Your idea title"
 git push
 ```
 
-GitHub Pages publishes automatically within ~60 seconds.
+GitHub Pages publishes within ~60 seconds.
 
 ---
 
-## To make the first card a large "featured" card
-
-Change `class="card"` to `class="card featured"` and add a number div:
+## To make a card featured (large, spans 2 columns)
 
 ```html
 <a class="card featured" href="..." data-category="...">
-  <div class="card-number">03</div>   ← increment each time
+  <div class="card-number">03</div>
   <div class="card-body">
-    ... rest of card content ...
+    <div class="card-tag">...</div>
+    <div class="card-title">...</div>
+    <div class="card-desc">...</div>
+    <div class="card-footer">...</div>
   </div>
 </a>
 ```
 
+Increment the number each time: 01, 02, 03...
+
 ---
 
-## Categories (for the filter buttons)
+## Categories
 
 | Value | Use for |
 |---|---|
-| `politics` | Electoral strategy, governance, state power |
+| `politics` | Electoral strategy, power, statecraft |
 | `civic` | Community action, public spaces, citizen movements |
 | `economy` | Business, jobs, economic policy |
 | `governance` | Institutions, law, systems design |
 
-To add a new category, add a filter button in `index.html`:
+To add a new category, add one button in `index.html`:
 ```html
 <button class="filter-btn" data-filter="education">Education</button>
 ```
 
 ---
 
-## Design system
+## Language switcher
 
-All idea pages use the same fonts (loaded from Google Fonts — no install needed):
-- `Playfair Display` — headings
-- `Source Serif 4` — body text  
-- `IBM Plex Mono` — labels and metadata
-
-Color palette:
-- Background: `#f5f0e8` (warm paper)
-- Text: `#0f0e0c` (near-black ink)
-- Accent: `#e8610a` (saffron orange)
-- Muted: `#7a6e5f`
-
-The homepage uses an inverted dark theme (same saffron accent).
+The Google Translate widget is already embedded in the homepage header. It covers all 22 scheduled Indian languages automatically. No setup needed.
 
 ---
 
-## That's it.
+## Design system
 
-No build tools. No npm. No frameworks. Pure HTML.  
-Publish weekly by adding a folder and one line to the homepage.
+Fonts (Google Fonts, no install):
+- `Bebas Neue` — display headings
+- `Crimson Pro` — body text
+- `IBM Plex Mono` — labels, metadata
+
+Colours:
+- Background: `#0a0a08`
+- Text: `#f2ede4`
+- Accent: `#f07b1f` (saffron)
+- Muted: `#6b6560`
+
+---
+
+No build tools. No npm. No frameworks. Pure HTML.
+One folder, one file, one card. That's it.
