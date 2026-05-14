@@ -6,12 +6,37 @@ layout: null
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SpotClean India — Operations Playbook</title>
+<title>SpotClean India — Nayalab</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<!-- Google Translate -->
+<script type="text/javascript">
+  function googleTranslateElementInit() {
+    new google.translate.TranslateElement({
+      pageLanguage: 'en',
+      includedLanguages: 'hi,ta,te,bn,mr,gu,kn,ml,pa,or,as,ur,mai,kok,sd,ks,ne,sa,si,doi,mni,sat',
+      layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+      autoDisplay: false,
+      multilanguagePage: true
+    }, 'google_translate_element');
+  }
+</script>
+<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 :root{--ink:#1a1a18;--paper:#f5f2eb;--paper2:#ede9df;--accent:#2d5a27;--accent2:#c8521a;--muted:#6b6860;--border:#d4cfc4;--white:#fdfcf8}
 body{background:var(--paper);color:var(--ink);font-family:'Instrument Sans',sans-serif;font-size:16px;line-height:1.7}
+/* Google Translate overrides */
+.goog-te-banner-frame{display:none!important}
+body{top:0!important}
+#google_translate_element .goog-te-gadget-simple{background:transparent!important;border:1px solid #444!important;padding:0.15rem 0.5rem!important}
+#google_translate_element .goog-te-gadget-simple a,
+#google_translate_element .goog-te-gadget-simple span{color:#aaa!important;font-family:'DM Mono',monospace!important;font-size:0.6rem!important;text-decoration:none!important}
+/* Nayalab nav bar */
+.nayalab-bar{background:#0a0a08;border-bottom:1px solid #2a2a26;padding:0.5rem 1.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.8rem}
+.nayalab-bar__home{font-family:'DM Mono',monospace;font-size:0.6rem;letter-spacing:0.25em;text-transform:uppercase;color:#f07b1f;text-decoration:none}
+.nayalab-bar__lang{display:flex;align-items:center;gap:0.8rem}
+.nayalab-bar__label{font-family:'DM Mono',monospace;font-size:0.55rem;letter-spacing:0.2em;text-transform:uppercase;color:#6b6560}
+/* Page styles */
 .hero{background:var(--ink);color:var(--paper);padding:1.25rem 2rem;display:flex;align-items:center;justify-content:space-between;gap:1.5rem;flex-wrap:wrap}
 .hero-title{font-family:'DM Serif Display',serif;font-size:clamp(1.5rem,3.5vw,2.2rem);line-height:1.1}
 .hero-title em{font-style:italic;color:#8a9e7a}
@@ -62,7 +87,6 @@ tr:nth-child(even) td{background:var(--paper2)}
 .s-nom{background:#e8f0e8;color:#2d5a27}.s-fund{background:#fdf0e8;color:#8b3a15}.s-clean{background:#e6f0f8;color:#1a4870}.s-maint{background:#f0f0e8;color:#4a4a20}.s-att{background:#fce8e8;color:#8b1a1a}
 .back-btn{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);background:none;border:1px solid var(--border);border-radius:3px;padding:6px 14px;cursor:pointer;margin-bottom:1.5rem;transition:all 0.15s;display:inline-block}
 .back-btn:hover{color:var(--ink);border-color:#aaa}
-/* LANDING */
 #landing{display:block}
 .landing-intro{font-size:1rem;color:var(--muted);max-width:640px;margin:0 0 2rem;line-height:1.7}
 .landing-intro strong{color:var(--ink)}
@@ -82,6 +106,16 @@ tr:nth-child(even) td{background:var(--paper2)}
 </head>
 <body>
 
+<!-- Nayalab nav bar -->
+<div class="nayalab-bar">
+  <a href="../index.html" class="nayalab-bar__home">&#8592; Nayalab</a>
+  <div class="nayalab-bar__lang">
+    <span class="nayalab-bar__label">Read in your language</span>
+    <div id="google_translate_element"></div>
+  </div>
+</div>
+
+<!-- Page hero -->
 <div class="hero">
   <div>
     <div class="hero-title">Spot<em>Clean</em> India</div>
@@ -90,22 +124,24 @@ tr:nth-child(even) td{background:var(--paper2)}
   <div class="hero-badge">Operations Playbook</div>
 </div>
 
+<!-- Module navigation -->
 <nav class="module-nav" id="nav">
   <button class="nav-item active" onclick="showLanding()">Overview</button>
-  <button class="nav-item" onclick="show(0)">01 · Choose a spot</button>
-  <button class="nav-item" onclick="show(1)">02 · Team size</button>
-  <button class="nav-item" onclick="show(2)">03 · Equipment</button>
-  <button class="nav-item" onclick="show(3)">04 · Disposal</button>
-  <button class="nav-item" onclick="show(4)">05 · Funding</button>
-  <button class="nav-item" onclick="show(5)">06 · Municipality</button>
-  <button class="nav-item" onclick="show(6)">07 · Corporations</button>
-  <button class="nav-item" onclick="show(7)">08 · Messaging</button>
-  <button class="nav-item" onclick="show(8)">09 · Governance</button>
-  <button class="nav-item" onclick="show(9)">10 · Digital platform</button>
+  <button class="nav-item" onclick="show(0)">01 &middot; Choose a spot</button>
+  <button class="nav-item" onclick="show(1)">02 &middot; Team size</button>
+  <button class="nav-item" onclick="show(2)">03 &middot; Equipment</button>
+  <button class="nav-item" onclick="show(3)">04 &middot; Disposal</button>
+  <button class="nav-item" onclick="show(4)">05 &middot; Funding</button>
+  <button class="nav-item" onclick="show(5)">06 &middot; Municipality</button>
+  <button class="nav-item" onclick="show(6)">07 &middot; Corporations</button>
+  <button class="nav-item" onclick="show(7)">08 &middot; Messaging</button>
+  <button class="nav-item" onclick="show(8)">09 &middot; Governance</button>
+  <button class="nav-item" onclick="show(9)">10 &middot; Digital platform</button>
 </nav>
 
 <div class="container">
 
+  <!-- LANDING -->
   <div id="landing">
     <p class="landing-intro">SpotClean India is a <strong>citizen-led playbook</strong> for cleaning and permanently maintaining public spaces. No central organisation. No permission needed. Anyone can run a spot fix using this guide. Click any module to read the full guidance.</p>
     <div class="modules-grid">
@@ -120,175 +156,408 @@ tr:nth-child(even) td{background:var(--paper2)}
       <div class="mod-card" onclick="show(8)"><div class="mod-num">09</div><div class="mod-name">Governance</div><div class="mod-desc">How to stay lean and structurally resistant to capture and corruption</div></div>
       <div class="mod-card" onclick="show(9)"><div class="mod-num">10</div><div class="mod-name">Digital platform</div><div class="mod-desc">The four-function app — spot map, clean reports, check-ins, micro-funding</div></div>
     </div>
-    <div class="landing-note">Click any module above to read the full guidance · Free to use, adapt, and share</div>
+    <div class="landing-note">Click any module above to read the full guidance &middot; Free to use, adapt, and share</div>
   </div>
 
+  <!-- MODULE 01 -->
   <div class="module" id="m0">
-    <button class="back-btn" onclick="showLanding()">← Back to overview</button>
-    <div class="module-header"><div class="module-number">01</div><div><div class="module-tag">Selection criteria</div><div class="module-title">How to choose a spot</div><div class="module-intro">Not every dirty spot is the right spot. Picking strategically makes the difference between a lasting transformation and wasted effort.</div></div></div>
-    <div class="card"><div class="card-label">The scoring system</div><h3>Score every candidate spot before committing</h3><p>Rate each spot 1–5 on four criteria. A total score below 12 means skip it — find a better candidate.</p></div>
+    <button class="back-btn" onclick="showLanding()">&#8592; Back to overview</button>
+    <div class="module-header">
+      <div class="module-number">01</div>
+      <div>
+        <div class="module-tag">Selection criteria</div>
+        <div class="module-title">How to choose a spot</div>
+        <div class="module-intro">Not every dirty spot is the right spot. Picking strategically makes the difference between a lasting transformation and wasted effort.</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-label">The scoring system</div>
+      <h3>Score every candidate spot before committing</h3>
+      <p>Rate each spot 1&ndash;5 on four criteria. A total score below 12 means skip it &mdash; find a better candidate.</p>
+    </div>
     <div class="grid2">
       <div class="stat-box"><div class="stat-label">Criterion 1</div><div class="stat-value">Visibility</div><div class="stat-sub">Seen by 50+ people/day? High-footfall spots create the most behaviour change.</div></div>
       <div class="stat-box"><div class="stat-label">Criterion 2</div><div class="stat-value">Access</div><div class="stat-sub">Can volunteers reach it safely on foot? Is there space to work?</div></div>
       <div class="stat-box"><div class="stat-label">Criterion 3</div><div class="stat-value">Recurrence</div><div class="stat-sub">Can future dumping be physically blocked or made harder through design?</div></div>
       <div class="stat-box"><div class="stat-label">Criterion 4</div><div class="stat-value">Ownership</div><div class="stat-sub">Is there someone nearby willing to maintain it after the fix?</div></div>
     </div>
-    <div class="card"><div class="card-label">Priority spot types</div><h3>Where to look first</h3>
-      <div class="step"><div class="step-n">1</div><div class="step-text"><strong>Temple, mosque, church entrances</strong> — high footfall, community pride attached, easier to mobilise locals</div></div>
-      <div class="step"><div class="step-n">2</div><div class="step-text"><strong>School gates</strong> — children are the future maintainers; the school can formally own upkeep</div></div>
-      <div class="step"><div class="step-n">3</div><div class="step-text"><strong>Market corners and nala edges</strong> — chronic dump spots that create visible, dramatic transformations</div></div>
-      <div class="step"><div class="step-n">4</div><div class="step-text"><strong>Bus stop surrounds</strong> — captive audience witnesses the before and after; high symbolic value</div></div>
+    <div class="card">
+      <div class="card-label">Priority spot types</div>
+      <h3>Where to look first</h3>
+      <div class="step"><div class="step-n">1</div><div class="step-text"><strong>Temple, mosque, church entrances</strong> &mdash; high footfall, community pride attached, easier to mobilise locals</div></div>
+      <div class="step"><div class="step-n">2</div><div class="step-text"><strong>School gates</strong> &mdash; children are the future maintainers; the school can formally own upkeep</div></div>
+      <div class="step"><div class="step-n">3</div><div class="step-text"><strong>Market corners and nala edges</strong> &mdash; chronic dump spots that create visible, dramatic transformations</div></div>
+      <div class="step"><div class="step-n">4</div><div class="step-text"><strong>Bus stop surrounds</strong> &mdash; captive audience witnesses the before and after; high symbolic value</div></div>
     </div>
-    <div class="card"><div class="card-label">Avoid these for now</div><div class="tags"><span class="tag no">Active construction zones</span><span class="tag no">Private land without consent</span><span class="tag no">Industrial or chemical waste</span><span class="tag no">No local owner available</span><span class="tag no">Politically contested locations</span></div></div>
+    <div class="card">
+      <div class="card-label">Avoid these for now</div>
+      <div class="tags">
+        <span class="tag no">Active construction zones</span>
+        <span class="tag no">Private land without consent</span>
+        <span class="tag no">Industrial or chemical waste</span>
+        <span class="tag no">No local owner available</span>
+        <span class="tag no">Politically contested locations</span>
+      </div>
+    </div>
   </div>
 
+  <!-- MODULE 02 -->
   <div class="module" id="m1">
-    <button class="back-btn" onclick="showLanding()">← Back to overview</button>
-    <div class="module-header"><div class="module-number">02</div><div><div class="module-tag">People & roles</div><div class="module-title">Team size</div><div class="module-intro">A spot fix is not a rally. Smaller focused teams finish things. Larger groups diffuse accountability and slow everything down.</div></div></div>
+    <button class="back-btn" onclick="showLanding()">&#8592; Back to overview</button>
+    <div class="module-header">
+      <div class="module-number">02</div>
+      <div>
+        <div class="module-tag">People &amp; roles</div>
+        <div class="module-title">Team size</div>
+        <div class="module-intro">A spot fix is not a rally. Smaller focused teams finish things. Larger groups diffuse accountability and slow everything down.</div>
+      </div>
+    </div>
     <div class="grid2">
       <div class="stat-box"><div class="stat-label">Minimum team</div><div class="stat-value">6</div><div class="stat-sub">Absolute floor for a safe, complete fix</div></div>
-      <div class="stat-box"><div class="stat-label">Ideal team</div><div class="stat-value">12–15</div><div class="stat-sub">Enough for all roles without crowding</div></div>
+      <div class="stat-box"><div class="stat-label">Ideal team</div><div class="stat-value">12&ndash;15</div><div class="stat-sub">Enough for all roles without crowding</div></div>
       <div class="stat-box"><div class="stat-label">Maximum useful</div><div class="stat-value">25</div><div class="stat-sub">Beyond this, people become spectators</div></div>
-      <div class="stat-box"><div class="stat-label">Time per spot</div><div class="stat-value">3–4 hrs</div><div class="stat-sub">7am–11am is the ideal window</div></div>
+      <div class="stat-box"><div class="stat-label">Time per spot</div><div class="stat-value">3&ndash;4 hrs</div><div class="stat-sub">7am&ndash;11am is the ideal window</div></div>
     </div>
-    <div class="card"><div class="card-label">Role breakdown — 12 person team</div><h3>Everyone has a job</h3><p style="margin-bottom:1rem;font-size:0.88rem;color:var(--muted)">No leaders — only coordinators for the day. Rotate roles across events.</p>
-      <div class="step"><div class="step-n">2</div><div class="step-text"><strong>Day coordinators</strong> — logistics, safety briefing, contact for the municipal officer</div></div>
-      <div class="step"><div class="step-n">4</div><div class="step-text"><strong>Sweepers & collectors</strong> — clearing, bagging, sorting wet from dry waste</div></div>
-      <div class="step"><div class="step-n">2</div><div class="step-text"><strong>Surface team</strong> — scrubbing, anti-litter texture coat, minor pothole filling</div></div>
-      <div class="step"><div class="step-n">2</div><div class="step-text"><strong>Greening crew</strong> — potted plants, murals, planters. The most visible transformation signal</div></div>
-      <div class="step"><div class="step-n">2</div><div class="step-text"><strong>Documenters</strong> — GPS-timestamped before/after photos from identical angles, uploaded during the event</div></div>
+    <div class="card">
+      <div class="card-label">Role breakdown &mdash; 12 person team</div>
+      <h3>Everyone has a job</h3>
+      <p style="margin-bottom:1rem;font-size:0.88rem;color:var(--muted)">No leaders &mdash; only coordinators for the day. Rotate roles across events.</p>
+      <div class="step"><div class="step-n">2</div><div class="step-text"><strong>Day coordinators</strong> &mdash; logistics, safety briefing, contact for the municipal officer</div></div>
+      <div class="step"><div class="step-n">4</div><div class="step-text"><strong>Sweepers &amp; collectors</strong> &mdash; clearing, bagging, sorting wet from dry waste</div></div>
+      <div class="step"><div class="step-n">2</div><div class="step-text"><strong>Surface team</strong> &mdash; scrubbing, anti-litter texture coat, minor pothole filling</div></div>
+      <div class="step"><div class="step-n">2</div><div class="step-text"><strong>Greening crew</strong> &mdash; potted plants, murals, planters. The most visible transformation signal</div></div>
+      <div class="step"><div class="step-n">2</div><div class="step-text"><strong>Documenters</strong> &mdash; GPS-timestamped before/after photos from identical angles, uploaded during the event</div></div>
     </div>
-    <div class="card"><div class="card-label">Day timeline</div><h3>Minute by minute</h3>
-      <div class="step"><div class="time-pill">7:00</div><div class="step-text"><strong>Arrive and brief</strong> — roles, safety, photograph before-state from fixed reference points</div></div>
-      <div class="step"><div class="time-pill">7:15</div><div class="step-text"><strong>Clear and bag</strong> — all waste removed, sorted wet/dry/hazardous. Hardest and most important phase.</div></div>
-      <div class="step"><div class="time-pill">9:00</div><div class="step-text"><strong>Surface & green</strong> — scrub, paint, plant</div></div>
-      <div class="step"><div class="time-pill">10:30</div><div class="step-text"><strong>Install messaging</strong> — neighbourhood tile, bin, QR plate (see Module 8)</div></div>
-      <div class="step"><div class="time-pill">11:00</div><div class="step-text"><strong>After photos & upload</strong> — from identical reference angles. Submit to platform. Done.</div></div>
+    <div class="card">
+      <div class="card-label">Day timeline</div>
+      <h3>Minute by minute</h3>
+      <div class="step"><div class="time-pill">7:00</div><div class="step-text"><strong>Arrive and brief</strong> &mdash; roles, safety, photograph before-state from fixed reference points</div></div>
+      <div class="step"><div class="time-pill">7:15</div><div class="step-text"><strong>Clear and bag</strong> &mdash; all waste removed, sorted wet/dry/hazardous. Hardest and most important phase.</div></div>
+      <div class="step"><div class="time-pill">9:00</div><div class="step-text"><strong>Surface &amp; green</strong> &mdash; scrub, paint, plant</div></div>
+      <div class="step"><div class="time-pill">10:30</div><div class="step-text"><strong>Install messaging</strong> &mdash; neighbourhood tile, bin, QR plate (see Module 8)</div></div>
+      <div class="step"><div class="time-pill">11:00</div><div class="step-text"><strong>After photos &amp; upload</strong> &mdash; from identical reference angles. Submit to platform. Done.</div></div>
     </div>
   </div>
 
+  <!-- MODULE 03 -->
   <div class="module" id="m2">
-    <button class="back-btn" onclick="showLanding()">← Back to overview</button>
-    <div class="module-header"><div class="module-number">03</div><div><div class="module-tag">What to bring</div><div class="module-title">Equipment</div><div class="module-intro">Everything your team needs, broken down by phase. Buy locally, keep it simple.</div></div></div>
-    <div class="card"><div class="card-label">Cleaning — per 12-person team</div><div class="tags"><span class="tag">Heavy-duty brooms ×6</span><span class="tag">Stiff scrub brushes ×4</span><span class="tag">Large garbage bags ×50</span><span class="tag">Rubber gloves ×15 pairs</span><span class="tag">Face masks ×15</span><span class="tag">Shovels ×3</span><span class="tag">Buckets ×4</span><span class="tag">Tongs for hazardous items ×2</span></div></div>
-    <div class="card"><div class="card-label">Surface treatment</div><div class="tags"><span class="tag">Phenyl or disinfectant concentrate</span><span class="tag">Anti-litter texture paint</span><span class="tag">Paint rollers and trays ×4</span><span class="tag">Wire brush for wall prep</span><span class="tag">Masking tape</span><span class="tag">Drop sheets ×2</span></div></div>
-    <div class="card"><div class="card-label">Greening</div><div class="tags"><span class="tag">Hardy potted plants ×4–6 (local species)</span><span class="tag">Quick-set cement for pot anchoring</span><span class="tag">Small planter boxes if wall available</span><span class="tag">Watering can ×1</span></div></div>
-    <div class="card"><div class="card-label">Documentation</div><div class="tags"><span class="tag">Smartphone with GPS ×2 minimum</span><span class="tag">Measuring tape for reference framing</span><span class="tag">Small marker stakes for fixed photo points</span></div></div>
-    <div class="card"><div class="card-label">Cost estimates</div><table><thead><tr><th>Fix type</th><th>Estimated cost</th></tr></thead><tbody><tr><td>Basic clean, no paint</td><td>₹2,000–4,000</td></tr><tr><td>Full clean + surface treatment + greening</td><td>₹8,000–15,000</td></tr><tr><td>With mural or custom signage</td><td>₹15,000–25,000</td></tr><tr><td>Monthly upkeep (ongoing)</td><td>₹500–1,000</td></tr></tbody></table></div>
-  </div>
-
-  <div class="module" id="m3">
-    <button class="back-btn" onclick="showLanding()">← Back to overview</button>
-    <div class="module-header"><div class="module-number">04</div><div><div class="module-tag">Critical logistics</div><div class="module-title">Disposal</div><div class="module-intro">The biggest operational failure of cleanup drives is generating bags of garbage with nowhere to go. Solve this before the event — never on the day.</div></div></div>
-    <div class="callout warn"><p><strong>Non-negotiable:</strong> Disposal must be arranged at least 5 days before the event. A spotfix that leaves bags piled on the street has made things worse, not better.</p></div>
-    <div class="card"><div class="card-label">Pre-event checklist</div>
-      <div class="step"><div class="step-n">1</div><div class="step-text"><strong>Contact the ward sanitation inspector</strong> directly. Request a pickup vehicle at the end of the event. Get a named person's number.</div></div>
-      <div class="step"><div class="step-n">2</div><div class="step-text"><strong>Pre-sort on-site</strong> — wet/organic in green bags, dry recyclables in blue. Many cities refuse unsegregated waste.</div></div>
-      <div class="step"><div class="step-n">3</div><div class="step-text"><strong>Locate the nearest kabadiwala</strong> in advance — plastic, metal, cardboard. Often collected free or for a small payment.</div></div>
-      <div class="step"><div class="step-n">4</div><div class="step-text"><strong>Identify a composting facility</strong> for organic waste — vermicompost units, municipal sites, or a community garden.</div></div>
+    <button class="back-btn" onclick="showLanding()">&#8592; Back to overview</button>
+    <div class="module-header">
+      <div class="module-number">03</div>
+      <div>
+        <div class="module-tag">What to bring</div>
+        <div class="module-title">Equipment</div>
+        <div class="module-intro">Everything your team needs, broken down by phase. Buy locally, keep it simple.</div>
+      </div>
     </div>
-    <div class="card"><div class="card-label">Hazardous material protocol</div><h3>Do not touch these items</h3><p>Syringes, medical waste, chemicals, unknown liquids, asbestos — flag with tape, photograph with GPS, submit separately to the municipality's hazardous waste cell. Never bag with general waste.</p></div>
-    <div class="card"><div class="card-label">Where recovered materials go</div><table><thead><tr><th>Material</th><th>Goes to</th></tr></thead><tbody><tr><td>Scrap metal, cardboard, paper, plastic</td><td>Kabadiwala</td></tr><tr><td>Glass</td><td>Municipality recycler</td></tr><tr><td>Organic / food waste</td><td>Nearest composting facility</td></tr><tr><td>Construction debris</td><td>Municipality debris yard only</td></tr><tr><td>Hazardous waste</td><td>Municipality hazardous cell — separate report</td></tr></tbody></table></div>
+    <div class="card">
+      <div class="card-label">Cleaning &mdash; per 12-person team</div>
+      <div class="tags">
+        <span class="tag">Heavy-duty brooms &times;6</span><span class="tag">Stiff scrub brushes &times;4</span><span class="tag">Large garbage bags &times;50</span><span class="tag">Rubber gloves &times;15 pairs</span><span class="tag">Face masks &times;15</span><span class="tag">Shovels &times;3</span><span class="tag">Buckets &times;4</span><span class="tag">Tongs for hazardous items &times;2</span>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-label">Surface treatment</div>
+      <div class="tags">
+        <span class="tag">Phenyl or disinfectant concentrate</span><span class="tag">Anti-litter texture paint</span><span class="tag">Paint rollers and trays &times;4</span><span class="tag">Wire brush for wall prep</span><span class="tag">Masking tape</span><span class="tag">Drop sheets &times;2</span>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-label">Greening</div>
+      <div class="tags">
+        <span class="tag">Hardy potted plants &times;4&ndash;6 (local species)</span><span class="tag">Quick-set cement for pot anchoring</span><span class="tag">Small planter boxes if wall available</span><span class="tag">Watering can &times;1</span>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-label">Documentation</div>
+      <div class="tags">
+        <span class="tag">Smartphone with GPS &times;2 minimum</span><span class="tag">Measuring tape for reference framing</span><span class="tag">Small marker stakes for fixed photo points</span>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-label">Cost estimates</div>
+      <table>
+        <thead><tr><th>Fix type</th><th>Estimated cost</th></tr></thead>
+        <tbody>
+          <tr><td>Basic clean, no paint</td><td>&#8377;2,000&ndash;4,000</td></tr>
+          <tr><td>Full clean + surface treatment + greening</td><td>&#8377;8,000&ndash;15,000</td></tr>
+          <tr><td>With mural or custom signage</td><td>&#8377;15,000&ndash;25,000</td></tr>
+          <tr><td>Monthly upkeep (ongoing)</td><td>&#8377;500&ndash;1,000</td></tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 
+  <!-- MODULE 04 -->
+  <div class="module" id="m3">
+    <button class="back-btn" onclick="showLanding()">&#8592; Back to overview</button>
+    <div class="module-header">
+      <div class="module-number">04</div>
+      <div>
+        <div class="module-tag">Critical logistics</div>
+        <div class="module-title">Disposal</div>
+        <div class="module-intro">The biggest operational failure of cleanup drives is generating bags of garbage with nowhere to go. Solve this before the event &mdash; never on the day.</div>
+      </div>
+    </div>
+    <div class="callout warn"><p><strong>Non-negotiable:</strong> Disposal must be arranged at least 5 days before the event. A spotfix that leaves bags piled on the street has made things worse, not better.</p></div>
+    <div class="card">
+      <div class="card-label">Pre-event checklist</div>
+      <div class="step"><div class="step-n">1</div><div class="step-text"><strong>Contact the ward sanitation inspector</strong> directly. Request a pickup vehicle at the end of the event. Get a named person's number.</div></div>
+      <div class="step"><div class="step-n">2</div><div class="step-text"><strong>Pre-sort on-site</strong> &mdash; wet/organic in green bags, dry recyclables in blue. Many cities refuse unsegregated waste.</div></div>
+      <div class="step"><div class="step-n">3</div><div class="step-text"><strong>Locate the nearest kabadiwala</strong> in advance &mdash; plastic, metal, cardboard. Often collected free or for a small payment.</div></div>
+      <div class="step"><div class="step-n">4</div><div class="step-text"><strong>Identify a composting facility</strong> for organic waste &mdash; vermicompost units, municipal sites, or a community garden.</div></div>
+    </div>
+    <div class="card">
+      <div class="card-label">Hazardous material protocol</div>
+      <h3>Do not touch these items</h3>
+      <p>Syringes, medical waste, chemicals, unknown liquids, asbestos &mdash; flag with tape, photograph with GPS, submit separately to the municipality's hazardous waste cell. Never bag with general waste.</p>
+    </div>
+    <div class="card">
+      <div class="card-label">Where recovered materials go</div>
+      <table>
+        <thead><tr><th>Material</th><th>Goes to</th></tr></thead>
+        <tbody>
+          <tr><td>Scrap metal, cardboard, paper, plastic</td><td>Kabadiwala</td></tr>
+          <tr><td>Glass</td><td>Municipality recycler</td></tr>
+          <tr><td>Organic / food waste</td><td>Nearest composting facility</td></tr>
+          <tr><td>Construction debris</td><td>Municipality debris yard only</td></tr>
+          <tr><td>Hazardous waste</td><td>Municipality hazardous cell &mdash; separate report</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- MODULE 05 -->
   <div class="module" id="m4">
-    <button class="back-btn" onclick="showLanding()">← Back to overview</button>
-    <div class="module-header"><div class="module-number">05</div><div><div class="module-tag">Money</div><div class="module-title">Funding a spot</div><div class="module-intro">Money must never concentrate at the centre. Each spot is funded independently. This prevents corruption, capture, and the NGO disease of funding-seeking replacing mission.</div></div></div>
-    <div class="big-quote">"Fund the spot, not the organisation."</div>
-    <div class="card"><div class="card-label">Funding tiers — simplest first</div>
-      <div class="step"><div class="step-n">1</div><div class="step-text"><strong>Self-funded team</strong> — 12 volunteers contributing ₹200–350 each covers a basic clean. Zero bureaucracy.</div></div>
-      <div class="step"><div class="step-n">2</div><div class="step-text"><strong>Local business contribution</strong> — ask nearby shops to donate materials, not cash. Simpler and corruption-proof.</div></div>
-      <div class="step"><div class="step-n">3</div><div class="step-text"><strong>RWA or housing society funds</strong> — request ₹5,000–10,000 from the society's discretionary maintenance budget.</div></div>
-      <div class="step"><div class="step-n">4</div><div class="step-text"><strong>Platform micro-crowdfunding</strong> — any nominated spot can receive public donations capped at ₹25,000. Funds released against receipts only.</div></div>
-      <div class="step"><div class="step-n">5</div><div class="step-text"><strong>Corporate CSR top-up</strong> — for complex spots only. Subject to strict no-branding rules (see Module 7).</div></div>
+    <button class="back-btn" onclick="showLanding()">&#8592; Back to overview</button>
+    <div class="module-header">
+      <div class="module-number">05</div>
+      <div>
+        <div class="module-tag">Money</div>
+        <div class="module-title">Funding a spot</div>
+        <div class="module-intro">Money must never concentrate at the centre. Each spot is funded independently. This prevents corruption, capture, and the NGO disease of funding-seeking replacing mission.</div>
+      </div>
+    </div>
+    <div class="big-quote">&ldquo;Fund the spot, not the organisation.&rdquo;</div>
+    <div class="card">
+      <div class="card-label">Funding tiers &mdash; simplest first</div>
+      <div class="step"><div class="step-n">1</div><div class="step-text"><strong>Self-funded team</strong> &mdash; 12 volunteers contributing &#8377;200&ndash;350 each covers a basic clean. Zero bureaucracy.</div></div>
+      <div class="step"><div class="step-n">2</div><div class="step-text"><strong>Local business contribution</strong> &mdash; ask nearby shops to donate materials, not cash. Simpler and corruption-proof.</div></div>
+      <div class="step"><div class="step-n">3</div><div class="step-text"><strong>RWA or housing society funds</strong> &mdash; request &#8377;5,000&ndash;10,000 from the society's discretionary maintenance budget.</div></div>
+      <div class="step"><div class="step-n">4</div><div class="step-text"><strong>Platform micro-crowdfunding</strong> &mdash; any nominated spot can receive public donations capped at &#8377;25,000. Funds released against receipts only.</div></div>
+      <div class="step"><div class="step-n">5</div><div class="step-text"><strong>Corporate CSR top-up</strong> &mdash; for complex spots only. Subject to strict no-branding rules (see Module 7).</div></div>
     </div>
     <div class="callout"><p>All spot-level spending is photographed, receipted, and posted publicly within 7 days. No exceptions. Transparency is the accountability mechanism.</p></div>
   </div>
 
+  <!-- MODULE 06 -->
   <div class="module" id="m5">
-    <button class="back-btn" onclick="showLanding()">← Back to overview</button>
-    <div class="module-header"><div class="module-number">06</div><div><div class="module-tag">Official partnership</div><div class="module-title">Working with municipalities</div><div class="module-intro">Don't ask for money or permission. Ask for three specific, low-cost commitments that make the clean durable.</div></div></div>
-    <div class="card"><div class="card-label">The Spot Adoption Agreement</div><h3>A one-page social contract</h3><p style="margin-bottom:1rem">Not a legal document. Signed by a named ward sanitation inspector and the spot's local owner.</p>
-      <div class="step"><div class="step-n">M</div><div class="step-text"><strong>Municipality commits</strong> to garbage pickup minimum 3× per week, and to installing one waste bin within 30 days</div></div>
+    <button class="back-btn" onclick="showLanding()">&#8592; Back to overview</button>
+    <div class="module-header">
+      <div class="module-number">06</div>
+      <div>
+        <div class="module-tag">Official partnership</div>
+        <div class="module-title">Working with municipalities</div>
+        <div class="module-intro">Don't ask for money or permission. Ask for three specific, low-cost commitments that make the clean durable.</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-label">The Spot Adoption Agreement</div>
+      <h3>A one-page social contract</h3>
+      <p style="margin-bottom:1rem">Not a legal document. Signed by a named ward sanitation inspector and the spot's local owner.</p>
+      <div class="step"><div class="step-n">M</div><div class="step-text"><strong>Municipality commits</strong> to garbage pickup minimum 3&times; per week, and to installing one waste bin within 30 days</div></div>
       <div class="step"><div class="step-n">O</div><div class="step-text"><strong>Local owner commits</strong> to a monthly walk-through and reporting deterioration via the platform within 48 hours</div></div>
       <div class="step"><div class="step-n">S</div><div class="step-text"><strong>SpotClean commits</strong> to a 90-day follow-up visit with a public condition report posted online</div></div>
     </div>
-    <div class="card"><div class="card-label">How to get a yes</div>
-      <div class="step"><div class="step-n">1</div><div class="step-text"><strong>Don't approach the top.</strong> Go to the ward sanitation inspector — they control trucks and schedules with fewer political pressures.</div></div>
-      <div class="step"><div class="step-n">2</div><div class="step-text"><strong>Frame it as free labour for them.</strong> The ask is minimal — one truck visit, one bin within 30 days.</div></div>
+    <div class="card">
+      <div class="card-label">How to get a yes</div>
+      <div class="step"><div class="step-n">1</div><div class="step-text"><strong>Don't approach the top.</strong> Go to the ward sanitation inspector &mdash; they control trucks and schedules with fewer political pressures.</div></div>
+      <div class="step"><div class="step-n">2</div><div class="step-text"><strong>Frame it as free labour for them.</strong> The ask is minimal &mdash; one truck visit, one bin within 30 days.</div></div>
       <div class="step"><div class="step-n">3</div><div class="step-text"><strong>Show them the platform score.</strong> Ward scores are tied to state rankings. A documented clean spot improves their metrics.</div></div>
       <div class="step"><div class="step-n">4</div><div class="step-text"><strong>Name them on the platform.</strong> Credit when things go well, gentle accountability when they don't.</div></div>
     </div>
   </div>
 
+  <!-- MODULE 07 -->
   <div class="module" id="m6">
-    <button class="back-btn" onclick="showLanding()">← Back to overview</button>
-    <div class="module-header"><div class="module-number">07</div><div><div class="module-tag">Corporate participation</div><div class="module-title">How corporations can help</div><div class="module-intro">Corporations are fuel, not drivers. Funders never determine which spots get cleaned, how they are cleaned, or what is written on the walls.</div></div></div>
-    <div class="card"><div class="card-label">What corporations can do</div><div class="tags"><span class="tag yes">Fund materials for platform-nominated spots</span><span class="tag yes">Provide employees as volunteers</span><span class="tag yes">Fund platform operating costs (disclosed publicly)</span><span class="tag yes">Receive internal ESG and CSR recognition</span><span class="tag yes">Count volunteer hours toward CSR requirements</span></div></div>
-    <div class="card"><div class="card-label">What corporations cannot do</div><div class="tags"><span class="tag no">No logo on cleaned walls or surfaces</span><span class="tag no">No company name on any installed signage</span><span class="tag no">No selecting which spots receive funding</span><span class="tag no">No press releases naming specific spots</span><span class="tag no">No employees-only events — must mix with community</span><span class="tag no">No naming rights of any kind</span></div></div>
-    <div class="callout warn"><p>Any corporate that cannot accept these terms is not the right partner. The no-branding rule is the most important safeguard against the model becoming an advertising platform.</p></div>
-    <div class="card"><div class="card-label">The pitch in plain language</div><p>Your employees spend one Saturday morning cleaning a real spot alongside local residents — no speeches, no banners. You get ESG documentation and team-building value. We get materials and capable volunteers. That's the whole deal.</p></div>
-  </div>
-
-  <div class="module" id="m7">
-    <button class="back-btn" onclick="showLanding()">← Back to overview</button>
-    <div class="module-header"><div class="module-number">08</div><div><div class="module-tag">Behaviour change</div><div class="module-title">Messaging after a clean</div><div class="module-intro">Shame-based messaging doesn't work. "Do not litter — fine ₹500" is ignored everywhere. What works is signalling that the space is cared for and belongs to someone.</div></div></div>
-    <div class="card"><div class="card-label">Physical interventions that change behaviour</div>
-      <div class="step"><div class="step-n">1</div><div class="step-text"><strong>Anti-litter texture coat on walls</strong> — rough-textured paint discourages urination and poster-plastering. The single most proven physical intervention.</div></div>
-      <div class="step"><div class="step-n">2</div><div class="step-text"><strong>A mural or geometric pattern</strong> — even a simple design signals intentionality. People don't litter painted walls as readily as blank ones.</div></div>
-      <div class="step"><div class="step-n">3</div><div class="step-text"><strong>A living plant, visibly tended</strong> — nothing signals ongoing human care more powerfully than a living thing.</div></div>
-      <div class="step"><div class="step-n">4</div><div class="step-text"><strong>A cemented, named bin</strong> — anchored, clearly marked, regularly emptied. Its presence alone changes disposal behaviour.</div></div>
+    <button class="back-btn" onclick="showLanding()">&#8592; Back to overview</button>
+    <div class="module-header">
+      <div class="module-number">07</div>
+      <div>
+        <div class="module-tag">Corporate participation</div>
+        <div class="module-title">How corporations can help</div>
+        <div class="module-intro">Corporations are fuel, not drivers. Funders never determine which spots get cleaned, how they are cleaned, or what is written on the walls.</div>
+      </div>
     </div>
-    <div class="card"><div class="card-label">The one message to leave behind</div><div class="big-quote" style="font-size:1.1rem">"This space is loved by the people of [neighbourhood name]. Help us keep it this way."</div><p>In the local language. On a durable tile or painted text. No organisation name on the wall. QR code on a small steel plate bolted nearby — links to the spot's public page.</p></div>
-    <div class="card"><div class="card-label">What not to write</div><div class="tags"><span class="tag no">Do not litter — fine ₹500</span><span class="tag no">CCTV surveillance in progress</span><span class="tag no">Keep India clean</span><span class="tag no">Any organisation name or logo</span><span class="tag no">Government scheme branding</span></div></div>
+    <div class="card">
+      <div class="card-label">What corporations can do</div>
+      <div class="tags">
+        <span class="tag yes">Fund materials for platform-nominated spots</span>
+        <span class="tag yes">Provide employees as volunteers</span>
+        <span class="tag yes">Fund platform operating costs (disclosed publicly)</span>
+        <span class="tag yes">Receive internal ESG and CSR recognition</span>
+        <span class="tag yes">Count volunteer hours toward CSR requirements</span>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-label">What corporations cannot do</div>
+      <div class="tags">
+        <span class="tag no">No logo on cleaned walls or surfaces</span>
+        <span class="tag no">No company name on any installed signage</span>
+        <span class="tag no">No selecting which spots receive funding</span>
+        <span class="tag no">No press releases naming specific spots</span>
+        <span class="tag no">No employees-only events &mdash; must mix with community</span>
+        <span class="tag no">No naming rights of any kind</span>
+      </div>
+    </div>
+    <div class="callout warn"><p>Any corporate that cannot accept these terms is not the right partner. The no-branding rule is the most important safeguard against the model becoming an advertising platform.</p></div>
+    <div class="card">
+      <div class="card-label">The pitch in plain language</div>
+      <p>Your employees spend one Saturday morning cleaning a real spot alongside local residents &mdash; no speeches, no banners. You get ESG documentation and team-building value. We get materials and capable volunteers. That's the whole deal.</p>
+    </div>
   </div>
 
+  <!-- MODULE 08 -->
+  <div class="module" id="m7">
+    <button class="back-btn" onclick="showLanding()">&#8592; Back to overview</button>
+    <div class="module-header">
+      <div class="module-number">08</div>
+      <div>
+        <div class="module-tag">Behaviour change</div>
+        <div class="module-title">Messaging after a clean</div>
+        <div class="module-intro">Shame-based messaging doesn't work. &ldquo;Do not litter &mdash; fine &#8377;500&rdquo; is ignored everywhere. What works is signalling that the space is cared for and belongs to someone.</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-label">Physical interventions that change behaviour</div>
+      <div class="step"><div class="step-n">1</div><div class="step-text"><strong>Anti-litter texture coat on walls</strong> &mdash; rough-textured paint discourages urination and poster-plastering. The single most proven physical intervention.</div></div>
+      <div class="step"><div class="step-n">2</div><div class="step-text"><strong>A mural or geometric pattern</strong> &mdash; even a simple design signals intentionality. People don't litter painted walls as readily as blank ones.</div></div>
+      <div class="step"><div class="step-n">3</div><div class="step-text"><strong>A living plant, visibly tended</strong> &mdash; nothing signals ongoing human care more powerfully than a living thing.</div></div>
+      <div class="step"><div class="step-n">4</div><div class="step-text"><strong>A cemented, named bin</strong> &mdash; anchored, clearly marked, regularly emptied. Its presence alone changes disposal behaviour.</div></div>
+    </div>
+    <div class="card">
+      <div class="card-label">The one message to leave behind</div>
+      <div class="big-quote" style="font-size:1.1rem">&ldquo;This space is loved by the people of [neighbourhood name]. Help us keep it this way.&rdquo;</div>
+      <p>In the local language. On a durable tile or painted text. No organisation name on the wall. QR code on a small steel plate bolted nearby &mdash; links to the spot's public page.</p>
+    </div>
+    <div class="card">
+      <div class="card-label">What not to write</div>
+      <div class="tags">
+        <span class="tag no">Do not litter &mdash; fine &#8377;500</span>
+        <span class="tag no">CCTV surveillance in progress</span>
+        <span class="tag no">Keep India clean</span>
+        <span class="tag no">Any organisation name or logo</span>
+        <span class="tag no">Government scheme branding</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODULE 09 -->
   <div class="module" id="m8">
-    <button class="back-btn" onclick="showLanding()">← Back to overview</button>
-    <div class="module-header"><div class="module-number">09</div><div><div class="module-tag">Structure</div><div class="module-title">Keeping it lean</div><div class="module-intro">Every Indian civic organisation eventually gets captured — by a politician, a funder, or its own bureaucracy. This structure is designed to make capture structurally difficult.</div></div></div>
-    <div class="card"><div class="card-label">Organisational structure</div>
+    <button class="back-btn" onclick="showLanding()">&#8592; Back to overview</button>
+    <div class="module-header">
+      <div class="module-number">09</div>
+      <div>
+        <div class="module-tag">Structure</div>
+        <div class="module-title">Keeping it lean</div>
+        <div class="module-intro">Every Indian civic organisation eventually gets captured &mdash; by a politician, a funder, or its own bureaucracy. This structure is designed to make capture structurally difficult.</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-label">Organisational structure</div>
       <div class="step"><div class="step-n">1</div><div class="step-text"><strong>No national president, no national office.</strong> The methodology is the organisation. Anyone following this playbook is SpotClean. No one can be expelled or installed.</div></div>
-      <div class="step"><div class="step-n">2</div><div class="step-text"><strong>A 5-person platform trust</strong> — the only formal entity. Rotating 2-year terms, publicly named, financials open in real time. One term only.</div></div>
+      <div class="step"><div class="step-n">2</div><div class="step-text"><strong>A 5-person platform trust</strong> &mdash; the only formal entity. Rotating 2-year terms, publicly named, financials open in real time. One term only.</div></div>
       <div class="step"><div class="step-n">3</div><div class="step-text"><strong>City nodes, not chapters.</strong> Loose groups of active spot owners per city. No elections, no hierarchy. One node cannot make decisions for another.</div></div>
-      <div class="step"><div class="step-n">4</div><div class="step-text"><strong>All money is spot-level.</strong> Central fund maximum: ₹10 lakh. Any donation above ₹1 lakh disclosed publicly within 48 hours.</div></div>
+      <div class="step"><div class="step-n">4</div><div class="step-text"><strong>All money is spot-level.</strong> Central fund maximum: &#8377;10 lakh. Any donation above &#8377;1 lakh disclosed publicly within 48 hours.</div></div>
       <div class="step"><div class="step-n">5</div><div class="step-text"><strong>One paid contractor.</strong> A platform manager on an annual contract, renewable by majority trust vote. No other paid staff.</div></div>
     </div>
-    <div class="card"><div class="card-label">Anti-capture rules</div><div class="tags"><span class="tag no">No politician can be a trust member</span><span class="tag no">No funder can sit on the trust</span><span class="tag yes">Methodology is Creative Commons licensed</span><span class="tag yes">Any group can use the SpotClean name without permission</span><span class="tag yes">Platform code is open-source on GitHub</span><span class="tag yes">All finances publicly visible in real time</span></div></div>
+    <div class="card">
+      <div class="card-label">Anti-capture rules</div>
+      <div class="tags">
+        <span class="tag no">No politician can be a trust member</span>
+        <span class="tag no">No funder can sit on the trust</span>
+        <span class="tag yes">Methodology is Creative Commons licensed</span>
+        <span class="tag yes">Any group can use the SpotClean name without permission</span>
+        <span class="tag yes">Platform code is open-source on GitHub</span>
+        <span class="tag yes">All finances publicly visible in real time</span>
+      </div>
+    </div>
     <div class="callout"><p>The open-source licence is the most important governance mechanism. If the organisation is ever captured or goes dormant, anyone can continue. The movement cannot be killed by killing the organisation.</p></div>
   </div>
 
+  <!-- MODULE 10 -->
   <div class="module" id="m9">
-    <button class="back-btn" onclick="showLanding()">← Back to overview</button>
-    <div class="module-header"><div class="module-number">10</div><div><div class="module-tag">Technology</div><div class="module-title">The digital platform</div><div class="module-intro">One lightweight progressive web app — no app store required, works on any smartphone, functional on 2G. Four core functions only. No feature creep.</div></div></div>
-    <div class="card"><div class="card-label">Function 1 — Spot map</div><h3>A live public map of all spots</h3><p style="margin-bottom:0.75rem">Anyone can submit a spot — one photo, one GPS pin, one sentence. 90 seconds. No signup required.</p><div><span class="status s-nom">Nominated</span><span class="status s-fund">Funded</span><span class="status s-clean">Cleaned</span><span class="status s-maint">Maintained</span><span class="status s-att">Needs attention</span></div></div>
-    <div class="card"><div class="card-label">Function 2 — Clean reports</div><h3>Permanent public record for every spot</h3><p>After cleaning: GPS-verified before photo, GPS-verified after photo, team size, materials used, waste volume, disposal method, and the municipal officer's name. This record never disappears.</p></div>
-    <div class="card"><div class="card-label">Function 3 — Monthly check-ins</div><h3>What makes the clean permanent</h3><p>Every cleaned spot has a named local owner. Monthly notification: <em>"How is [spot name] doing?"</em> One photo and a 1–5 rating. If rating drops below 3 for two consecutive months, the spot is flagged and the city node is notified.</p></div>
-    <div class="card"><div class="card-label">Function 4 — Micro-funding</div><h3>Peer-to-peer, not centralised</h3><p>Nominated spots can accept donations capped at ₹25,000. All donors named publicly. Funds go directly to the spot team lead's UPI ID against receipts. The platform trust never touches spot-level money.</p></div>
-    <div class="card"><div class="card-label">Technical requirements</div><div class="tags"><span class="tag yes">Progressive web app — no app store install</span><span class="tag yes">Works on 2G and 3G networks</span><span class="tag yes">Offline photo capture, uploads when connected</span><span class="tag yes">GPS mandatory for all photo submissions</span><span class="tag yes">Open source on GitHub from day one</span><span class="tag yes">Target under ₹15,000/month hosting cost</span></div></div>
+    <button class="back-btn" onclick="showLanding()">&#8592; Back to overview</button>
+    <div class="module-header">
+      <div class="module-number">10</div>
+      <div>
+        <div class="module-tag">Technology</div>
+        <div class="module-title">The digital platform</div>
+        <div class="module-intro">One lightweight progressive web app &mdash; no app store required, works on any smartphone, functional on 2G. Four core functions only. No feature creep.</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-label">Function 1 &mdash; Spot map</div>
+      <h3>A live public map of all spots</h3>
+      <p style="margin-bottom:0.75rem">Anyone can submit a spot &mdash; one photo, one GPS pin, one sentence. 90 seconds. No signup required.</p>
+      <div>
+        <span class="status s-nom">Nominated</span>
+        <span class="status s-fund">Funded</span>
+        <span class="status s-clean">Cleaned</span>
+        <span class="status s-maint">Maintained</span>
+        <span class="status s-att">Needs attention</span>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-label">Function 2 &mdash; Clean reports</div>
+      <h3>Permanent public record for every spot</h3>
+      <p>After cleaning: GPS-verified before photo, GPS-verified after photo, team size, materials used, waste volume, disposal method, and the municipal officer's name. This record never disappears.</p>
+    </div>
+    <div class="card">
+      <div class="card-label">Function 3 &mdash; Monthly check-ins</div>
+      <h3>What makes the clean permanent</h3>
+      <p>Every cleaned spot has a named local owner. Monthly notification: <em>&ldquo;How is [spot name] doing?&rdquo;</em> One photo and a 1&ndash;5 rating. If rating drops below 3 for two consecutive months, the spot is flagged and the city node is notified.</p>
+    </div>
+    <div class="card">
+      <div class="card-label">Function 4 &mdash; Micro-funding</div>
+      <h3>Peer-to-peer, not centralised</h3>
+      <p>Nominated spots can accept donations capped at &#8377;25,000. All donors named publicly. Funds go directly to the spot team lead's UPI ID against receipts. The platform trust never touches spot-level money.</p>
+    </div>
+    <div class="card">
+      <div class="card-label">Technical requirements</div>
+      <div class="tags">
+        <span class="tag yes">Progressive web app &mdash; no app store install</span>
+        <span class="tag yes">Works on 2G and 3G networks</span>
+        <span class="tag yes">Offline photo capture, uploads when connected</span>
+        <span class="tag yes">GPS mandatory for all photo submissions</span>
+        <span class="tag yes">Open source on GitHub from day one</span>
+        <span class="tag yes">Target under &#8377;15,000/month hosting cost</span>
+      </div>
+    </div>
   </div>
 
-</div>
+</div><!-- end .container -->
 
 <footer class="page-footer">
   <strong>SpotClean India</strong>
-  Open-source · Creative Commons Attribution licence · Free to use, adapt, and share<br><br>
+  Open-source &middot; Creative Commons Attribution licence &middot; Free to use, adapt, and share<br><br>
   This playbook may be used by anyone, anywhere, without permission.<br>
-  To contribute: <a href="https://github.com/raulscooper">github.com/raulscooper</a>
+  Part of <a href="../index.html">Nayalab</a> &middot; <a href="https://github.com/raulscooper">github.com/raulscooper</a>
 </footer>
 
 <script>
-const ids=['m0','m1','m2','m3','m4','m5','m6','m7','m8','m9'];
-function showLanding(){
-  document.getElementById('landing').style.display='block';
-  ids.forEach(id=>document.getElementById(id).classList.remove('active'));
-  document.querySelectorAll('.nav-item').forEach((b,i)=>b.classList.toggle('active',i===0));
-  window.scrollTo({top:0,behavior:'smooth'});
+const ids = ['m0','m1','m2','m3','m4','m5','m6','m7','m8','m9'];
+function showLanding() {
+  document.getElementById('landing').style.display = 'block';
+  ids.forEach(id => document.getElementById(id).classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach((b, i) => b.classList.toggle('active', i === 0));
+  window.scrollTo({top: 0, behavior: 'smooth'});
 }
-function show(i){
-  document.getElementById('landing').style.display='none';
-  ids.forEach((id,j)=>document.getElementById(id).classList.toggle('active',j===i));
-  document.querySelectorAll('.nav-item').forEach((b,j)=>b.classList.toggle('active',j===i+1));
-  window.scrollTo({top:0,behavior:'smooth'});
+function show(i) {
+  document.getElementById('landing').style.display = 'none';
+  ids.forEach((id, j) => document.getElementById(id).classList.toggle('active', j === i));
+  document.querySelectorAll('.nav-item').forEach((b, j) => b.classList.toggle('active', j === i + 1));
+  window.scrollTo({top: 0, behavior: 'smooth'});
 }
 </script>
 </body>
