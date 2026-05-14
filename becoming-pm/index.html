@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Common Man's Blueprint to Prime Minister</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0f0e0c;
+    --paper: #f5f0e8;
+    --saffron: #e8610a;
+    --saffron-dim: #c94f00;
+    --green: #1a6b3a;
+    --rule: #c8b89a;
+    --muted: #7a6e5f;
+    --highlight: #fff3cd;
+    --danger: #8b1a1a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 18px;
+    line-height: 1.75;
+    overflow-x: hidden;
+  }
+
+  /* ── NOISE TEXTURE OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0.4;
+  }
+
+  /* ── HEADER ── */
+  header {
+    border-bottom: 3px double var(--rule);
+    padding: 3rem 2rem 2rem;
+    text-align: center;
+    position: relative;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .masthead-rule {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+  }
+
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 6vw, 4.5rem);
+    font-weight: 900;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.5rem;
+  }
+
+  h1 em {
+    font-style: italic;
+    color: var(--saffron);
+  }
+
+  .subtitle {
+    font-family: 'Source Serif 4', serif;
+    font-style: italic;
+    font-size: 1.1rem;
+    color: var(--muted);
+    font-weight: 300;
+    margin: 1rem 0 1.5rem;
+  }
+
+  .meta-bar {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    color: var(--muted);
+    text-transform: uppercase;
+    padding: 1rem 0;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+  }
+
+  /* ── NAVIGATION ── */
+  nav {
+    position: sticky;
+    top: 0;
+    background: var(--paper);
+    border-bottom: 2px solid var(--ink);
+    z-index: 100;
+    padding: 0.6rem 1rem;
+  }
+
+  nav ul {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem 1.5rem;
+    justify-content: center;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  nav a {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink);
+    text-decoration: none;
+    padding: 0.2rem 0;
+    border-bottom: 2px solid transparent;
+    transition: border-color 0.2s, color 0.2s;
+  }
+
+  nav a:hover { border-bottom-color: var(--saffron); color: var(--saffron); }
+
+  /* ── LAYOUT ── */
+  main {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 2rem 4rem;
+  }
+
+  section {
+    margin: 4rem 0;
+    padding-top: 1rem;
+    border-top: 1px solid var(--rule);
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  section.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── TYPOGRAPHY ── */
+  h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.5rem, 4vw, 2.4rem);
+    font-weight: 700;
+    line-height: 1.15;
+    margin-bottom: 0.3rem;
+  }
+
+  h2 .phase-label {
+    display: block;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--saffron);
+    font-weight: 400;
+    margin-bottom: 0.4rem;
+  }
+
+  h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    font-style: italic;
+    margin: 2rem 0 0.5rem;
+    color: var(--ink);
+  }
+
+  p { margin-bottom: 1.1rem; }
+
+  strong { font-weight: 600; }
+
+  em { font-style: italic; color: var(--saffron-dim); }
+
+  /* ── PHASE TIMELINE BADGE ── */
+  .phase-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .year-badge {
+    flex-shrink: 0;
+    background: var(--ink);
+    color: var(--paper);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    padding: 0.4rem 0.8rem;
+    white-space: nowrap;
+    margin-top: 0.35rem;
+  }
+
+  .phase-intro {
+    font-style: italic;
+    color: var(--muted);
+    font-size: 0.95rem;
+    border-left: 3px solid var(--saffron);
+    padding-left: 1rem;
+    margin: 1.2rem 0 1.5rem;
+    line-height: 1.6;
+  }
+
+  /* ── CALLOUT BOXES ── */
+  .callout {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 1.5rem 1.8rem;
+    margin: 2rem 0;
+    position: relative;
+  }
+
+  .callout::before {
+    content: '❧';
+    position: absolute;
+    top: -0.6rem;
+    left: 1.5rem;
+    background: var(--ink);
+    padding: 0 0.4rem;
+    font-size: 1.2rem;
+    color: var(--saffron);
+  }
+
+  .callout p { margin-bottom: 0.5rem; color: var(--paper); }
+  .callout p:last-child { margin-bottom: 0; }
+  .callout strong { color: var(--saffron); }
+
+  .warning {
+    background: var(--danger);
+    color: #fff;
+    padding: 1.2rem 1.5rem;
+    margin: 1.5rem 0;
+    border-left: 5px solid #ff6b6b;
+    font-size: 0.9rem;
+  }
+
+  .warning strong { color: #ffcdd2; }
+
+  /* ── CHECKLIST ── */
+  .checklist {
+    list-style: none;
+    margin: 1rem 0 1.5rem;
+  }
+
+  .checklist li {
+    position: relative;
+    padding-left: 1.8rem;
+    margin-bottom: 0.6rem;
+    font-size: 0.95rem;
+  }
+
+  .checklist li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--saffron);
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 500;
+  }
+
+  /* ── METRIC GRID ── */
+  .metric-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+    margin: 1.5rem 0;
+  }
+
+  .metric {
+    background: var(--paper);
+    padding: 1.2rem;
+    text-align: center;
+  }
+
+  .metric-value {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 900;
+    color: var(--saffron);
+    display: block;
+    line-height: 1;
+    margin-bottom: 0.3rem;
+  }
+
+  .metric-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* ── COMPARISON TABLE ── */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+    font-size: 0.88rem;
+  }
+
+  th {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    background: var(--ink);
+    color: var(--paper);
+    padding: 0.7rem 1rem;
+    text-align: left;
+  }
+
+  td {
+    padding: 0.7rem 1rem;
+    border-bottom: 1px solid var(--rule);
+    vertical-align: top;
+  }
+
+  tr:nth-child(even) td { background: rgba(0,0,0,0.025); }
+
+  /* ── PULLQUOTE ── */
+  blockquote {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+    font-style: italic;
+    font-weight: 400;
+    line-height: 1.45;
+    color: var(--ink);
+    border-top: 3px solid var(--saffron);
+    border-bottom: 3px solid var(--saffron);
+    padding: 1.5rem 0;
+    margin: 2.5rem 0;
+    text-align: center;
+  }
+
+  /* ── TRUTH BOX ── */
+  .truth-box {
+    border: 2px solid var(--ink);
+    padding: 1.5rem;
+    margin: 2rem 0;
+    position: relative;
+  }
+
+  .truth-box-label {
+    position: absolute;
+    top: -0.7rem;
+    left: 1rem;
+    background: var(--paper);
+    padding: 0 0.5rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* ── TIMELINE CONNECTOR ── */
+  .phase-connector {
+    text-align: center;
+    padding: 1rem 0;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 1.2rem;
+    color: var(--rule);
+    letter-spacing: 0.3em;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem;
+    border-top: 3px double var(--rule);
+    text-align: center;
+  }
+
+  footer p {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.3rem;
+  }
+
+  /* ── INTRO SECTION ── */
+  .intro-drop-cap::first-letter {
+    font-family: 'Playfair Display', serif;
+    font-size: 4.5rem;
+    font-weight: 900;
+    float: left;
+    line-height: 0.8;
+    margin: 0.05em 0.1em 0 0;
+    color: var(--saffron);
+  }
+
+  /* ── PRINCIPLE NUMBER ── */
+  .principle {
+    display: grid;
+    grid-template-columns: 3rem 1fr;
+    gap: 1rem;
+    margin: 1.2rem 0;
+    align-items: start;
+  }
+
+  .principle-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: var(--rule);
+    line-height: 1;
+    text-align: right;
+  }
+
+  .principle-text { padding-top: 0.1rem; }
+  .principle-text strong { display: block; margin-bottom: 0.2rem; }
+
+  /* ── SCROLL ANIMATION ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  header { animation: fadeUp 0.8s ease forwards; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 600px) {
+    body { font-size: 16px; }
+    main { padding: 0 1rem 3rem; }
+    header { padding: 2rem 1rem 1.5rem; }
+    .meta-bar { flex-direction: column; gap: 0.4rem; }
+    nav ul { gap: 0.3rem 1rem; }
+    .phase-header { flex-direction: column; gap: 0.5rem; }
+    .principle { grid-template-columns: 2rem 1fr; }
+    .principle-num { font-size: 1.8rem; }
+  }
+
+  /* ── PRINT ── */
+  @media print {
+    nav, body::before { display: none; }
+    section { opacity: 1; transform: none; }
+    .callout { border: 2px solid #000; background: #fff; color: #000; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <p class="masthead-rule">A Public Domain Political Strategy Document · India · 2026</p>
+  <h1>The Common Man's Road to<br><em>Prime Minister</em></h1>
+  <p class="subtitle">A defensible, evidence-based 20-year blueprint for any Indian citizen<br>with no political connections, no dynasty, and no shortcuts</p>
+  <div class="meta-bar">
+    <span>20 Year Horizon</span>
+    <span>5 Phases</span>
+    <span>Based on Real Precedent</span>
+    <span>No Dynasty Required</span>
+  </div>
+</header>
+
+<nav>
+  <ul>
+    <li><a href="#premise">Premise</a></li>
+    <li><a href="#phase1">Phase I · Foundation</a></li>
+    <li><a href="#phase2">Phase II · Entry</a></li>
+    <li><a href="#phase3">Phase III · Dominance</a></li>
+    <li><a href="#phase4">Phase IV · National</a></li>
+    <li><a href="#phase5">Phase V · The Moment</a></li>
+    <li><a href="#truths">Hard Truths</a></li>
+    <li><a href="#start">Start Today</a></li>
+  </ul>
+</nav>
+
+<main>
+
+  <!-- PREMISE -->
+  <section id="premise">
+    <h2><span class="phase-label">Before You Begin</span>The Brutal Premise</h2>
+
+    <p class="intro-drop-cap">No Indian Prime Minister has ever walked in cold. Every single one came from a dynasty, an RSS/organizational cadre decades deep, or a regional strongman base built over 20+ years. And yet — all three pathways had an entry point that was once open to a nobody. This document maps that entry point, and every step after it.</p>
+
+    <p>This blueprint assumes you have: one life to spend, genuine conviction about India's direction, and the willingness to subordinate personal comfort to a 20-year project. It does not assume money, caste privilege, or family connections — though all three help at the margin.</p>
+
+    <blockquote>"The Indian political system is not a ladder. It is a maze with multiple competing maze-masters. This document is the map."</blockquote>
+
+    <div class="truth-box">
+      <span class="truth-box-label">Core Strategic Insight</span>
+      <p>The bottleneck to becoming PM is not strategy — thousands of smart Indians have the strategy. The bottleneck is <strong>embodied presence, built trust, and a genuine mass constituency</strong> that no amount of money or intelligence can shortcut. This blueprint tells you where to spend your years most efficiently.</p>
+    </div>
+
+    <h3>The Three Proven Pathways (and Which One Is Open)</h3>
+    <table>
+      <thead><tr><th>Pathway</th><th>Examples</th><th>Open Today?</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Dynasty</strong></td><td>Rajiv Gandhi, Rahul Gandhi</td><td>Closed — you need the bloodline</td></tr>
+        <tr><td><strong>RSS Cadre</strong></td><td>Modi, Vajpayee, Advani</td><td>Partly open — requires decades inside RSS</td></tr>
+        <tr><td><strong>Regional Strongman</strong></td><td>Deve Gowda, Mamata, Jayalalithaa</td><td><strong>Open — this is your path</strong></td></tr>
+        <tr><td><strong>Technocrat Appointee</strong></td><td>Manmohan Singh</td><td>Open but you surrender real power</td></tr>
+      </tbody>
+    </table>
+
+    <p>This blueprint follows the <strong>Regional Strongman → Coalition Kingmaker → National Figure</strong> pathway. It is the only route that gives a true outsider genuine power rather than borrowed authority.</p>
+  </section>
+
+  <!-- PHASE 1 -->
+  <section id="phase1">
+    <h2><span class="phase-label">Phase I · Years 1–5</span>Build Undeniable Local Credibility</h2>
+
+    <div class="phase-header">
+      <div class="year-badge">YEARS 1–5</div>
+      <p class="phase-intro">Do not enter politics yet. The single most common mistake of political outsiders is entering the arena before they have something that cannot be taken away — a genuine reputation built outside the system. Your first five years are about becoming someone people talk about without you spending money.</p>
+    </div>
+
+    <h3>Choose Your Entry Profession</h3>
+    <p>Your pre-political career is your political foundation. It determines your constituency, your credibility, and your story. Choose one:</p>
+
+    <div class="metric-grid">
+      <div class="metric">
+        <span class="metric-value">Law</span>
+        <span class="metric-label">Best for constitutional credibility + anti-corruption narrative</span>
+      </div>
+      <div class="metric">
+        <span class="metric-value">RTI / Activism</span>
+        <span class="metric-label">Best for outsider brand + media access</span>
+      </div>
+      <div class="metric">
+        <span class="metric-value">Journalism</span>
+        <span class="metric-label">Best for narrative control + network building</span>
+      </div>
+      <div class="metric">
+        <span class="metric-value">Social Work</span>
+        <span class="metric-label">Best for rural penetration + grassroots loyalty</span>
+      </div>
+    </div>
+
+    <p><strong>The optimal combination:</strong> Practice law or RTI activism during the day, do visible community service on weekends, and document everything publicly. You are building a portfolio of provable wins — not a career.</p>
+
+    <h3>Pick Your Geography — Non-Negotiably</h3>
+    <p>You cannot be from everywhere. You must pick one district and make it yours before you can think about anything else. Criteria for picking it:</p>
+
+    <ul class="checklist">
+      <li>High anti-incumbency — the sitting MLA or MP is weak, corrupt, or absentee</li>
+      <li>Your own caste/community has meaningful presence (15%+ of voters) but is not already locked to another party</li>
+      <li>The district has a genuine unsolved problem you can credibly claim — water, jobs, school quality, corruption</li>
+      <li>It is in a large state — UP, Bihar, Maharashtra, Bengal, Tamil Nadu, Andhra. Smaller states have lower ceilings</li>
+      <li>You can live there full-time. Outsider candidates who commute lose</li>
+    </ul>
+
+    <div class="callout">
+      <p><strong>The Mamata Principle:</strong> Mamata Banerjee spent years doing street-level work in Kolkata before she mattered. She was beaten by CPM workers. She showed up anyway. Her physical presence in moments of danger is what made her story. No consultant, no AI, no money can manufacture that. <strong>You must be present when it hurts.</strong></p>
+    </div>
+
+    <h3>Build Your Win Record</h3>
+    <p>By year 5, you must have at least 3 documented public wins that ordinary people in your district know about — not newspaper articles, but actual results:</p>
+    <ul class="checklist">
+      <li>A corrupt official held accountable through RTI or public pressure</li>
+      <li>A infrastructure problem solved (road, water, school) through persistent advocacy</li>
+      <li>A vulnerable community (Dalits, women, farmers) visibly defended and helped</li>
+    </ul>
+
+    <h3>Phase I Success Metrics</h3>
+    <div class="metric-grid">
+      <div class="metric">
+        <span class="metric-value">1</span>
+        <span class="metric-label">District fully claimed as your territory</span>
+      </div>
+      <div class="metric">
+        <span class="metric-value">3+</span>
+        <span class="metric-label">Documented public wins people remember</span>
+      </div>
+      <div class="metric">
+        <span class="metric-value">500+</span>
+        <span class="metric-label">People who would give you their afternoon if you called</span>
+      </div>
+      <div class="metric">
+        <span class="metric-value">0</span>
+        <span class="metric-label">Corruption scandals, public lies, or credibility damage</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="phase-connector">· · · · ·</div>
+
+  <!-- PHASE 2 -->
+  <section id="phase2">
+    <h2><span class="phase-label">Phase II · Years 5–10</span>Win a Seat. Then Make It Unlosable.</h2>
+
+    <div class="phase-header">
+      <div class="year-badge">YEARS 5–10</div>
+      <p class="phase-intro">Your first election is not about winning power. It is about proving that your organic support translates to votes without a party machine behind you. Even a close loss, if credible, builds more political capital than a bought win.</p>
+    </div>
+
+    <h3>The Party Question</h3>
+    <p>You have three options, each with different risk profiles:</p>
+
+    <table>
+      <thead><tr><th>Option</th><th>Upside</th><th>Downside</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>Join an existing regional party</strong></td>
+          <td>Immediate infrastructure, ballot symbol recognition</td>
+          <td>You are owned by the party leadership. Your ceiling is their ceiling.</td>
+        </tr>
+        <tr>
+          <td><strong>Join BJP or Congress</strong></td>
+          <td>National brand, resources</td>
+          <td>You are a small fish in a large pond. Promotion is slow and political.</td>
+        </tr>
+        <tr>
+          <td><strong>Start independent / new party</strong></td>
+          <td>You own the asset. No ceiling.</td>
+          <td>Hardest path. No infrastructure. Ballot symbol unknown. But Kejriwal did it.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p><strong>Recommended:</strong> Contest your first election as an independent or under a small party banner in your home constituency. If you win, you have proof of concept. Then decide whether to affiliate or build your own vehicle.</p>
+
+    <h3>How to Win Without Money</h3>
+    <p>Indian elections are expensive, but money is less decisive in your home constituency than elsewhere — because you have something money cannot buy: <em>local trust built over 5 years.</em></p>
+
+    <ul class="checklist">
+      <li><strong>Door-to-door personally</strong> — not volunteers, not pamphlets. You, at every door, in every lane, knowing people's names. This is how Nitish Kumar built Bihar. This is how Mamata built Kolkata.</li>
+      <li><strong>Caste arithmetic</strong> — understand exactly which communities are in your constituency, their grievances, and which ones are persuadable. This is not cynicism; it is fluency in how Indian democracy actually works.</li>
+      <li><strong>The "5 family" rule</strong> — in every village, identify the 5 most influential families. Win them, and the village follows. Lose them, and no amount of rallies help.</li>
+      <li><strong>Anti-corruption as a free campaign</strong> — if you have 5 years of documented wins against corrupt officials, your campaign is already run. Every win you had is a campaign story.</li>
+    </ul>
+
+    <h3>After You Win: Make the Seat Unlosable</h3>
+    <p>The first term is for service delivery, not legislation. Use your position to solve visible local problems. Do not go to Delhi and forget your constituency — that is how first-term MPs become one-term MPs.</p>
+
+    <div class="callout">
+      <p><strong>The Narendra Modi Model:</strong> Modi spent <strong>13 years</strong> as Gujarat Chief Minister before going national. He did not arrive in Delhi — he <em>was sent for</em> by a party that needed him. <strong>Your regional dominance is your leverage, not your launching pad.</strong> You are not going to Delhi to ask for something. You go when Delhi asks for you.</p>
+    </div>
+
+    <h3>Phase II Success Metrics</h3>
+    <div class="metric-grid">
+      <div class="metric">
+        <span class="metric-value">1</span>
+        <span class="metric-label">Election won in your home constituency</span>
+      </div>
+      <div class="metric">
+        <span class="metric-value">55%+</span>
+        <span class="metric-label">Vote share in your constituency by term's end</span>
+      </div>
+      <div class="metric">
+        <span class="metric-value">3</span>
+        <span class="metric-label">Visible constituency wins in your first term</span>
+      </div>
+      <div class="metric">
+        <span class="metric-value">2+</span>
+        <span class="metric-label">Districts where people know your name beyond your own</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="phase-connector">· · · · ·</div>
+
+  <!-- PHASE 3 -->
+  <section id="phase3">
+    <h2><span class="phase-label">Phase III · Years 10–15</span>Regional Dominance and the Organisation</h2>
+
+    <div class="phase-header">
+      <div class="year-badge">YEARS 10–15</div>
+      <p class="phase-intro">A single seat is a platform, not power. Real leverage in Indian politics comes from controlling enough seats that the national parties need you. This phase is about scaling from one constituency to one state.</p>
+    </div>
+
+    <h3>Build Your Organisation — The Non-Negotiable</h3>
+    <p>You cannot scale personally. By year 10, you need a real organisation — not a fan club, not paid workers, but people who believe in the project and recruit others who believe. This is the hardest problem in politics and there is no formula for it, but there are principles:</p>
+
+    <div class="principle">
+      <div class="principle-num">1</div>
+      <div class="principle-text">
+        <strong>Ideology before organisation</strong>
+        People join movements, not management structures. You need a clear, simple, emotionally resonant idea that answers "why does this matter?" before you can ask anyone to sacrifice for it.
+      </div>
+    </div>
+
+    <div class="principle">
+      <div class="principle-num">2</div>
+      <div class="principle-text">
+        <strong>Serve the communities RSS ignores</strong>
+        The RSS has deep roots in upper-caste Hindu communities. The 600 million Indians who are Dalit, Muslim, Adivasi, or secular urban middle class are structurally underserved by the current system. This is your constituency — not by cynical design, but because genuine service to underserved communities builds the deepest loyalty.
+      </div>
+    </div>
+
+    <div class="principle">
+      <div class="principle-num">3</div>
+      <div class="principle-text">
+        <strong>Institutions over events</strong>
+        Rallies are ephemeral. Schools, health camps, skill centres, legal aid clinics — institutions that serve people daily create loyalty that lasts. Every institution you build is a permanent campaign office.
+      </div>
+    </div>
+
+    <div class="principle">
+      <div class="principle-num">4</div>
+      <div class="principle-text">
+        <strong>Promote from within</strong>
+        Every person who joined you in year 2 and is still with you in year 10 must be visibly elevated. Organisations that promote from within retain talent; organisations that hire from outside for senior roles at the first sign of resources collapse.
+      </div>
+    </div>
+
+    <h3>The State Assembly Target</h3>
+    <p>By year 15, you must either:</p>
+    <ul class="checklist">
+      <li><strong>Win your state assembly election</strong> and become Chief Minister — the most powerful launchpad to PM</li>
+      <li><strong>Or</strong> control enough seats (25+) that no state government can be stable without your support — the kingmaker position</li>
+    </ul>
+
+    <p>The CM route is vastly preferable. A sitting Chief Minister with a good governance record has something no MP can claim: <em>proof that you can run a government.</em> This was Modi's Gujarat credential. This was Deve Gowda's Karnataka credential.</p>
+
+    <h3>The Governance Record That Matters</h3>
+    <p>If you reach Chief Minister, your governance record must emphasise three things that translate nationally:</p>
+
+    <ul class="checklist">
+      <li><strong>Corruption-free administration</strong> — one clean term is worth more than any policy achievement</li>
+      <li><strong>Economic results</strong> — visible infrastructure, jobs, investment that ordinary people can see and touch</li>
+      <li><strong>Law and order</strong> — Indians at every income level care deeply about personal safety</li>
+    </ul>
+
+    <div class="warning">
+      <strong>The Kejriwal Warning:</strong> AAP built fast, won Delhi, then tried to nationalise before consolidating. The result: Delhi is governed well but AAP is a regional party with a crumbling national presence. <strong>Do not go national before your state is unassailable.</strong> Premature nationalisation is the most common way outsider movements die.
+    </div>
+
+    <h3>Phase III Success Metrics</h3>
+    <div class="metric-grid">
+      <div class="metric">
+        <span class="metric-value">CM</span>
+        <span class="metric-label">Chief Minister of your state, or credible path to it</span>
+      </div>
+      <div class="metric">
+        <span class="metric-value">25+</span>
+        <span class="metric-label">Seats under your party's control</span>
+      </div>
+      <div class="metric">
+        <span class="metric-value">3+</span>
+        <span class="metric-label">Districts where you have booth-level organisation</span>
+      </div>
+      <div class="metric">
+        <span class="metric-value">1</span>
+        <span class="metric-label">Clear governance achievement that translates to a national story</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="phase-connector">· · · · ·</div>
+
+  <!-- PHASE 4 -->
+  <section id="phase4">
+    <h2><span class="phase-label">Phase IV · Years 15–19</span>Nationalise Your Identity</h2>
+
+    <div class="phase-header">
+      <div class="year-badge">YEARS 15–19</div>
+      <p class="phase-intro">Regional dominance gives you leverage. It does not give you legitimacy at the national level. This phase is about answering the question every Indian voter and coalition partner will ask: "Why should someone from Tamil Nadu / Bihar / wherever be Prime Minister of all of India?"</p>
+    </div>
+
+    <h3>The National Idea</h3>
+    <p>Every PM who succeeded had a one-line thesis that explained their candidacy. You need one too. It must be:</p>
+
+    <ul class="checklist">
+      <li><strong>Not already occupied</strong> — Hindutva is BJP's. Congress has "unity in diversity." Find the gap.</li>
+      <li><strong>Emotionally resonant</strong> — it must connect with people who have never met you</li>
+      <li><strong>Backed by your record</strong> — if you claim "development," you must have visible development in your state. Claims without records are dismissed instantly.</li>
+      <li><strong>Simple enough to be a slogan</strong> — "Gujarat Model" was three syllables. Your idea must survive being said by someone who hates you.</li>
+    </ul>
+
+    <p>The most available national ideas in 2026's India, given the occupied political space:</p>
+
+    <table>
+      <thead><tr><th>Idea</th><th>Available?</th><th>Viable Base</th></tr></thead>
+      <tbody>
+        <tr><td>Corruption-free governance</td><td>Partially — AAP tried it but lost credibility</td><td>Urban middle class, youth</td></tr>
+        <tr><td>Economic justice / jobs</td><td>Yes — no one owns it credibly</td><td>Youth (65% of India under 35), rural</td></tr>
+        <tr><td>Federal India / states' rights</td><td>Yes — deeply resonant post-GST, post-centralisation</td><td>Regional parties, South India</td></tr>
+        <tr><td>Inclusive development</td><td>Yes — Dalit + Muslim + Adivasi coalition has no political home</td><td>~600M underserved voters</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Media and the National Conversation</h3>
+    <p>A regional leader becomes a national figure primarily through media. You need:</p>
+
+    <ul class="checklist">
+      <li><strong>A book</strong> — not a hagiography, but a genuine policy vision. Vajpayee wrote poetry. Manmohan Singh had academic papers. Your intellectual output signals seriousness to the elite class that shapes national narratives.</li>
+      <li><strong>National media presence</strong> — regular columns, interviews, positions on national issues. You must have a recorded, consistent position on every major national question before you announce national ambitions.</li>
+      <li><strong>Social media with authentic voice</strong> — not managed, not PR. Indians can tell. Modi's early social media worked because it was direct. Rahul Gandhi's worked when it was unscripted. Fakeness is detected and punished.</li>
+      <li><strong>Allies in other states</strong> — begin building relationships with regional leaders in other states who share your ideological direction. Coalition building starts long before the election.</li>
+    </ul>
+
+    <h3>The Coalition Architecture</h3>
+    <p>India's PM is rarely directly elected to the role. They are elevated because they are useful to a coalition that needs a consensus figure. Position yourself as:</p>
+
+    <div class="callout">
+      <p><strong>The least objectionable, most competent consensus candidate.</strong> This sounds like weakness. It is actually the description of every PM who came from outside the two dominant parties. Deve Gowda was PM because he was the person the United Front could agree on. I.K. Gujral for the same reason. <strong>Being everyone's second choice is a viable strategy when no one can be everyone's first choice.</strong></p>
+    </div>
+
+    <h3>Phase IV Success Metrics</h3>
+    <div class="metric-grid">
+      <div class="metric">
+        <span class="metric-value">1</span>
+        <span class="metric-label">Clear national idea that is yours and no one else's</span>
+      </div>
+      <div class="metric">
+        <span class="metric-value">3+</span>
+        <span class="metric-value-sub"></span>
+        <span class="metric-label">Regional allies who would support your PM candidacy</span>
+      </div>
+      <div class="metric">
+        <span class="metric-value">National</span>
+        <span class="metric-label">Media presence beyond your state</span>
+      </div>
+      <div class="metric">
+        <span class="metric-value">30+</span>
+        <span class="metric-label">Lok Sabha seats under your coalition's umbrella</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="phase-connector">· · · · ·</div>
+
+  <!-- PHASE 5 -->
+  <section id="phase5">
+    <h2><span class="phase-label">Phase V · Year 19–20</span>Be Ready for the Moment</h2>
+
+    <div class="phase-header">
+      <div class="year-badge">YEARS 19–20</div>
+      <p class="phase-intro">You cannot manufacture the moment. But you can be so prepared that when the moment arrives — when a coalition fractures, when the dominant party loses its majority, when a national crisis demands new leadership — you are the obvious answer.</p>
+    </div>
+
+    <h3>What the Moment Looks Like</h3>
+    <p>Every surprise PM in Indian history benefited from a specific kind of political opening:</p>
+
+    <table>
+      <thead><tr><th>PM</th><th>The Moment</th><th>Why They Were Ready</th></tr></thead>
+      <tbody>
+        <tr><td>Deve Gowda</td><td>Hung parliament, Congress refused to support BJP</td><td>Karnataka CM with clean image, regional credibility</td></tr>
+        <tr><td>I.K. Gujral</td><td>Coalition crisis, needed a transitional figure</td><td>Known diplomat, no enemies, no ambition threat</td></tr>
+        <tr><td>Manmohan Singh</td><td>Congress won but Sonia renounced PM post</td><td>30 years of institutional credibility, non-threatening to allies</td></tr>
+        <tr><td>V.P. Singh</td><td>Anti-corruption wave against Rajiv Gandhi</td><td>Had built the narrative for years as a crusader</td></tr>
+      </tbody>
+    </table>
+
+    <p>Notice: none of them manufactured the opening. All of them were positioned to walk through it when it appeared. <strong>This is your final job — to be so obviously ready that when the door opens, your name is the first one spoken.</strong></p>
+
+    <h3>The Final Positioning Checklist</h3>
+    <ul class="checklist">
+      <li>Your state is stable and governed well — you can leave without it collapsing</li>
+      <li>Your coalition partners have made private commitments of support</li>
+      <li>Your national idea is associated with you in public discourse</li>
+      <li>You have no major corruption allegations — even unproven ones are lethal at this stage</li>
+      <li>You have a deputy or successor in your state who ensures continuity</li>
+      <li>You have relationships with the President's office and constitutional institutions</li>
+      <li>You have publicly positioned yourself as a unifier, not a divider</li>
+    </ul>
+
+    <div class="callout">
+      <p><strong>The Paradox of Ambition:</strong> In India, openly seeking to be PM is often politically fatal. Every successful coalition PM presented themselves as <em>reluctantly available</em> rather than aggressively seeking. This is not hypocrisy — it is accurate signalling to coalition partners that you will not be a threat to their power. <strong>Desire the office. Do not display the desire.</strong></p>
+    </div>
+  </section>
+
+  <!-- HARD TRUTHS -->
+  <section id="truths">
+    <h2><span class="phase-label">What No One Tells You</span>The Hard Truths</h2>
+
+    <p>This blueprint is defensible and evidence-based. It is also genuinely difficult. Here are the things that will not appear in any political strategy document but that every successful Indian politician knows:</p>
+
+    <div class="principle">
+      <div class="principle-num">1</div>
+      <div class="principle-text">
+        <strong>The state will not remain neutral once you become a threat</strong>
+        The moment your organisation becomes politically significant, you will face ED raids, CBI investigations, tax scrutiny, and media attacks funded by rivals. This is not paranoia — it is the documented experience of every outsider movement in Indian history. Build your organisation to survive this. Have no financial skeletons. Keep your books immaculate from day one.
+      </div>
+    </div>
+
+    <div class="principle">
+      <div class="principle-num">2</div>
+      <div class="principle-text">
+        <strong>Caste is not optional — it is the operating system</strong>
+        You may personally believe in a caste-free India. You will still need to understand caste arithmetic in every constituency you contest. Ignoring it is not idealism; it is losing. The question is whether you use caste arithmetic cynically (to divide) or strategically (to build the broadest possible coalition of underserved communities).
+      </div>
+    </div>
+
+    <div class="principle">
+      <div class="principle-num">3</div>
+      <div class="principle-text">
+        <strong>Money matters at every stage, but not in the way you think</strong>
+        You do not need to be rich. You need access to enough money to sustain operations — travel, staff, legal defense, election deposits. This means building a donor base of small contributions from your community over years, not seeking one large donor who will then own you.
+      </div>
+    </div>
+
+    <div class="principle">
+      <div class="principle-num">4</div>
+      <div class="principle-text">
+        <strong>Your family will bear costs you did not negotiate with them</strong>
+        Every Indian politician's family — spouse, children, parents — becomes a target for scrutiny, attacks, and social pressure. This is not a side effect. It is a guaranteed feature. Have this conversation before year one, not year ten.
+      </div>
+    </div>
+
+    <div class="principle">
+      <div class="principle-num">5</div>
+      <div class="principle-text">
+        <strong>The 20 years will change you</strong>
+        No one who spends two decades in Indian politics emerges unchanged. The compromises, the alliances of convenience, the gap between your stated values and what governance requires — these accumulate. The politicians who retain their integrity do so through conscious, repeated choice, not through the absence of temptation. Decide in advance what you will not do. Write it down. Refer to it.
+      </div>
+    </div>
+
+    <blockquote>"The question is not whether you can win. The question is whether the person who wins, after 20 years, is still the person who started."</blockquote>
+  </section>
+
+  <!-- START TODAY -->
+  <section id="start">
+    <h2><span class="phase-label">If You Are Serious</span>What to Do in the Next 90 Days</h2>
+
+    <p>Every 20-year project begins with a 90-day commitment that proves to yourself that you mean it. Here is the minimum viable start:</p>
+
+    <ul class="checklist">
+      <li><strong>Days 1–7:</strong> Identify your district. Research the incumbent's weaknesses. Map the caste composition. Identify the top 3 unsolved problems. Write this down in 2 pages.</li>
+      <li><strong>Days 8–30:</strong> Move to the district if you are not already there. Attend every public meeting, village panchayat, and local gathering you can find. Do not speak. Listen. For 3 weeks, only listen.</li>
+      <li><strong>Days 31–60:</strong> Identify one specific problem you can help solve using skills you already have — legal, medical, technical, financial. Solve it publicly and without payment. Document the result.</li>
+      <li><strong>Days 61–90:</strong> Find 10 people in the district who share your conviction and have their own local credibility. Not followers — equals. These are your founding team. The quality of these 10 people will determine everything.</li>
+    </ul>
+
+    <div class="callout">
+      <p><strong>The 90-day test:</strong> If you cannot do these four things in 90 days, the 20-year project will not happen. Not because the project is wrong, but because the 20 years requires the same discipline, presence, and willingness to do unglamorous work — every single year. <strong>The 90 days is the audition. You are auditioning yourself.</strong></p>
+    </div>
+
+    <h3>The One Principle Above All Others</h3>
+    <p>Every section of this blueprint can be debated, refined, or adapted to your specific circumstances. One principle cannot be compromised without the entire project collapsing:</p>
+
+    <div class="truth-box">
+      <span class="truth-box-label">Non-Negotiable</span>
+      <p style="font-family: 'Playfair Display', serif; font-size: 1.3rem; font-style: italic; line-height: 1.5;">Your credibility is the only asset that cannot be rebuilt once lost. Money can be recovered. Allies can be won back. Seats can be regained. <strong>A reputation for honesty, once destroyed, is gone.</strong> Every decision in the next 20 years must be made with this in mind first, and electoral calculation second.</p>
+    </div>
+
+    <p>This document is in the public domain. Share it, adapt it, critique it. If it helps one serious person build a genuinely better political career — one rooted in real service rather than inherited privilege — it has done its job.</p>
+  </section>
+
+</main>
+
+<footer>
+  <p>This document is in the public domain · No rights reserved · Share freely</p>
+  <p>Evidence-based political strategy for India · 2026</p>
+  <p>Built on the real careers of Modi, Mamata, Kejriwal, Deve Gowda, V.P. Singh, and others</p>
+</footer>
+
+<script>
+  // Scroll-triggered section reveals
+  const sections = document.querySelectorAll('section');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.08 });
+  sections.forEach(s => observer.observe(s));
+
+  // Active nav highlighting
+  const navLinks = document.querySelectorAll('nav a');
+  const sectionMap = {};
+  sections.forEach(s => { if (s.id) sectionMap[s.id] = s; });
+
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 120) current = s.id;
+    });
+    navLinks.forEach(a => {
+      a.style.color = a.getAttribute('href') === '#' + current ? 'var(--saffron)' : '';
+      a.style.borderBottomColor = a.getAttribute('href') === '#' + current ? 'var(--saffron)' : '';
+    });
+  });
+</script>
+
+</body>
+</html>
