@@ -3,16 +3,30 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Raul's Ideas — Open Blueprints for India</title>
+<title>Nayalab — Open Blueprints for India</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<!-- Google Translate -->
+<script type="text/javascript">
+  function googleTranslateElementInit() {
+    new google.translate.TranslateElement({
+      pageLanguage: 'en',
+      includedLanguages: 'hi,ta,te,bn,mr,gu,kn,ml,pa,or,as,ur,mai,kok,sd,ks,ne,sa,si,doi,mni,sat',
+      layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+      autoDisplay: false,
+      multilanguagePage: true
+    }, 'google_translate_element');
+  }
+</script>
+<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
 <style>
   :root {
     --bg: #0a0a08;
     --paper: #f2ede4;
     --saffron: #f07b1f;
-    --saffron-glow: rgba(240,123,31,0.15);
-    --green: #2d6a4f;
+    --saffron-glow: rgba(240,123,31,0.12);
     --muted: #6b6560;
     --rule: #2a2a26;
     --card-bg: #131310;
@@ -28,7 +42,6 @@
     font-family: 'Crimson Pro', Georgia, serif;
     font-size: 18px;
     line-height: 1.7;
-    min-height: 100vh;
     overflow-x: hidden;
   }
 
@@ -43,69 +56,83 @@
     opacity: 0.35;
   }
 
-  /* ── HEADER ── */
-  header {
-    padding: 4rem 3rem 3rem;
-    max-width: 1100px;
-    margin: 0 auto;
-    position: relative;
+  /* ── TRANSLATE BAR ── */
+  .translate-bar {
+    background: #111;
+    border-bottom: 1px solid var(--rule);
+    padding: 0.5rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.8rem;
   }
 
-  .site-eyebrow {
+  .translate-label {
     font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.65rem;
-    letter-spacing: 0.35em;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: var(--saffron);
-    margin-bottom: 1.2rem;
-    display: block;
+    color: var(--muted);
   }
+
+  /* Override Google Translate widget colours to match dark theme */
+  #google_translate_element .goog-te-gadget-simple {
+    background: transparent !important;
+    border: 1px solid var(--rule) !important;
+    padding: 0.2rem 0.6rem !important;
+    border-radius: 0 !important;
+  }
+
+  #google_translate_element .goog-te-gadget-simple a,
+  #google_translate_element .goog-te-gadget-simple span {
+    color: var(--muted) !important;
+    font-family: 'IBM Plex Mono', monospace !important;
+    font-size: 0.6rem !important;
+    letter-spacing: 0.1em !important;
+    text-decoration: none !important;
+  }
+
+  .goog-te-banner-frame { display: none !important; }
+  body { top: 0 !important; }
+
+  /* ── HEADER ── */
+  header {
+    padding: 1.5rem 3rem 1.2rem;
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .site-eyebrow { display: none; }
 
   h1 {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(4rem, 12vw, 9rem);
-    line-height: 0.92;
-    letter-spacing: 0.02em;
+    font-size: clamp(2rem, 5vw, 3rem);
+    line-height: 1;
+    letter-spacing: 0.04em;
     color: var(--paper);
-    margin-bottom: 0.2rem;
+    margin: 0;
   }
 
-  h1 span {
-    color: var(--saffron);
-    display: block;
-  }
+  h1 span { color: var(--saffron); display: inline; }
 
   .site-desc {
     font-family: 'Crimson Pro', serif;
     font-style: italic;
-    font-size: 1.15rem;
+    font-size: 0.95rem;
     color: var(--muted);
-    max-width: 520px;
-    margin-top: 1.5rem;
     font-weight: 300;
-    line-height: 1.6;
-    border-left: 2px solid var(--rule);
-    padding-left: 1.2rem;
+    line-height: 1.4;
+    margin: 0;
   }
 
-  .header-meta {
-    display: flex;
-    gap: 2rem;
-    margin-top: 2rem;
-    flex-wrap: wrap;
-  }
+  .header-meta { display: none; }
+  .header-meta span { display: none; }
 
-  .header-meta span {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.62rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--muted);
-    border: 1px solid var(--rule);
-    padding: 0.3rem 0.8rem;
-  }
-
-  /* ── DIVIDER ── */
   .rule-line {
     border: none;
     border-top: 1px solid var(--rule);
@@ -117,7 +144,7 @@
   .catalog {
     max-width: 1100px;
     margin: 0 auto;
-    padding: 3rem 3rem 5rem;
+    padding: 1.5rem 3rem 4rem;
   }
 
   .catalog-header {
@@ -139,10 +166,9 @@
     font-family: 'Bebas Neue', sans-serif;
     font-size: 1.5rem;
     color: var(--saffron);
-    letter-spacing: 0.05em;
   }
 
-  /* ── CATEGORY FILTER ── */
+  /* ── FILTERS ── */
   .filters {
     display: flex;
     flex-wrap: wrap;
@@ -231,7 +257,6 @@
     font-size: 1.7rem;
     line-height: 1.05;
     letter-spacing: 0.03em;
-    color: var(--paper);
     transition: color 0.2s;
   }
 
@@ -276,7 +301,7 @@
     transform: translateX(4px);
   }
 
-  /* ── FEATURED CARD (spans 2 cols) ── */
+  /* ── FEATURED CARD ── */
   .card.featured {
     grid-column: span 2;
     flex-direction: row;
@@ -303,12 +328,10 @@
     user-select: none;
   }
 
-  .card.featured:hover .card-number { color: var(--saffron-glow); }
+  .card.featured:hover .card-number { color: #2a2a22; }
 
-  /* ── HIDDEN (for filter) ── */
   .card[data-hidden="true"] { display: none; }
 
-  /* ── EMPTY STATE ── */
   .empty-state {
     grid-column: 1 / -1;
     padding: 4rem;
@@ -333,9 +356,7 @@
   .about-strip h2 {
     font-family: 'Bebas Neue', sans-serif;
     font-size: 2.5rem;
-    letter-spacing: 0.03em;
     margin-bottom: 0.8rem;
-    color: var(--paper);
   }
 
   .about-strip p {
@@ -346,23 +367,11 @@
     font-weight: 300;
   }
 
-  .about-strip a {
-    color: var(--saffron);
-    text-decoration: none;
-    border-bottom: 1px solid var(--saffron);
-  }
+  .about-strip a { color: var(--saffron); text-decoration: none; border-bottom: 1px solid var(--saffron); }
 
-  .principles {
-    display: flex;
-    flex-direction: column;
-    gap: 0.8rem;
-  }
+  .principles { display: flex; flex-direction: column; gap: 0.8rem; }
 
-  .principle-item {
-    display: flex;
-    gap: 1rem;
-    align-items: flex-start;
-  }
+  .principle-item { display: flex; gap: 1rem; align-items: flex-start; }
 
   .principle-bullet {
     font-family: 'IBM Plex Mono', monospace;
@@ -403,10 +412,7 @@
     color: var(--muted);
   }
 
-  footer a {
-    color: var(--saffron);
-    text-decoration: none;
-  }
+  footer a { color: var(--saffron); text-decoration: none; }
 
   /* ── ANIMATIONS ── */
   @keyframes fadeUp {
@@ -425,24 +431,22 @@
     .card.featured .card-title { font-size: 2rem; }
     .about-strip { grid-template-columns: 1fr; gap: 2rem; }
     .grid { grid-template-columns: 1fr; }
+    .translate-bar { padding: 0.5rem 1.2rem; }
   }
 </style>
 </head>
 <body>
 
-<header>
-  <span class="site-eyebrow">Open Blueprints for India</span>
-  <h1>Ideas Worth<span>Building.</span></h1>
-  <p class="site-desc">Publicly documented strategies, playbooks, and thought experiments — each one rigorous enough to actually work, and open enough for anyone to use.</p>
-  <div class="header-meta">
-    <span>No copyright</span>
-    <span>Evidence-based</span>
-    <span>Updated weekly</span>
-    <span>Free to use</span>
-  </div>
-</header>
+<!-- Google Translate Bar -->
+<div class="translate-bar">
+  <span class="translate-label">Read in your language</span>
+  <div id="google_translate_element"></div>
+</div>
 
-<hr class="rule-line">
+<header>
+  <h1>Naya<span>lab</span></h1>
+  <p class="site-desc">Open blueprints for India — free to use, adapt, and share</p>
+</header>
 
 <section class="catalog">
 
@@ -461,7 +465,7 @@
 
   <div class="grid" id="grid">
 
-    <!-- ── CARD 1: FEATURED ── -->
+    <!-- CARD 1: FEATURED -->
     <a class="card featured" href="becoming-pm/index.html" data-category="politics">
       <div class="card-number">01</div>
       <div class="card-body">
@@ -475,7 +479,7 @@
       </div>
     </a>
 
-    <!-- ── CARD 2 ── -->
+    <!-- CARD 2 -->
     <a class="card" href="spotclean/index.html" data-category="civic">
       <div class="card-tag">Civic</div>
       <div class="card-title">SpotClean India</div>
@@ -486,14 +490,13 @@
       </div>
     </a>
 
-    <!-- ── PLACEHOLDER: add new cards below this comment ── -->
-    <!--
-    <a class="card" href="your-folder/index.html" data-category="CATEGORY">
+    <!-- ADD NEW CARDS BELOW THIS LINE
+    <a class="card" href="YOUR-FOLDER/index.html" data-category="CATEGORY">
       <div class="card-tag">CATEGORY</div>
       <div class="card-title">TITLE</div>
       <div class="card-desc">SHORT DESCRIPTION</div>
       <div class="card-footer">
-        <span class="card-date">MONTH YEAR</span>
+        <span class="card-date">Month Year</span>
         <span class="card-arrow">→ Read</span>
       </div>
     </a>
@@ -524,22 +527,22 @@
     </div>
     <div class="principle-item">
       <span class="principle-bullet">03</span>
-      <div class="principle-text"><strong>Usable by anyone.</strong> No jargon, no paywalls, no permissions. Anyone can run with any of this.</div>
+      <div class="principle-text"><strong>Usable by anyone.</strong> No jargon, no paywalls, no permissions needed.</div>
     </div>
     <div class="principle-item">
       <span class="principle-bullet">04</span>
-      <div class="principle-text"><strong>No copyright.</strong> Public domain. Adapt freely. Attribution appreciated but not required.</div>
+      <div class="principle-text"><strong>No copyright.</strong> Public domain. Adapt freely.</div>
     </div>
   </div>
 </section>
 
 <footer>
-  <p>Raul's Ideas · Open blueprints for India · Public domain</p>
+  <p>Nayalab · Open blueprints for India · Public domain</p>
   <p><a href="https://github.com/raulscooper">github.com/raulscooper</a></p>
 </footer>
 
 <script>
-  // ── FILTER ──
+  // Filter logic
   const filterBtns = document.querySelectorAll('.filter-btn');
   const cards = document.querySelectorAll('.card[data-category]');
   const countEl = document.getElementById('visibleCount');
@@ -556,7 +559,7 @@
         card.dataset.hidden = match ? 'false' : 'true';
         if (match) visible++;
       });
-      countEl.textContent = visible + (visible === 1 ? ' published' : ' published');
+      countEl.textContent = visible + ' published';
       emptyState.style.display = visible === 0 ? 'block' : 'none';
     });
   });
