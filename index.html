@@ -1,295 +1,566 @@
----
-layout: null
----
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SpotClean India — Operations Playbook</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<title>Raul's Ideas — Open Blueprints for India</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-:root{--ink:#1a1a18;--paper:#f5f2eb;--paper2:#ede9df;--accent:#2d5a27;--accent2:#c8521a;--muted:#6b6860;--border:#d4cfc4;--white:#fdfcf8}
-body{background:var(--paper);color:var(--ink);font-family:'Instrument Sans',sans-serif;font-size:16px;line-height:1.7}
-.hero{background:var(--ink);color:var(--paper);padding:1.25rem 2rem;display:flex;align-items:center;justify-content:space-between;gap:1.5rem;flex-wrap:wrap}
-.hero-title{font-family:'DM Serif Display',serif;font-size:clamp(1.5rem,3.5vw,2.2rem);line-height:1.1}
-.hero-title em{font-style:italic;color:#8a9e7a}
-.hero-sub{font-size:0.82rem;color:rgba(245,242,235,0.5);margin-top:0.25rem}
-.hero-badge{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:#8a9e7a;border:1px solid rgba(138,158,122,0.35);padding:5px 14px;border-radius:2px;white-space:nowrap;flex-shrink:0}
-.module-nav{background:var(--white);border-bottom:1px solid var(--border);padding:0.5rem 1.25rem;display:flex;flex-wrap:wrap;gap:3px}
-.nav-item{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.07em;text-transform:uppercase;color:var(--muted);cursor:pointer;padding:5px 11px;border-radius:3px;border:none;background:transparent;transition:all 0.15s;white-space:nowrap}
-.nav-item:hover{color:var(--ink);background:var(--paper2)}
-.nav-item.active{color:var(--accent);background:#eef5ec;font-weight:600}
-.container{max-width:840px;margin:0 auto;padding:2.5rem 1.5rem 5rem}
-.module{display:none}
-.module.active{display:block;animation:fu 0.22s ease}
-@keyframes fu{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
-.module-header{display:flex;align-items:flex-start;gap:1.25rem;margin-bottom:2rem;padding-bottom:1.75rem;border-bottom:1px solid var(--border)}
-.module-number{font-family:'DM Serif Display',serif;font-size:4rem;line-height:1;color:var(--border);flex-shrink:0;margin-top:-0.4rem}
-.module-tag{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent);margin-bottom:0.3rem}
-.module-title{font-family:'DM Serif Display',serif;font-size:2rem;line-height:1.15}
-.module-intro{font-size:0.95rem;color:var(--muted);margin-top:0.5rem;line-height:1.65}
-.card{background:var(--white);border:1px solid var(--border);border-radius:4px;padding:1.25rem 1.4rem;margin-bottom:1rem}
-.card-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--accent2);margin-bottom:0.6rem}
-.card h3{font-family:'DM Serif Display',serif;font-size:1.15rem;margin-bottom:0.6rem}
-.card p,.card li{font-size:0.93rem;color:#3a3830;line-height:1.7}
-.grid2{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem}
-.stat-box{background:var(--paper2);border:1px solid var(--border);border-radius:4px;padding:1.1rem 1.2rem}
-.stat-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);margin-bottom:0.3rem}
-.stat-value{font-family:'DM Serif Display',serif;font-size:1.7rem;color:var(--ink);line-height:1.1}
-.stat-sub{font-size:0.78rem;color:var(--muted);margin-top:0.2rem;line-height:1.4}
-.step{display:flex;gap:1rem;margin-bottom:1.1rem;align-items:flex-start}
-.step-n{width:26px;height:26px;border-radius:50%;border:1px solid var(--border);background:var(--paper2);font-family:'DM Mono',monospace;font-size:11px;display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--muted);margin-top:2px}
-.time-pill{font-family:'DM Mono',monospace;font-size:11px;font-weight:500;color:var(--accent);background:#eef5ec;border:1px solid #b8d4b0;border-radius:20px;padding:3px 10px;white-space:nowrap;flex-shrink:0;margin-top:3px;line-height:1.4}
-.step-text{font-size:0.93rem;color:#3a3830;line-height:1.65}
-.step-text strong{color:var(--ink);font-weight:600}
-.tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:0.6rem}
-.tag{font-size:11px;padding:4px 11px;border:1px solid var(--border);border-radius:2px;color:var(--muted);background:var(--paper2);font-family:'DM Mono',monospace}
-.tag.no{border-color:#e8c4b0;color:#8b3a15;background:#fdf0e8}
-.tag.yes{border-color:#b8d4b0;color:#2d5a27;background:#eef5ec}
-.callout{border-left:3px solid var(--accent);padding:0.9rem 1.1rem;background:#eef5ec;margin:1.1rem 0;border-radius:0 4px 4px 0}
-.callout p{font-size:0.93rem;color:#2a4a24;line-height:1.65}
-.callout.warn{border-left-color:var(--accent2);background:#fdf0e8}
-.callout.warn p{color:#6b2e0e}
-.big-quote{font-family:'DM Serif Display',serif;font-size:1.3rem;font-style:italic;color:var(--ink);line-height:1.5;padding:1.25rem 1.5rem;background:var(--paper2);border-radius:4px;margin:1.1rem 0;text-align:center}
-table{width:100%;border-collapse:collapse;font-size:0.88rem;margin:0.8rem 0}
-th{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);padding:0.5rem 0.7rem;text-align:left;border-bottom:1px solid var(--border)}
-td{padding:0.65rem 0.7rem;border-bottom:1px solid var(--border);color:#3a3830;vertical-align:top}
-tr:last-child td{border-bottom:none}
-tr:nth-child(even) td{background:var(--paper2)}
-.status{display:inline-block;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;padding:3px 9px;border-radius:2px;font-weight:500;margin:3px 3px 3px 0}
-.s-nom{background:#e8f0e8;color:#2d5a27}.s-fund{background:#fdf0e8;color:#8b3a15}.s-clean{background:#e6f0f8;color:#1a4870}.s-maint{background:#f0f0e8;color:#4a4a20}.s-att{background:#fce8e8;color:#8b1a1a}
-.back-btn{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);background:none;border:1px solid var(--border);border-radius:3px;padding:6px 14px;cursor:pointer;margin-bottom:1.5rem;transition:all 0.15s;display:inline-block}
-.back-btn:hover{color:var(--ink);border-color:#aaa}
-/* LANDING */
-#landing{display:block}
-.landing-intro{font-size:1rem;color:var(--muted);max-width:640px;margin:0 0 2rem;line-height:1.7}
-.landing-intro strong{color:var(--ink)}
-.modules-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:2rem}
-@media(min-width:700px){.modules-grid{grid-template-columns:repeat(5,1fr)}}
-.mod-card{background:var(--white);border:1px solid var(--border);border-radius:4px;padding:1rem 1.1rem;cursor:pointer;transition:all 0.15s;text-align:left}
-.mod-card:hover{border-color:#999;background:var(--paper2);transform:translateY(-2px)}
-.mod-num{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:0.12em;color:var(--accent);margin-bottom:0.35rem}
-.mod-name{font-family:'DM Serif Display',serif;font-size:1rem;line-height:1.2;margin-bottom:0.35rem}
-.mod-desc{font-size:0.75rem;color:var(--muted);line-height:1.45}
-.landing-note{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.1em;color:var(--muted);text-align:center;padding:1rem;border-top:1px solid var(--border);margin-top:0.25rem}
-.page-footer{background:var(--ink);color:rgba(245,242,235,0.45);text-align:center;padding:2rem 1.5rem;font-family:'DM Mono',monospace;font-size:11px;letter-spacing:0.08em}
-.page-footer strong{color:var(--paper);display:block;font-size:1.3rem;font-family:'DM Serif Display',serif;letter-spacing:0;margin-bottom:0.4rem;font-weight:400}
-.page-footer a{color:#8a9e7a;text-decoration:none}
-@media(max-width:500px){.module-header{flex-direction:column;gap:0.4rem}.module-number{font-size:2.5rem}.hero{padding:1rem 1.25rem}.modules-grid{grid-template-columns:1fr 1fr}.grid2{grid-template-columns:1fr 1fr}}
+  :root {
+    --bg: #0a0a08;
+    --paper: #f2ede4;
+    --saffron: #f07b1f;
+    --saffron-glow: rgba(240,123,31,0.15);
+    --green: #2d6a4f;
+    --muted: #6b6560;
+    --rule: #2a2a26;
+    --card-bg: #131310;
+    --card-border: #242420;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--paper);
+    font-family: 'Crimson Pro', Georgia, serif;
+    font-size: 18px;
+    line-height: 1.7;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── GRAIN ── */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.35;
+  }
+
+  /* ── HEADER ── */
+  header {
+    padding: 4rem 3rem 3rem;
+    max-width: 1100px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .site-eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--saffron);
+    margin-bottom: 1.2rem;
+    display: block;
+  }
+
+  h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(4rem, 12vw, 9rem);
+    line-height: 0.92;
+    letter-spacing: 0.02em;
+    color: var(--paper);
+    margin-bottom: 0.2rem;
+  }
+
+  h1 span {
+    color: var(--saffron);
+    display: block;
+  }
+
+  .site-desc {
+    font-family: 'Crimson Pro', serif;
+    font-style: italic;
+    font-size: 1.15rem;
+    color: var(--muted);
+    max-width: 520px;
+    margin-top: 1.5rem;
+    font-weight: 300;
+    line-height: 1.6;
+    border-left: 2px solid var(--rule);
+    padding-left: 1.2rem;
+  }
+
+  .header-meta {
+    display: flex;
+    gap: 2rem;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .header-meta span {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    border: 1px solid var(--rule);
+    padding: 0.3rem 0.8rem;
+  }
+
+  /* ── DIVIDER ── */
+  .rule-line {
+    border: none;
+    border-top: 1px solid var(--rule);
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  /* ── CATALOG ── */
+  .catalog {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 3rem 3rem 5rem;
+  }
+
+  .catalog-header {
+    display: flex;
+    align-items: baseline;
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .catalog-title {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .catalog-count {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.5rem;
+    color: var(--saffron);
+    letter-spacing: 0.05em;
+  }
+
+  /* ── CATEGORY FILTER ── */
+  .filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .filter-btn {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    background: transparent;
+    border: 1px solid var(--rule);
+    color: var(--muted);
+    padding: 0.35rem 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .filter-btn:hover,
+  .filter-btn.active {
+    background: var(--saffron);
+    border-color: var(--saffron);
+    color: var(--bg);
+  }
+
+  /* ── GRID ── */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+  }
+
+  /* ── CARD ── */
+  .card {
+    background: var(--card-bg);
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    text-decoration: none;
+    color: var(--paper);
+    transition: background 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--saffron-glow);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .card:hover { background: #1a1a16; }
+  .card:hover::before { opacity: 1; }
+
+  .card-tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--saffron);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .card-tag::before {
+    content: '';
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    background: var(--saffron);
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .card-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.7rem;
+    line-height: 1.05;
+    letter-spacing: 0.03em;
+    color: var(--paper);
+    transition: color 0.2s;
+  }
+
+  .card:hover .card-title { color: var(--saffron); }
+
+  .card-desc {
+    font-family: 'Crimson Pro', serif;
+    font-style: italic;
+    font-size: 0.95rem;
+    color: var(--muted);
+    font-weight: 300;
+    line-height: 1.5;
+    flex: 1;
+  }
+
+  .card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 1rem;
+    border-top: 1px solid var(--rule);
+    margin-top: auto;
+  }
+
+  .card-date {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    color: var(--muted);
+  }
+
+  .card-arrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--saffron);
+    opacity: 0;
+    transition: opacity 0.2s, transform 0.2s;
+  }
+
+  .card:hover .card-arrow {
+    opacity: 1;
+    transform: translateX(4px);
+  }
+
+  /* ── FEATURED CARD (spans 2 cols) ── */
+  .card.featured {
+    grid-column: span 2;
+    flex-direction: row;
+    gap: 2rem;
+    align-items: center;
+  }
+
+  .card.featured .card-title { font-size: 2.8rem; }
+
+  .card.featured .card-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+
+  .card.featured .card-number {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 6rem;
+    color: var(--rule);
+    line-height: 1;
+    flex-shrink: 0;
+    transition: color 0.3s;
+    user-select: none;
+  }
+
+  .card.featured:hover .card-number { color: var(--saffron-glow); }
+
+  /* ── HIDDEN (for filter) ── */
+  .card[data-hidden="true"] { display: none; }
+
+  /* ── EMPTY STATE ── */
+  .empty-state {
+    grid-column: 1 / -1;
+    padding: 4rem;
+    text-align: center;
+    color: var(--muted);
+    font-style: italic;
+    display: none;
+  }
+
+  /* ── ABOUT STRIP ── */
+  .about-strip {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 2.5rem 3rem;
+    border-top: 1px solid var(--rule);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: center;
+  }
+
+  .about-strip h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.5rem;
+    letter-spacing: 0.03em;
+    margin-bottom: 0.8rem;
+    color: var(--paper);
+  }
+
+  .about-strip p {
+    font-family: 'Crimson Pro', serif;
+    font-size: 0.95rem;
+    color: var(--muted);
+    line-height: 1.7;
+    font-weight: 300;
+  }
+
+  .about-strip a {
+    color: var(--saffron);
+    text-decoration: none;
+    border-bottom: 1px solid var(--saffron);
+  }
+
+  .principles {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+
+  .principle-item {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+
+  .principle-bullet {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    color: var(--saffron);
+    padding-top: 0.35rem;
+    flex-shrink: 0;
+  }
+
+  .principle-text {
+    font-family: 'Crimson Pro', serif;
+    font-size: 0.9rem;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  .principle-text strong { color: var(--paper); font-weight: 600; }
+
+  /* ── FOOTER ── */
+  footer {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 2rem 3rem;
+    border-top: 1px solid var(--rule);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  footer p {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  footer a {
+    color: var(--saffron);
+    text-decoration: none;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  header { animation: fadeUp 0.7s ease forwards; }
+  .catalog { animation: fadeUp 0.7s 0.2s ease both; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 700px) {
+    header, .catalog, .about-strip, footer { padding-left: 1.2rem; padding-right: 1.2rem; }
+    .card.featured { grid-column: span 1; flex-direction: column; }
+    .card.featured .card-number { font-size: 3rem; }
+    .card.featured .card-title { font-size: 2rem; }
+    .about-strip { grid-template-columns: 1fr; gap: 2rem; }
+    .grid { grid-template-columns: 1fr; }
+  }
 </style>
 </head>
 <body>
 
-<div class="hero">
+<header>
+  <span class="site-eyebrow">Open Blueprints for India</span>
+  <h1>Ideas Worth<span>Building.</span></h1>
+  <p class="site-desc">Publicly documented strategies, playbooks, and thought experiments — each one rigorous enough to actually work, and open enough for anyone to use.</p>
+  <div class="header-meta">
+    <span>No copyright</span>
+    <span>Evidence-based</span>
+    <span>Updated weekly</span>
+    <span>Free to use</span>
+  </div>
+</header>
+
+<hr class="rule-line">
+
+<section class="catalog">
+
+  <div class="catalog-header">
+    <span class="catalog-title">All ideas</span>
+    <span class="catalog-count" id="visibleCount">2 published</span>
+  </div>
+
+  <div class="filters">
+    <button class="filter-btn active" data-filter="all">All</button>
+    <button class="filter-btn" data-filter="politics">Politics</button>
+    <button class="filter-btn" data-filter="civic">Civic</button>
+    <button class="filter-btn" data-filter="economy">Economy</button>
+    <button class="filter-btn" data-filter="governance">Governance</button>
+  </div>
+
+  <div class="grid" id="grid">
+
+    <!-- ── CARD 1: FEATURED ── -->
+    <a class="card featured" href="becoming-pm/index.html" data-category="politics">
+      <div class="card-number">01</div>
+      <div class="card-body">
+        <div class="card-tag">Politics</div>
+        <div class="card-title">The Common Man's Road to Prime Minister</div>
+        <div class="card-desc">A defensible, evidence-based 20-year blueprint for any Indian citizen with no political connections, no dynasty, and no shortcuts. Five phases. Real precedents. No hallucinations.</div>
+        <div class="card-footer">
+          <span class="card-date">May 2026</span>
+          <span class="card-arrow">→ Read blueprint</span>
+        </div>
+      </div>
+    </a>
+
+    <!-- ── CARD 2 ── -->
+    <a class="card" href="spotclean/index.html" data-category="civic">
+      <div class="card-tag">Civic</div>
+      <div class="card-title">SpotClean India</div>
+      <div class="card-desc">Open-source playbook for cleaning and permanently maintaining public spaces — one spot at a time. No central organisation needed.</div>
+      <div class="card-footer">
+        <span class="card-date">May 2026</span>
+        <span class="card-arrow">→ Read playbook</span>
+      </div>
+    </a>
+
+    <!-- ── PLACEHOLDER: add new cards below this comment ── -->
+    <!--
+    <a class="card" href="your-folder/index.html" data-category="CATEGORY">
+      <div class="card-tag">CATEGORY</div>
+      <div class="card-title">TITLE</div>
+      <div class="card-desc">SHORT DESCRIPTION</div>
+      <div class="card-footer">
+        <span class="card-date">MONTH YEAR</span>
+        <span class="card-arrow">→ Read</span>
+      </div>
+    </a>
+    -->
+
+    <div class="empty-state" id="emptyState">No ideas in this category yet.</div>
+
+  </div>
+</section>
+
+<hr class="rule-line">
+
+<section class="about-strip">
   <div>
-    <div class="hero-title">Spot<em>Clean</em> India</div>
-    <div class="hero-sub">Open-source playbook for cleaning and maintaining public spaces — one spot at a time.</div>
+    <h2>What This Is</h2>
+    <p>Each page on this site is a complete, standalone blueprint — researched, stress-tested against real evidence, and published in the open. Not op-eds. Not takes. <em>Actual strategies</em> someone could pick up and follow.</p>
+    <br>
+    <p>Everything here is public domain. Use it, adapt it, critique it. Source: <a href="https://github.com/raulscooper">github.com/raulscooper</a></p>
   </div>
-  <div class="hero-badge">Operations Playbook</div>
-</div>
-
-<nav class="module-nav" id="nav">
-  <button class="nav-item active" onclick="showLanding()">Overview</button>
-  <button class="nav-item" onclick="show(0)">01 · Choose a spot</button>
-  <button class="nav-item" onclick="show(1)">02 · Team size</button>
-  <button class="nav-item" onclick="show(2)">03 · Equipment</button>
-  <button class="nav-item" onclick="show(3)">04 · Disposal</button>
-  <button class="nav-item" onclick="show(4)">05 · Funding</button>
-  <button class="nav-item" onclick="show(5)">06 · Municipality</button>
-  <button class="nav-item" onclick="show(6)">07 · Corporations</button>
-  <button class="nav-item" onclick="show(7)">08 · Messaging</button>
-  <button class="nav-item" onclick="show(8)">09 · Governance</button>
-  <button class="nav-item" onclick="show(9)">10 · Digital platform</button>
-</nav>
-
-<div class="container">
-
-  <div id="landing">
-    <p class="landing-intro">SpotClean India is a <strong>citizen-led playbook</strong> for cleaning and permanently maintaining public spaces. No central organisation. No permission needed. Anyone can run a spot fix using this guide. Click any module to read the full guidance.</p>
-    <div class="modules-grid">
-      <div class="mod-card" onclick="show(0)"><div class="mod-num">01</div><div class="mod-name">Choose a spot</div><div class="mod-desc">How to score and select the right location for maximum impact</div></div>
-      <div class="mod-card" onclick="show(1)"><div class="mod-num">02</div><div class="mod-name">Team size</div><div class="mod-desc">Roles, headcount, and a minute-by-minute fix day timeline</div></div>
-      <div class="mod-card" onclick="show(2)"><div class="mod-num">03</div><div class="mod-name">Equipment</div><div class="mod-desc">Everything to bring — cleaning, surface treatment, greening, documentation</div></div>
-      <div class="mod-card" onclick="show(3)"><div class="mod-num">04</div><div class="mod-name">Disposal</div><div class="mod-desc">How to arrange waste removal before the event. The most overlooked step.</div></div>
-      <div class="mod-card" onclick="show(4)"><div class="mod-num">05</div><div class="mod-name">Funding</div><div class="mod-desc">Five tiers from self-funded teams to micro-crowdfunding</div></div>
-      <div class="mod-card" onclick="show(5)"><div class="mod-num">06</div><div class="mod-name">Municipality</div><div class="mod-desc">The Spot Adoption Agreement — three commitments that make a clean permanent</div></div>
-      <div class="mod-card" onclick="show(6)"><div class="mod-num">07</div><div class="mod-name">Corporations</div><div class="mod-desc">What companies can and cannot do — fuel the movement without hijacking it</div></div>
-      <div class="mod-card" onclick="show(7)"><div class="mod-num">08</div><div class="mod-name">Messaging</div><div class="mod-desc">What to paint, plant, and say so people don't dirty it again</div></div>
-      <div class="mod-card" onclick="show(8)"><div class="mod-num">09</div><div class="mod-name">Governance</div><div class="mod-desc">How to stay lean and structurally resistant to capture and corruption</div></div>
-      <div class="mod-card" onclick="show(9)"><div class="mod-num">10</div><div class="mod-name">Digital platform</div><div class="mod-desc">The four-function app — spot map, clean reports, check-ins, micro-funding</div></div>
+  <div class="principles">
+    <div class="principle-item">
+      <span class="principle-bullet">01</span>
+      <div class="principle-text"><strong>Evidence-based, not wishful.</strong> Every claim is grounded in real precedent — real politicians, real organisations, real numbers.</div>
     </div>
-    <div class="landing-note">Click any module above to read the full guidance · Free to use, adapt, and share</div>
-  </div>
-
-  <div class="module" id="m0">
-    <button class="back-btn" onclick="showLanding()">← Back to overview</button>
-    <div class="module-header"><div class="module-number">01</div><div><div class="module-tag">Selection criteria</div><div class="module-title">How to choose a spot</div><div class="module-intro">Not every dirty spot is the right spot. Picking strategically makes the difference between a lasting transformation and wasted effort.</div></div></div>
-    <div class="card"><div class="card-label">The scoring system</div><h3>Score every candidate spot before committing</h3><p>Rate each spot 1–5 on four criteria. A total score below 12 means skip it — find a better candidate.</p></div>
-    <div class="grid2">
-      <div class="stat-box"><div class="stat-label">Criterion 1</div><div class="stat-value">Visibility</div><div class="stat-sub">Seen by 50+ people/day? High-footfall spots create the most behaviour change.</div></div>
-      <div class="stat-box"><div class="stat-label">Criterion 2</div><div class="stat-value">Access</div><div class="stat-sub">Can volunteers reach it safely on foot? Is there space to work?</div></div>
-      <div class="stat-box"><div class="stat-label">Criterion 3</div><div class="stat-value">Recurrence</div><div class="stat-sub">Can future dumping be physically blocked or made harder through design?</div></div>
-      <div class="stat-box"><div class="stat-label">Criterion 4</div><div class="stat-value">Ownership</div><div class="stat-sub">Is there someone nearby willing to maintain it after the fix?</div></div>
+    <div class="principle-item">
+      <span class="principle-bullet">02</span>
+      <div class="principle-text"><strong>Defensible under challenge.</strong> Each idea should survive hard questioning. If it doesn't, it gets revised.</div>
     </div>
-    <div class="card"><div class="card-label">Priority spot types</div><h3>Where to look first</h3>
-      <div class="step"><div class="step-n">1</div><div class="step-text"><strong>Temple, mosque, church entrances</strong> — high footfall, community pride attached, easier to mobilise locals</div></div>
-      <div class="step"><div class="step-n">2</div><div class="step-text"><strong>School gates</strong> — children are the future maintainers; the school can formally own upkeep</div></div>
-      <div class="step"><div class="step-n">3</div><div class="step-text"><strong>Market corners and nala edges</strong> — chronic dump spots that create visible, dramatic transformations</div></div>
-      <div class="step"><div class="step-n">4</div><div class="step-text"><strong>Bus stop surrounds</strong> — captive audience witnesses the before and after; high symbolic value</div></div>
+    <div class="principle-item">
+      <span class="principle-bullet">03</span>
+      <div class="principle-text"><strong>Usable by anyone.</strong> No jargon, no paywalls, no permissions. Anyone can run with any of this.</div>
     </div>
-    <div class="card"><div class="card-label">Avoid these for now</div><div class="tags"><span class="tag no">Active construction zones</span><span class="tag no">Private land without consent</span><span class="tag no">Industrial or chemical waste</span><span class="tag no">No local owner available</span><span class="tag no">Politically contested locations</span></div></div>
-  </div>
-
-  <div class="module" id="m1">
-    <button class="back-btn" onclick="showLanding()">← Back to overview</button>
-    <div class="module-header"><div class="module-number">02</div><div><div class="module-tag">People & roles</div><div class="module-title">Team size</div><div class="module-intro">A spot fix is not a rally. Smaller focused teams finish things. Larger groups diffuse accountability and slow everything down.</div></div></div>
-    <div class="grid2">
-      <div class="stat-box"><div class="stat-label">Minimum team</div><div class="stat-value">6</div><div class="stat-sub">Absolute floor for a safe, complete fix</div></div>
-      <div class="stat-box"><div class="stat-label">Ideal team</div><div class="stat-value">12–15</div><div class="stat-sub">Enough for all roles without crowding</div></div>
-      <div class="stat-box"><div class="stat-label">Maximum useful</div><div class="stat-value">25</div><div class="stat-sub">Beyond this, people become spectators</div></div>
-      <div class="stat-box"><div class="stat-label">Time per spot</div><div class="stat-value">3–4 hrs</div><div class="stat-sub">7am–11am is the ideal window</div></div>
-    </div>
-    <div class="card"><div class="card-label">Role breakdown — 12 person team</div><h3>Everyone has a job</h3><p style="margin-bottom:1rem;font-size:0.88rem;color:var(--muted)">No leaders — only coordinators for the day. Rotate roles across events.</p>
-      <div class="step"><div class="step-n">2</div><div class="step-text"><strong>Day coordinators</strong> — logistics, safety briefing, contact for the municipal officer</div></div>
-      <div class="step"><div class="step-n">4</div><div class="step-text"><strong>Sweepers & collectors</strong> — clearing, bagging, sorting wet from dry waste</div></div>
-      <div class="step"><div class="step-n">2</div><div class="step-text"><strong>Surface team</strong> — scrubbing, anti-litter texture coat, minor pothole filling</div></div>
-      <div class="step"><div class="step-n">2</div><div class="step-text"><strong>Greening crew</strong> — potted plants, murals, planters. The most visible transformation signal</div></div>
-      <div class="step"><div class="step-n">2</div><div class="step-text"><strong>Documenters</strong> — GPS-timestamped before/after photos from identical angles, uploaded during the event</div></div>
-    </div>
-    <div class="card"><div class="card-label">Day timeline</div><h3>Minute by minute</h3>
-      <div class="step"><div class="time-pill">7:00</div><div class="step-text"><strong>Arrive and brief</strong> — roles, safety, photograph before-state from fixed reference points</div></div>
-      <div class="step"><div class="time-pill">7:15</div><div class="step-text"><strong>Clear and bag</strong> — all waste removed, sorted wet/dry/hazardous. Hardest and most important phase.</div></div>
-      <div class="step"><div class="time-pill">9:00</div><div class="step-text"><strong>Surface & green</strong> — scrub, paint, plant</div></div>
-      <div class="step"><div class="time-pill">10:30</div><div class="step-text"><strong>Install messaging</strong> — neighbourhood tile, bin, QR plate (see Module 8)</div></div>
-      <div class="step"><div class="time-pill">11:00</div><div class="step-text"><strong>After photos & upload</strong> — from identical reference angles. Submit to platform. Done.</div></div>
+    <div class="principle-item">
+      <span class="principle-bullet">04</span>
+      <div class="principle-text"><strong>No copyright.</strong> Public domain. Adapt freely. Attribution appreciated but not required.</div>
     </div>
   </div>
+</section>
 
-  <div class="module" id="m2">
-    <button class="back-btn" onclick="showLanding()">← Back to overview</button>
-    <div class="module-header"><div class="module-number">03</div><div><div class="module-tag">What to bring</div><div class="module-title">Equipment</div><div class="module-intro">Everything your team needs, broken down by phase. Buy locally, keep it simple.</div></div></div>
-    <div class="card"><div class="card-label">Cleaning — per 12-person team</div><div class="tags"><span class="tag">Heavy-duty brooms ×6</span><span class="tag">Stiff scrub brushes ×4</span><span class="tag">Large garbage bags ×50</span><span class="tag">Rubber gloves ×15 pairs</span><span class="tag">Face masks ×15</span><span class="tag">Shovels ×3</span><span class="tag">Buckets ×4</span><span class="tag">Tongs for hazardous items ×2</span></div></div>
-    <div class="card"><div class="card-label">Surface treatment</div><div class="tags"><span class="tag">Phenyl or disinfectant concentrate</span><span class="tag">Anti-litter texture paint</span><span class="tag">Paint rollers and trays ×4</span><span class="tag">Wire brush for wall prep</span><span class="tag">Masking tape</span><span class="tag">Drop sheets ×2</span></div></div>
-    <div class="card"><div class="card-label">Greening</div><div class="tags"><span class="tag">Hardy potted plants ×4–6 (local species)</span><span class="tag">Quick-set cement for pot anchoring</span><span class="tag">Small planter boxes if wall available</span><span class="tag">Watering can ×1</span></div></div>
-    <div class="card"><div class="card-label">Documentation</div><div class="tags"><span class="tag">Smartphone with GPS ×2 minimum</span><span class="tag">Measuring tape for reference framing</span><span class="tag">Small marker stakes for fixed photo points</span></div></div>
-    <div class="card"><div class="card-label">Cost estimates</div><table><thead><tr><th>Fix type</th><th>Estimated cost</th></tr></thead><tbody><tr><td>Basic clean, no paint</td><td>₹2,000–4,000</td></tr><tr><td>Full clean + surface treatment + greening</td><td>₹8,000–15,000</td></tr><tr><td>With mural or custom signage</td><td>₹15,000–25,000</td></tr><tr><td>Monthly upkeep (ongoing)</td><td>₹500–1,000</td></tr></tbody></table></div>
-  </div>
-
-  <div class="module" id="m3">
-    <button class="back-btn" onclick="showLanding()">← Back to overview</button>
-    <div class="module-header"><div class="module-number">04</div><div><div class="module-tag">Critical logistics</div><div class="module-title">Disposal</div><div class="module-intro">The biggest operational failure of cleanup drives is generating bags of garbage with nowhere to go. Solve this before the event — never on the day.</div></div></div>
-    <div class="callout warn"><p><strong>Non-negotiable:</strong> Disposal must be arranged at least 5 days before the event. A spotfix that leaves bags piled on the street has made things worse, not better.</p></div>
-    <div class="card"><div class="card-label">Pre-event checklist</div>
-      <div class="step"><div class="step-n">1</div><div class="step-text"><strong>Contact the ward sanitation inspector</strong> directly. Request a pickup vehicle at the end of the event. Get a named person's number.</div></div>
-      <div class="step"><div class="step-n">2</div><div class="step-text"><strong>Pre-sort on-site</strong> — wet/organic in green bags, dry recyclables in blue. Many cities refuse unsegregated waste.</div></div>
-      <div class="step"><div class="step-n">3</div><div class="step-text"><strong>Locate the nearest kabadiwala</strong> in advance — plastic, metal, cardboard. Often collected free or for a small payment.</div></div>
-      <div class="step"><div class="step-n">4</div><div class="step-text"><strong>Identify a composting facility</strong> for organic waste — vermicompost units, municipal sites, or a community garden.</div></div>
-    </div>
-    <div class="card"><div class="card-label">Hazardous material protocol</div><h3>Do not touch these items</h3><p>Syringes, medical waste, chemicals, unknown liquids, asbestos — flag with tape, photograph with GPS, submit separately to the municipality's hazardous waste cell. Never bag with general waste.</p></div>
-    <div class="card"><div class="card-label">Where recovered materials go</div><table><thead><tr><th>Material</th><th>Goes to</th></tr></thead><tbody><tr><td>Scrap metal, cardboard, paper, plastic</td><td>Kabadiwala</td></tr><tr><td>Glass</td><td>Municipality recycler</td></tr><tr><td>Organic / food waste</td><td>Nearest composting facility</td></tr><tr><td>Construction debris</td><td>Municipality debris yard only</td></tr><tr><td>Hazardous waste</td><td>Municipality hazardous cell — separate report</td></tr></tbody></table></div>
-  </div>
-
-  <div class="module" id="m4">
-    <button class="back-btn" onclick="showLanding()">← Back to overview</button>
-    <div class="module-header"><div class="module-number">05</div><div><div class="module-tag">Money</div><div class="module-title">Funding a spot</div><div class="module-intro">Money must never concentrate at the centre. Each spot is funded independently. This prevents corruption, capture, and the NGO disease of funding-seeking replacing mission.</div></div></div>
-    <div class="big-quote">"Fund the spot, not the organisation."</div>
-    <div class="card"><div class="card-label">Funding tiers — simplest first</div>
-      <div class="step"><div class="step-n">1</div><div class="step-text"><strong>Self-funded team</strong> — 12 volunteers contributing ₹200–350 each covers a basic clean. Zero bureaucracy.</div></div>
-      <div class="step"><div class="step-n">2</div><div class="step-text"><strong>Local business contribution</strong> — ask nearby shops to donate materials, not cash. Simpler and corruption-proof.</div></div>
-      <div class="step"><div class="step-n">3</div><div class="step-text"><strong>RWA or housing society funds</strong> — request ₹5,000–10,000 from the society's discretionary maintenance budget.</div></div>
-      <div class="step"><div class="step-n">4</div><div class="step-text"><strong>Platform micro-crowdfunding</strong> — any nominated spot can receive public donations capped at ₹25,000. Funds released against receipts only.</div></div>
-      <div class="step"><div class="step-n">5</div><div class="step-text"><strong>Corporate CSR top-up</strong> — for complex spots only. Subject to strict no-branding rules (see Module 7).</div></div>
-    </div>
-    <div class="callout"><p>All spot-level spending is photographed, receipted, and posted publicly within 7 days. No exceptions. Transparency is the accountability mechanism.</p></div>
-  </div>
-
-  <div class="module" id="m5">
-    <button class="back-btn" onclick="showLanding()">← Back to overview</button>
-    <div class="module-header"><div class="module-number">06</div><div><div class="module-tag">Official partnership</div><div class="module-title">Working with municipalities</div><div class="module-intro">Don't ask for money or permission. Ask for three specific, low-cost commitments that make the clean durable.</div></div></div>
-    <div class="card"><div class="card-label">The Spot Adoption Agreement</div><h3>A one-page social contract</h3><p style="margin-bottom:1rem">Not a legal document. Signed by a named ward sanitation inspector and the spot's local owner.</p>
-      <div class="step"><div class="step-n">M</div><div class="step-text"><strong>Municipality commits</strong> to garbage pickup minimum 3× per week, and to installing one waste bin within 30 days</div></div>
-      <div class="step"><div class="step-n">O</div><div class="step-text"><strong>Local owner commits</strong> to a monthly walk-through and reporting deterioration via the platform within 48 hours</div></div>
-      <div class="step"><div class="step-n">S</div><div class="step-text"><strong>SpotClean commits</strong> to a 90-day follow-up visit with a public condition report posted online</div></div>
-    </div>
-    <div class="card"><div class="card-label">How to get a yes</div>
-      <div class="step"><div class="step-n">1</div><div class="step-text"><strong>Don't approach the top.</strong> Go to the ward sanitation inspector — they control trucks and schedules with fewer political pressures.</div></div>
-      <div class="step"><div class="step-n">2</div><div class="step-text"><strong>Frame it as free labour for them.</strong> The ask is minimal — one truck visit, one bin within 30 days.</div></div>
-      <div class="step"><div class="step-n">3</div><div class="step-text"><strong>Show them the platform score.</strong> Ward scores are tied to state rankings. A documented clean spot improves their metrics.</div></div>
-      <div class="step"><div class="step-n">4</div><div class="step-text"><strong>Name them on the platform.</strong> Credit when things go well, gentle accountability when they don't.</div></div>
-    </div>
-  </div>
-
-  <div class="module" id="m6">
-    <button class="back-btn" onclick="showLanding()">← Back to overview</button>
-    <div class="module-header"><div class="module-number">07</div><div><div class="module-tag">Corporate participation</div><div class="module-title">How corporations can help</div><div class="module-intro">Corporations are fuel, not drivers. Funders never determine which spots get cleaned, how they are cleaned, or what is written on the walls.</div></div></div>
-    <div class="card"><div class="card-label">What corporations can do</div><div class="tags"><span class="tag yes">Fund materials for platform-nominated spots</span><span class="tag yes">Provide employees as volunteers</span><span class="tag yes">Fund platform operating costs (disclosed publicly)</span><span class="tag yes">Receive internal ESG and CSR recognition</span><span class="tag yes">Count volunteer hours toward CSR requirements</span></div></div>
-    <div class="card"><div class="card-label">What corporations cannot do</div><div class="tags"><span class="tag no">No logo on cleaned walls or surfaces</span><span class="tag no">No company name on any installed signage</span><span class="tag no">No selecting which spots receive funding</span><span class="tag no">No press releases naming specific spots</span><span class="tag no">No employees-only events — must mix with community</span><span class="tag no">No naming rights of any kind</span></div></div>
-    <div class="callout warn"><p>Any corporate that cannot accept these terms is not the right partner. The no-branding rule is the most important safeguard against the model becoming an advertising platform.</p></div>
-    <div class="card"><div class="card-label">The pitch in plain language</div><p>Your employees spend one Saturday morning cleaning a real spot alongside local residents — no speeches, no banners. You get ESG documentation and team-building value. We get materials and capable volunteers. That's the whole deal.</p></div>
-  </div>
-
-  <div class="module" id="m7">
-    <button class="back-btn" onclick="showLanding()">← Back to overview</button>
-    <div class="module-header"><div class="module-number">08</div><div><div class="module-tag">Behaviour change</div><div class="module-title">Messaging after a clean</div><div class="module-intro">Shame-based messaging doesn't work. "Do not litter — fine ₹500" is ignored everywhere. What works is signalling that the space is cared for and belongs to someone.</div></div></div>
-    <div class="card"><div class="card-label">Physical interventions that change behaviour</div>
-      <div class="step"><div class="step-n">1</div><div class="step-text"><strong>Anti-litter texture coat on walls</strong> — rough-textured paint discourages urination and poster-plastering. The single most proven physical intervention.</div></div>
-      <div class="step"><div class="step-n">2</div><div class="step-text"><strong>A mural or geometric pattern</strong> — even a simple design signals intentionality. People don't litter painted walls as readily as blank ones.</div></div>
-      <div class="step"><div class="step-n">3</div><div class="step-text"><strong>A living plant, visibly tended</strong> — nothing signals ongoing human care more powerfully than a living thing.</div></div>
-      <div class="step"><div class="step-n">4</div><div class="step-text"><strong>A cemented, named bin</strong> — anchored, clearly marked, regularly emptied. Its presence alone changes disposal behaviour.</div></div>
-    </div>
-    <div class="card"><div class="card-label">The one message to leave behind</div><div class="big-quote" style="font-size:1.1rem">"This space is loved by the people of [neighbourhood name]. Help us keep it this way."</div><p>In the local language. On a durable tile or painted text. No organisation name on the wall. QR code on a small steel plate bolted nearby — links to the spot's public page.</p></div>
-    <div class="card"><div class="card-label">What not to write</div><div class="tags"><span class="tag no">Do not litter — fine ₹500</span><span class="tag no">CCTV surveillance in progress</span><span class="tag no">Keep India clean</span><span class="tag no">Any organisation name or logo</span><span class="tag no">Government scheme branding</span></div></div>
-  </div>
-
-  <div class="module" id="m8">
-    <button class="back-btn" onclick="showLanding()">← Back to overview</button>
-    <div class="module-header"><div class="module-number">09</div><div><div class="module-tag">Structure</div><div class="module-title">Keeping it lean</div><div class="module-intro">Every Indian civic organisation eventually gets captured — by a politician, a funder, or its own bureaucracy. This structure is designed to make capture structurally difficult.</div></div></div>
-    <div class="card"><div class="card-label">Organisational structure</div>
-      <div class="step"><div class="step-n">1</div><div class="step-text"><strong>No national president, no national office.</strong> The methodology is the organisation. Anyone following this playbook is SpotClean. No one can be expelled or installed.</div></div>
-      <div class="step"><div class="step-n">2</div><div class="step-text"><strong>A 5-person platform trust</strong> — the only formal entity. Rotating 2-year terms, publicly named, financials open in real time. One term only.</div></div>
-      <div class="step"><div class="step-n">3</div><div class="step-text"><strong>City nodes, not chapters.</strong> Loose groups of active spot owners per city. No elections, no hierarchy. One node cannot make decisions for another.</div></div>
-      <div class="step"><div class="step-n">4</div><div class="step-text"><strong>All money is spot-level.</strong> Central fund maximum: ₹10 lakh. Any donation above ₹1 lakh disclosed publicly within 48 hours.</div></div>
-      <div class="step"><div class="step-n">5</div><div class="step-text"><strong>One paid contractor.</strong> A platform manager on an annual contract, renewable by majority trust vote. No other paid staff.</div></div>
-    </div>
-    <div class="card"><div class="card-label">Anti-capture rules</div><div class="tags"><span class="tag no">No politician can be a trust member</span><span class="tag no">No funder can sit on the trust</span><span class="tag yes">Methodology is Creative Commons licensed</span><span class="tag yes">Any group can use the SpotClean name without permission</span><span class="tag yes">Platform code is open-source on GitHub</span><span class="tag yes">All finances publicly visible in real time</span></div></div>
-    <div class="callout"><p>The open-source licence is the most important governance mechanism. If the organisation is ever captured or goes dormant, anyone can continue. The movement cannot be killed by killing the organisation.</p></div>
-  </div>
-
-  <div class="module" id="m9">
-    <button class="back-btn" onclick="showLanding()">← Back to overview</button>
-    <div class="module-header"><div class="module-number">10</div><div><div class="module-tag">Technology</div><div class="module-title">The digital platform</div><div class="module-intro">One lightweight progressive web app — no app store required, works on any smartphone, functional on 2G. Four core functions only. No feature creep.</div></div></div>
-    <div class="card"><div class="card-label">Function 1 — Spot map</div><h3>A live public map of all spots</h3><p style="margin-bottom:0.75rem">Anyone can submit a spot — one photo, one GPS pin, one sentence. 90 seconds. No signup required.</p><div><span class="status s-nom">Nominated</span><span class="status s-fund">Funded</span><span class="status s-clean">Cleaned</span><span class="status s-maint">Maintained</span><span class="status s-att">Needs attention</span></div></div>
-    <div class="card"><div class="card-label">Function 2 — Clean reports</div><h3>Permanent public record for every spot</h3><p>After cleaning: GPS-verified before photo, GPS-verified after photo, team size, materials used, waste volume, disposal method, and the municipal officer's name. This record never disappears.</p></div>
-    <div class="card"><div class="card-label">Function 3 — Monthly check-ins</div><h3>What makes the clean permanent</h3><p>Every cleaned spot has a named local owner. Monthly notification: <em>"How is [spot name] doing?"</em> One photo and a 1–5 rating. If rating drops below 3 for two consecutive months, the spot is flagged and the city node is notified.</p></div>
-    <div class="card"><div class="card-label">Function 4 — Micro-funding</div><h3>Peer-to-peer, not centralised</h3><p>Nominated spots can accept donations capped at ₹25,000. All donors named publicly. Funds go directly to the spot team lead's UPI ID against receipts. The platform trust never touches spot-level money.</p></div>
-    <div class="card"><div class="card-label">Technical requirements</div><div class="tags"><span class="tag yes">Progressive web app — no app store install</span><span class="tag yes">Works on 2G and 3G networks</span><span class="tag yes">Offline photo capture, uploads when connected</span><span class="tag yes">GPS mandatory for all photo submissions</span><span class="tag yes">Open source on GitHub from day one</span><span class="tag yes">Target under ₹15,000/month hosting cost</span></div></div>
-  </div>
-
-</div>
-
-<footer class="page-footer">
-  <strong>SpotClean India</strong>
-  Open-source · Creative Commons Attribution licence · Free to use, adapt, and share<br><br>
-  This playbook may be used by anyone, anywhere, without permission.<br>
-  To contribute: <a href="https://github.com/raulscooper">github.com/raulscooper</a>
+<footer>
+  <p>Raul's Ideas · Open blueprints for India · Public domain</p>
+  <p><a href="https://github.com/raulscooper">github.com/raulscooper</a></p>
 </footer>
 
 <script>
-const ids=['m0','m1','m2','m3','m4','m5','m6','m7','m8','m9'];
-function showLanding(){
-  document.getElementById('landing').style.display='block';
-  ids.forEach(id=>document.getElementById(id).classList.remove('active'));
-  document.querySelectorAll('.nav-item').forEach((b,i)=>b.classList.toggle('active',i===0));
-  window.scrollTo({top:0,behavior:'smooth'});
-}
-function show(i){
-  document.getElementById('landing').style.display='none';
-  ids.forEach((id,j)=>document.getElementById(id).classList.toggle('active',j===i));
-  document.querySelectorAll('.nav-item').forEach((b,j)=>b.classList.toggle('active',j===i+1));
-  window.scrollTo({top:0,behavior:'smooth'});
-}
+  // ── FILTER ──
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const cards = document.querySelectorAll('.card[data-category]');
+  const countEl = document.getElementById('visibleCount');
+  const emptyState = document.getElementById('emptyState');
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const filter = btn.dataset.filter;
+      let visible = 0;
+      cards.forEach(card => {
+        const match = filter === 'all' || card.dataset.category === filter;
+        card.dataset.hidden = match ? 'false' : 'true';
+        if (match) visible++;
+      });
+      countEl.textContent = visible + (visible === 1 ? ' published' : ' published');
+      emptyState.style.display = visible === 0 ? 'block' : 'none';
+    });
+  });
 </script>
+
 </body>
 </html>
