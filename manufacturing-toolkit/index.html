@@ -1,0 +1,1280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Manufacturing Toolkit — Nayalab</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300;1,8..60,400&display=swap" rel="stylesheet">
+<!-- Google Translate -->
+<script type="text/javascript">
+  function googleTranslateElementInit() {
+    new google.translate.TranslateElement({
+      pageLanguage: 'en',
+      includedLanguages: 'hi,ta,te,bn,mr,gu,kn,ml,pa,or,as,ur,mai,kok,sd,ks,ne,sa,si,doi,mni,sat',
+      layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+      autoDisplay: false,
+      multilanguagePage: true
+    }, 'google_translate_element');
+  }
+</script>
+<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+<style>
+  :root {
+    --ink: #0f0e0c;
+    --paper: #f5f0e8;
+    --paper2: #ede8df;
+    --saffron: #e8610a;
+    --saffron-dim: #c94f00;
+    --green: #1a5c38;
+    --green-bg: #eef5ec;
+    --red: #8b1a1a;
+    --red-bg: #fdf0f0;
+    --rule: #c8b89a;
+    --muted: #7a6e5f;
+    --border: #d4cfc4;
+    --white: #fdfcf8;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 18px;
+    line-height: 1.75;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0.35;
+  }
+
+  /* Google Translate */
+  .goog-te-banner-frame { display: none !important; }
+  body { top: 0 !important; }
+  #google_translate_element .goog-te-gadget-simple { background: transparent !important; border: 1px solid #444 !important; padding: 0.15rem 0.5rem !important; }
+  #google_translate_element .goog-te-gadget-simple a,
+  #google_translate_element .goog-te-gadget-simple span { color: #aaa !important; font-family: 'IBM Plex Mono', monospace !important; font-size: 0.6rem !important; text-decoration: none !important; }
+
+  /* Nayalab bar */
+  .nayalab-bar { background: #0a0a08; border-bottom: 1px solid #2a2a26; padding: 0.5rem 2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.8rem; }
+  .nayalab-bar a { font-family: 'IBM Plex Mono', monospace; font-size: 0.6rem; letter-spacing: 0.25em; text-transform: uppercase; color: #f07b1f; text-decoration: none; }
+  .nayalab-bar__lang { display: flex; align-items: center; gap: 0.8rem; }
+  .nayalab-bar__label { font-family: 'IBM Plex Mono', monospace; font-size: 0.55rem; letter-spacing: 0.2em; text-transform: uppercase; color: #6b6560; }
+
+  /* Sticky nav */
+  nav.page-nav {
+    position: sticky;
+    top: 0;
+    background: var(--paper);
+    border-bottom: 2px solid var(--ink);
+    z-index: 100;
+    padding: 0.6rem 2rem;
+  }
+
+  nav.page-nav ul {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem 1.2rem;
+    justify-content: center;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  nav.page-nav a {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink);
+    text-decoration: none;
+    padding: 0.2rem 0;
+    border-bottom: 2px solid transparent;
+    transition: border-color 0.2s, color 0.2s;
+  }
+
+  nav.page-nav a:hover { border-bottom-color: var(--saffron); color: var(--saffron); }
+
+  /* Layout */
+  main { max-width: 860px; margin: 0 auto; padding: 0 2rem 5rem; }
+
+  /* Header */
+  header {
+    padding: 3.5rem 2rem 2.5rem;
+    max-width: 860px;
+    margin: 0 auto;
+  }
+
+  .masthead-rule {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 1.2rem;
+    display: block;
+  }
+
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.2rem, 6vw, 4rem);
+    font-weight: 900;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.8rem;
+  }
+
+  h1 em { font-style: italic; color: var(--saffron); }
+
+  .header-desc {
+    font-family: 'Source Serif 4', serif;
+    font-style: italic;
+    font-size: 1.1rem;
+    color: var(--muted);
+    max-width: 600px;
+    line-height: 1.6;
+    font-weight: 300;
+    border-left: 3px solid var(--rule);
+    padding-left: 1.2rem;
+    margin-top: 1rem;
+  }
+
+  .meta-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-top: 1.5rem;
+    padding-top: 1.2rem;
+    border-top: 1px solid var(--rule);
+  }
+
+  .meta-tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    border: 1px solid var(--rule);
+    padding: 0.3rem 0.7rem;
+  }
+
+  /* Sections */
+  section {
+    margin: 4rem 0;
+    padding-top: 0.5rem;
+    border-top: 1px solid var(--rule);
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 0.55s ease, transform 0.55s ease;
+  }
+
+  section.visible { opacity: 1; transform: translateY(0); }
+
+  /* Tool header */
+  .tool-header { margin-bottom: 2rem; }
+
+  .tool-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--saffron);
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+
+  h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.6rem, 4vw, 2.5rem);
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 0.5rem;
+  }
+
+  .tool-intro {
+    font-style: italic;
+    color: var(--muted);
+    font-size: 1rem;
+    border-left: 3px solid var(--saffron);
+    padding-left: 1rem;
+    line-height: 1.6;
+    margin-top: 0.8rem;
+  }
+
+  h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    font-style: italic;
+    margin: 2.2rem 0 0.6rem;
+  }
+
+  h4 {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--saffron-dim);
+    margin: 1.5rem 0 0.5rem;
+  }
+
+  p { margin-bottom: 1.1rem; }
+  strong { font-weight: 600; }
+  em { font-style: italic; }
+  a { color: var(--saffron-dim); }
+
+  /* Callouts */
+  .callout {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 1.5rem 1.8rem;
+    margin: 2rem 0;
+    position: relative;
+  }
+
+  .callout::before {
+    content: '❧';
+    position: absolute;
+    top: -0.65rem;
+    left: 1.5rem;
+    background: var(--ink);
+    padding: 0 0.4rem;
+    font-size: 1.1rem;
+    color: var(--saffron);
+  }
+
+  .callout p { color: var(--paper); margin-bottom: 0.5rem; }
+  .callout p:last-child { margin-bottom: 0; }
+  .callout strong { color: var(--saffron); }
+
+  .callout.green { background: var(--green); }
+  .callout.green::before { background: var(--green); }
+  .callout.green strong { color: #a8e6c0; }
+
+  .callout.warn { background: var(--red); }
+  .callout.warn::before { background: var(--red); color: #ffcdd2; content: '⚠'; }
+  .callout.warn strong { color: #ffcdd2; }
+
+  /* Step list */
+  .step-list { list-style: none; margin: 1rem 0 1.5rem; }
+
+  .step-list li {
+    display: flex;
+    gap: 1.2rem;
+    margin-bottom: 1.2rem;
+    align-items: flex-start;
+  }
+
+  .step-num {
+    flex-shrink: 0;
+    width: 2rem;
+    height: 2rem;
+    background: var(--ink);
+    color: var(--paper);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 0.15rem;
+  }
+
+  .step-content { flex: 1; }
+  .step-content strong { display: block; margin-bottom: 0.2rem; }
+
+  /* Arrow list */
+  .arrow-list { list-style: none; margin: 1rem 0 1.5rem; }
+
+  .arrow-list li {
+    padding-left: 1.8rem;
+    position: relative;
+    margin-bottom: 0.7rem;
+    font-size: 0.97rem;
+  }
+
+  .arrow-list li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--saffron);
+    font-family: 'IBM Plex Mono', monospace;
+  }
+
+  /* Blockquote */
+  blockquote {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+    font-style: italic;
+    border-top: 3px solid var(--saffron);
+    border-bottom: 3px solid var(--saffron);
+    padding: 1.4rem 0;
+    margin: 2.5rem 0;
+    text-align: center;
+    line-height: 1.45;
+  }
+
+  /* Truth box */
+  .truth-box {
+    border: 2px solid var(--ink);
+    padding: 1.5rem;
+    margin: 2rem 0;
+    position: relative;
+  }
+
+  .truth-box-label {
+    position: absolute;
+    top: -0.7rem;
+    left: 1rem;
+    background: var(--paper);
+    padding: 0 0.5rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* Source box */
+  .source-box {
+    background: var(--paper2);
+    border: 1px solid var(--border);
+    padding: 1.2rem 1.5rem;
+    margin: 1.5rem 0;
+  }
+
+  .source-box-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--saffron-dim);
+    display: block;
+    margin-bottom: 0.6rem;
+  }
+
+  .source-box p { margin-bottom: 0.4rem; font-size: 0.92rem; }
+  .source-box p:last-child { margin-bottom: 0; }
+  .source-box a { word-break: break-all; }
+
+  /* Stage ladder */
+  .ladder { margin: 1.5rem 0; }
+
+  .ladder-stage {
+    display: grid;
+    grid-template-columns: 3rem 1fr;
+    gap: 0;
+    margin-bottom: 0;
+  }
+
+  .ladder-left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .ladder-dot {
+    width: 2.8rem;
+    height: 2.8rem;
+    background: var(--paper);
+    border: 2px solid var(--ink);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    flex-shrink: 0;
+    z-index: 1;
+  }
+
+  .ladder-line {
+    width: 2px;
+    flex: 1;
+    background: var(--rule);
+    min-height: 1.5rem;
+  }
+
+  .ladder-content {
+    padding: 0.3rem 0 2rem 1.5rem;
+  }
+
+  .ladder-content h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    font-style: italic;
+    letter-spacing: 0;
+    text-transform: none;
+    color: var(--ink);
+    margin: 0 0 0.3rem;
+  }
+
+  .ladder-content .capital {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    color: var(--saffron);
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+
+  .ladder-content p { font-size: 0.95rem; margin-bottom: 0.5rem; }
+
+  /* Kill switch table */
+  .kill-table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: 0.88rem; }
+  .kill-table th { font-family: 'IBM Plex Mono', monospace; font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase; background: var(--ink); color: var(--paper); padding: 0.7rem 1rem; text-align: left; }
+  .kill-table td { padding: 0.75rem 1rem; border-bottom: 1px solid var(--border); vertical-align: top; }
+  .kill-table tr:nth-child(even) td { background: var(--paper2); }
+  .kill-table .signal { font-family: 'IBM Plex Mono', monospace; font-size: 0.75rem; color: var(--red); font-weight: 500; }
+
+  /* Moat cards */
+  .moat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--rule); border: 1px solid var(--rule); margin: 1.5rem 0; }
+
+  .moat-card { background: var(--white); padding: 1.4rem; }
+
+  .moat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    font-weight: 900;
+    color: var(--rule);
+    line-height: 1;
+    margin-bottom: 0.4rem;
+  }
+
+  .moat-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    font-weight: 700;
+    font-style: italic;
+    margin-bottom: 0.5rem;
+  }
+
+  .moat-card p { font-size: 0.88rem; color: var(--muted); line-height: 1.6; margin: 0; }
+
+  /* Case study */
+  .case-study {
+    background: var(--paper2);
+    border-left: 4px solid var(--saffron);
+    padding: 1.8rem;
+    margin: 2.5rem 0;
+  }
+
+  .case-study-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--saffron-dim);
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+
+  .case-study h3 {
+    font-size: 1.2rem;
+    margin: 0 0 1rem;
+    font-style: normal;
+  }
+
+  .case-study p { font-size: 0.93rem; margin-bottom: 0.7rem; }
+  .case-study p:last-child { margin-bottom: 0; }
+
+  /* Pre-mortem form */
+  .premortem {
+    border: 2px solid var(--ink);
+    padding: 0;
+    margin: 2rem 0;
+  }
+
+  .premortem-header {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 0.8rem 1.5rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+
+  .premortem-body { padding: 1.5rem; }
+
+  .premortem-row {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 1rem;
+    border-bottom: 1px solid var(--border);
+    padding: 0.9rem 0;
+    align-items: start;
+    font-size: 0.92rem;
+  }
+
+  .premortem-row:last-child { border-bottom: none; }
+
+  .premortem-condition {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  .premortem-action {
+    font-weight: 600;
+    color: var(--red);
+    line-height: 1.5;
+  }
+
+  /* Data source grid */
+  .datasource-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.5rem 0; }
+
+  .datasource-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    padding: 1.2rem;
+  }
+
+  .datasource-name {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    color: var(--saffron-dim);
+    display: block;
+    margin-bottom: 0.3rem;
+  }
+
+  .datasource-url {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.6rem;
+    color: var(--muted);
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+
+  .datasource-card p { font-size: 0.84rem; color: var(--muted); margin: 0; line-height: 1.5; }
+
+  /* Crowding check */
+  .check-row {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 1rem;
+    align-items: start;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.92rem;
+  }
+
+  .check-num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--muted);
+    padding-top: 0.1rem;
+  }
+
+  .check-verdict {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
+    white-space: nowrap;
+    padding-top: 0.1rem;
+  }
+
+  .verdict-go { color: var(--green); }
+  .verdict-stop { color: var(--red); }
+
+  /* Footer */
+  footer {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 2rem;
+    border-top: 3px double var(--rule);
+    text-align: center;
+  }
+
+  footer p {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.3rem;
+  }
+
+  footer a { color: var(--saffron-dim); text-decoration: none; }
+
+  /* Scroll animation */
+  header { animation: fadeUp 0.7s ease forwards; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* Responsive */
+  @media (max-width: 640px) {
+    body { font-size: 16px; }
+    main, header { padding-left: 1.2rem; padding-right: 1.2rem; }
+    .nayalab-bar { padding: 0.5rem 1.2rem; }
+    .moat-grid { grid-template-columns: 1fr; }
+    .datasource-grid { grid-template-columns: 1fr; }
+    .premortem-row { grid-template-columns: 1fr; }
+    .check-row { grid-template-columns: auto 1fr; }
+    .check-verdict { display: none; }
+    nav.page-nav { padding: 0.5rem 1rem; }
+  }
+
+  @media print {
+    nav.page-nav, .nayalab-bar, body::before { display: none; }
+    section { opacity: 1; transform: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Nayalab nav -->
+<div class="nayalab-bar">
+  <a href="../index.html">&#8592; Nayalab</a>
+  <div class="nayalab-bar__lang">
+    <span class="nayalab-bar__label">Read in your language</span>
+    <div id="google_translate_element"></div>
+  </div>
+</div>
+
+<!-- Sticky navigation -->
+<nav class="page-nav">
+  <ul>
+    <li><a href="#premise">Premise</a></li>
+    <li><a href="#tool1">Tool 1 · Where to Look</a></li>
+    <li><a href="#tool2">Tool 2 · Crowding Check</a></li>
+    <li><a href="#tool3">Tool 3 · Demand Ladder</a></li>
+    <li><a href="#tool4">Tool 4 · First Order</a></li>
+    <li><a href="#tool5">Tool 5 · Pre-Mortem</a></li>
+    <li><a href="#tool6">Tool 6 · Moat Builder</a></li>
+    <li><a href="#casestudies">Case Studies</a></li>
+  </ul>
+</nav>
+
+<header>
+  <span class="masthead-rule">A Public Domain Manufacturing Toolkit · India · Nayalab</span>
+  <h1>How to Enter<br><em>Indian Manufacturing</em><br>Without Losing Everything</h1>
+  <p class="header-desc">Six tools for anyone with ₹25 lakh and the will to make something — designed to work in 2026, 2036, or whenever you are reading this.</p>
+  <div class="meta-bar">
+    <span class="meta-tag">Starting capital: ₹25 lakh</span>
+    <span class="meta-tag">No background assumed</span>
+    <span class="meta-tag">30–45 min read</span>
+    <span class="meta-tag">Public domain</span>
+  </div>
+</header>
+
+<main>
+
+  <!-- PREMISE -->
+  <section id="premise">
+    <div class="tool-header">
+      <span class="tool-label">Before You Begin</span>
+      <h2>The Honest Starting Point</h2>
+    </div>
+
+    <p>India is the fifth-largest economy in the world. Its manufacturing sector is 13% of GDP — roughly half of Vietnam's, a country with one-fourteenth of India's population. That gap is not a tragedy. It is an opportunity. And it is an opportunity that is specifically available to a private citizen with modest capital, because the gap exists not at the high-end of manufacturing — electronics, semiconductors, aerospace — but in the vast middle ground of everyday industrial and consumer products that India imports or under-produces.</p>
+
+    <p>This toolkit does not tell you what to make. It gives you six tools to figure that out for yourself, validate it without losing your capital, enter the market before you've built a factory, and defend your position once you've found something that works.</p>
+
+    <p>Before the tools, one non-negotiable truth:</p>
+
+    <blockquote>"The biggest mistake a first-time manufacturer makes is building the factory before proving the product. The order comes before the factory. Always."</blockquote>
+
+    <p>Every tool in this kit is ordered around that principle. You will spend money on understanding the market before you spend money on making anything. You will sell before you manufacture. You will manufacture on someone else's machines before you buy your own. By the time you own equipment, you will already have paying customers — which means you are spending capital to expand a proven business, not gambling on an unproven one.</p>
+
+    <div class="truth-box">
+      <span class="truth-box-label">How to use this toolkit</span>
+      <p>Work through the tools in order — they are sequential, not parallel. Tool 1 finds your opportunity. Tool 2 confirms it's real. Tool 3 tells you how to enter without a factory. Tool 4 gets you your first paying customer. Tool 5 tells you exactly when to stop. Tool 6 tells you how to protect what you've built.</p>
+      <p style="margin-top:0.8rem">The two case studies at the end run real product categories through all six tools so you can see the framework in action before applying it to your own idea.</p>
+    </div>
+
+    <div class="callout warn">
+      <p><strong>What this toolkit will not do:</strong> It will not eliminate risk. Manufacturing is genuinely hard. Supply chain disruptions, quality failures, buyer defaults, and regulatory changes are real. This toolkit is designed to ensure that when things go wrong — and some things will — you are not wiped out. You have preserved enough capital to try again or exit cleanly.</p>
+    </div>
+  </section>
+
+  <!-- TOOL 1 -->
+  <section id="tool1">
+    <div class="tool-header">
+      <span class="tool-label">Tool 1 of 6</span>
+      <h2>Where to Look</h2>
+      <p class="tool-intro">Finding product categories where Indian production is genuinely undersupplied relative to demand — using specific, free, publicly available data sources rather than gut feeling or trend articles.</p>
+    </div>
+
+    <p>Most people who want to start a manufacturing business begin by asking "what should I make?" They search for lists of "profitable manufacturing ideas" and end up with generic advice — candles, soap, spices. That approach is backwards. The right question is: <strong>where does real, documented demand exist that Indian supply is currently not meeting?</strong> That question has specific, checkable answers.</p>
+
+    <h3>The Three Signal Types</h3>
+
+    <p>There are three categories of signal that tell you an opportunity exists. You are looking for product categories where all three signals are present simultaneously.</p>
+
+    <h4>Signal Type 1 — Import Volumes</h4>
+
+    <p>If India is importing large quantities of a product, that is direct evidence of unmet domestic demand. The more India imports of something, the more opportunity exists for a domestic manufacturer who can produce it at comparable quality and price. Import data is public, free, and specific down to the product level.</p>
+
+    <div class="source-box">
+      <span class="source-box-label">Where to find import data — free sources</span>
+      <p><strong>ITC Trade Map</strong> — <a href="https://trademap.org" target="_blank">trademap.org</a> — The most useful free tool. Shows which products India imports, from which countries, at what volumes, and how those volumes have changed year on year. Requires free registration. Search by HS code or product name.</p>
+      <p><strong>Ministry of Commerce — DGFT Portal</strong> — <a href="https://dgft.gov.in" target="_blank">dgft.gov.in</a> — India's official trade statistics. Aggregate data by product category and country. Good for macro-level validation of what you find on Trade Map.</p>
+      <p><strong>Zauba.com</strong> — <a href="https://zauba.com" target="_blank">zauba.com</a> — Shipment-level Indian import and export data. You can see actual import records including the importer name, the exporter country, the value, and the port. This is where you go to get specific, not just aggregate.</p>
+      <p><strong>UN Comtrade</strong> — <a href="https://comtrade.un.org" target="_blank">comtrade.un.org</a> — Country-level trade statistics for 200+ countries. Useful for understanding whether the demand is growing globally, not just in India.</p>
+    </div>
+
+    <p><strong>What you are looking for:</strong> A product where India's annual imports exceed ₹500 crore, where China or a single country accounts for more than 50% of those imports (concentrated source = vulnerability that a domestic supplier can exploit), and where import volumes have been growing year on year for at least three years (growing demand, not a fading category).</p>
+
+    <h4>Signal Type 2 — Active Domestic Demand with Few Suppliers</h4>
+
+    <p>Import data tells you what India is buying from abroad. But some demand is met domestically by a small number of suppliers — meaning there is space for a new entrant. IndiaMART and TradeIndia are your instruments here.</p>
+
+    <div class="source-box">
+      <span class="source-box-label">Where to find domestic supply-demand gaps</span>
+      <p><strong>IndiaMART</strong> — <a href="https://indiamart.com" target="_blank">indiamart.com</a> — Search for your product. Count how many verified suppliers appear. Under 50 suppliers for a product with high buyer inquiry volume = undersupplied. Also look at the "Buy Requirements" section — these are actual buyers posting real purchase needs that no supplier has fulfilled yet.</p>
+      <p><strong>TradeIndia</strong> — <a href="https://tradeindia.com" target="_blank">tradeindia.com</a> — Similar to IndiaMART. Cross-reference both platforms. If both show high buyer inquiries and low supplier density, that is a strong signal.</p>
+      <p><strong>Government e-Marketplace (GeM)</strong> — <a href="https://gem.gov.in" target="_blank">gem.gov.in</a> — India's government procurement portal, processing over ₹13.6 lakh crore in transactions as of 2025. Search for product categories where government departments are actively buying but where the number of registered sellers is low. Government is the most reliable buyer in India — it pays, eventually, and it buys at scale.</p>
+    </div>
+
+    <p><strong>What you are looking for:</strong> Products where buyer inquiries on IndiaMART or GeM are frequent and recent, but where the number of verified, active suppliers is thin. Specifically, look for buyer requirements that have been posted but show zero or very few responses — that is the clearest possible signal of an unmet need.</p>
+
+    <h4>Signal Type 3 — India's Structural Strengths</h4>
+
+    <p>Some product categories have natural advantages in India that make domestic production structurally cheaper or better than imports — access to raw materials, existing craft knowledge, agricultural inputs, or proximity to end markets. These advantages are not going away regardless of policy changes, which makes them durable.</p>
+
+    <p>India's documented structural strengths, grounded in existing supply chains and raw material availability:</p>
+
+    <ul class="arrow-list">
+      <li><strong>Cotton and textile inputs</strong> — India is the world's second-largest cotton producer. Products that use cotton as a primary input have an inherent cost advantage over countries that import cotton.</li>
+      <li><strong>Leather and leather goods</strong> — India has one of the world's largest cattle populations, providing raw hide. The leather cluster in Agra, Chennai, Kanpur, and Kolkata has decades of embedded skill. Products requiring leather craftsmanship are structurally advantaged.</li>
+      <li><strong>Chemical intermediates</strong> — India has strong petrochemical and basic chemical production. Specialty chemicals, dyes, and agro-chemicals derived from these intermediates have a raw material cost advantage.</li>
+      <li><strong>Agricultural processing</strong> — India produces enormous volumes of agricultural output that is exported raw and re-imported as processed product. The margin between raw and processed is the opportunity.</li>
+      <li><strong>Engineering components</strong> — The auto components cluster in Pune, Chennai, and Gurugram has built supply chain depth over decades. Adjacent components that use the same raw materials and skills are enterable.</li>
+      <li><strong>Pharmaceuticals and nutraceuticals</strong> — India's bulk drug manufacturing capacity gives domestic formulators a raw material cost advantage over any imported equivalent.</li>
+    </ul>
+
+    <div class="callout">
+      <p><strong>The three-signal test in practice:</strong> You are looking for a product where (1) import volumes are large and growing, (2) domestic supply is thin relative to buyer inquiries, and (3) India has a structural advantage in producing it. A product that satisfies all three signals is your target category. A product that satisfies only one or two should be reconsidered — you are either fighting entrenched imports without an advantage, or entering a crowded market, or both.</p>
+    </div>
+
+    <h3>How to Run the Search — Step by Step</h3>
+
+    <ul class="step-list">
+      <li>
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <strong>Start with what you know</strong>
+          Begin with industries or products you have some familiarity with — even as a consumer or observer. Familiarity reduces the time it takes to understand the market and reduces the risk of being misled by suppliers or buyers. Write down five product categories you know something about.
+        </div>
+      </li>
+      <li>
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <strong>Run each category through Trade Map</strong>
+          Go to trademap.org. Search each category using a product name or HS code. Look at India's import figures for the last five years. Filter for categories where annual imports exceed ₹500 crore and where year-on-year growth is positive. Note the top exporting countries to India for each.
+        </div>
+      </li>
+      <li>
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <strong>Check domestic supply depth on IndiaMART</strong>
+          For each category that passes the Trade Map filter, search IndiaMART. Count active, verified suppliers. Read buyer requirements. Note how many requirements are unanswered or answered by only one or two suppliers. A category with 500+ import crore and fewer than 50 active IndiaMART suppliers is a priority candidate.
+        </div>
+      </li>
+      <li>
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <strong>Check structural advantage</strong>
+          Ask: does India produce the primary raw material for this product? Is there an existing cluster of manufacturers nearby that I could learn from or buy inputs from? Is there documented craft or industrial skill in India relevant to this product? If yes to at least two of three, the category has structural support.
+        </div>
+      </li>
+      <li>
+        <div class="step-num">5</div>
+        <div class="step-content">
+          <strong>Shortlist two or three categories</strong>
+          After running all five of your starting categories through this process, you should have one to three that pass all three signals. These are your candidates for Tool 2. Do not proceed to Tool 2 with more than three — narrowing forces rigour.
+        </div>
+      </li>
+    </ul>
+  </section>
+
+  <!-- TOOL 2 -->
+  <section id="tool2">
+    <div class="tool-header">
+      <span class="tool-label">Tool 2 of 6</span>
+      <h2>The Crowding Check</h2>
+      <p class="tool-intro">Five specific questions that tell you whether a market is genuinely enterable, or whether it looks open but is actually locked by incumbents, pricing dynamics, or structural barriers you cannot overcome with ₹25 lakh.</p>
+    </div>
+
+    <p>Finding a category that looks promising is not the same as finding one you can actually enter. This tool is designed to kill bad ideas before you spend money on them. Answer each question honestly. If you cannot answer a question, that itself is a signal — it means you do not yet know enough about the market to enter it.</p>
+
+    <h3>The Five Questions</h3>
+
+    <div class="check-row">
+      <span class="check-num">01</span>
+      <div>
+        <strong>Who are the existing suppliers, and how big are they?</strong>
+        <p style="margin-top:0.4rem;font-size:0.93rem">Search IndiaMART, TradeIndia, and Zauba for your product. Identify the top five existing Indian suppliers. Check their company profiles, turnover estimates (often listed), and years in business. If the top suppliers are large companies — annual turnover above ₹50 crore, decade-old operations — you cannot compete on price or scale with ₹25 lakh. You need to either find a niche within the category (a specific variant, size, quality tier, or geography they do not serve) or move to a different category.</p>
+      </div>
+      <span class="check-verdict verdict-stop">STOP if dominated by large players</span>
+    </div>
+
+    <div class="check-row">
+      <span class="check-num">02</span>
+      <div>
+        <strong>What is the price gap between the cheapest import and what Indian buyers are paying?</strong>
+        <p style="margin-top:0.4rem;font-size:0.93rem">Look at Zauba import records for your product. Note the CIF price per unit of imports. Then look at IndiaMART asking prices from domestic suppliers for the same product. The difference between import price and domestic selling price is your margin window. If the gap is less than 15%, your room to compete profitably after transport, compliance, and operational costs is too thin. If the gap is 30% or more, there is genuine room for a new domestic entrant to price competitively and still make money.</p>
+      </div>
+      <span class="check-verdict verdict-go">PROCEED if gap is 30%+</span>
+    </div>
+
+    <div class="check-row">
+      <span class="check-num">03</span>
+      <div>
+        <strong>Is the dominant supply source one country — and is that country under trade pressure?</strong>
+        <p style="margin-top:0.4rem;font-size:0.93rem">If 60–80% of imports come from China, that is your opportunity. India has been progressively restricting Chinese imports through Quality Control Orders, anti-dumping duties, and BIS certification requirements. As of 2025, India has issued 187 Quality Control Orders covering 769 product categories — many specifically designed to restrict Chinese imports. A product where China dominates import supply and where a QCO is either in force or under consideration is a category where domestic production is being actively encouraged by policy. Check the Ministry of Commerce notifications for QCOs relevant to your category.</p>
+      </div>
+      <span class="check-verdict verdict-go">SIGNAL if China dominant</span>
+    </div>
+
+    <div class="check-row">
+      <span class="check-num">04</span>
+      <div>
+        <strong>What is the minimum viable order size, and can your ₹25 lakh sustain it?</strong>
+        <p style="margin-top:0.4rem;font-size:0.93rem">Contact three existing suppliers on IndiaMART as if you were a buyer. Ask for their minimum order quantities and prices. This tells you two things: the scale at which the market operates, and what a buyer actually expects. If minimum order sizes require capital you do not have — either for inventory or for production — the category is not currently accessible at your capital level. Conversely, if minimum orders are small enough that you can fulfill one order from working capital while the next order is being produced, the business model is viable.</p>
+      </div>
+      <span class="check-verdict verdict-stop">STOP if MOQ exceeds capital</span>
+    </div>
+
+    <div class="check-row" style="border-bottom:none">
+      <span class="check-num">05</span>
+      <div>
+        <strong>Does this product require a mandatory certification that will take more than six months to obtain?</strong>
+        <p style="margin-top:0.4rem;font-size:0.93rem">Some products require BIS certification, FSSAI license, drug manufacturing license, or other regulatory approvals before they can be sold legally. These are not obstacles — they are moats that protect you once you have them. But they take time and capital to obtain. Research whether your product requires mandatory certification before you can sell it. If yes, factor the cost and timeline into your plan — typically ₹1–3 lakh and 3–12 months depending on the product. If certification is optional, consider obtaining it anyway after your first revenues come in, as it becomes part of your moat (see Tool 6).</p>
+      </div>
+      <span class="check-verdict verdict-go">FACTOR IN — not a dealbreaker</span>
+    </div>
+
+    <div class="callout">
+      <p><strong>The Crowding Check verdict:</strong> A category is enterable if the existing suppliers are fragmented and small, the price gap is 30%+, imports are concentrated in a single country under trade pressure, minimum order sizes are manageable within your capital, and any required certification is obtainable within your budget and timeline.</p>
+      <p style="margin-top:0.8rem">A category fails the check if it is dominated by large incumbents with no obvious niche you can occupy, if the price gap leaves no room for profit, or if the certification barrier is so high that you will run out of capital before you can sell legally.</p>
+    </div>
+
+    <h3>What to Do When No Category Passes</h3>
+
+    <p>If none of your shortlisted categories pass the Crowding Check, go back to Tool 1 and generate a new set of candidates. This is normal. The first pass through Tool 1 often produces categories that seem promising from import data but fail the Crowding Check because of pricing dynamics or incumbent strength that only becomes visible when you look more closely.</p>
+
+    <p>The Crowding Check is the most important filter in this toolkit. Failing here saves you from spending ₹25 lakh learning a lesson you could have learned for free.</p>
+  </section>
+
+  <!-- TOOL 3 -->
+  <section id="tool3">
+    <div class="tool-header">
+      <span class="tool-label">Tool 3 of 6</span>
+      <h2>The Proof-of-Demand Ladder</h2>
+      <p class="tool-intro">A four-stage entry sequence that lets you validate market demand at every step before committing more capital — from pure trading with zero manufacturing risk to owning your own production facility, only when the market has already proven it will pay you.</p>
+    </div>
+
+    <blockquote>"You do not need to build a factory to find out if there is demand for your product. You need to find demand first, and build a factory later — or not at all."</blockquote>
+
+    <p>The ladder below is not a sequence you must complete in full. Many successful small manufacturers stop at Stage 2 permanently and build highly profitable businesses on other people's machines. The ladder is a decision framework — at each stage, you have enough information to decide whether to invest more or to exit cleanly.</p>
+
+    <div class="ladder">
+
+      <div class="ladder-stage">
+        <div class="ladder-left">
+          <div class="ladder-dot">1</div>
+          <div class="ladder-line"></div>
+        </div>
+        <div class="ladder-content">
+          <h4>Trade First — Import or Buy Domestically and Resell</h4>
+          <span class="capital">Capital commitment: ₹2–5 lakh · Timeline: 0–6 months</span>
+          <p>Before you make anything, find out if people will buy it. Import a small quantity of the product — or source it from an existing domestic manufacturer — and sell it. Your goal at this stage is not profit. It is market data. You are answering: who buys this, at what price, in what quantities, and how often do they reorder?</p>
+          <p>For imports: use a freight forwarder for a small test shipment. Alibaba.com and Global Sources are your sourcing platforms for Chinese product samples. For domestic sourcing: contact three manufacturers on IndiaMART and ask for samples and minimum order pricing. You are a buyer at this stage, not a manufacturer.</p>
+          <p>Sell the product through IndiaMART, through direct outreach to potential buyers you identified in Tool 1 and Tool 2, or through a broker. Do not invest in branding or packaging at this stage — you are testing raw demand, not building a brand.</p>
+          <p><strong>What you are proving:</strong> That buyers exist, that they will pay the price you need, and that they will reorder. One buyer who reorders three times is more valuable data than fifty inquiries that go nowhere.</p>
+          <p><strong>Exit criterion:</strong> If after 90 days of active selling you have not found a single buyer willing to place a repeat order at a margin that works, the product either has no demand or the price point is wrong. Change the product, change the target buyer, or stop. Do not proceed to Stage 2.</p>
+        </div>
+      </div>
+
+      <div class="ladder-stage">
+        <div class="ladder-left">
+          <div class="ladder-dot">2</div>
+          <div class="ladder-line"></div>
+        </div>
+        <div class="ladder-content">
+          <h4>Outsource Production — Job Work on Existing Machines</h4>
+          <span class="capital">Capital commitment: ₹5–10 lakh additional · Timeline: 3–12 months</span>
+          <p>You have buyers. Now you need to produce the product yourself — but not on your own machines. India has an enormous job work ecosystem: small manufacturers who will produce to your specifications on their equipment, for a fee. This is called job work or toll manufacturing, and it is how many large FMCG and industrial companies in India operate their supply chains.</p>
+          <p>Find a job work partner in the relevant manufacturing cluster — the MSME cluster maps published by the Ministry of MSME identify where production capacity exists for almost every product category in India. Alternatively, search "[product] job work manufacturer India" on IndiaMART. Visit the facility before placing an order. Check their equipment, their quality controls, and their existing clients.</p>
+          <p>At this stage you own: the customer relationship, the brand (if any), the specifications, and the quality standards. You do not own: the machinery, the factory space, or the production labour. Your capital goes into raw materials, quality checks, and working capital for the production cycle — not equipment.</p>
+          <p><strong>What you are proving:</strong> That you can produce the product to the quality your buyers require, at a cost that leaves you with acceptable margin. The gross margin you need to validate at this stage is at least 25% after materials, job work fees, and delivery costs. Below that, the business is not viable at small scale.</p>
+          <p><strong>The critical discipline at Stage 2:</strong> Do not sign a long-term contract with your job work partner until you have completed at least three production runs successfully. Your first run will have quality issues. Your job work partner's delivery timelines will slip. These are normal and fixable — but you need to discover them before you are locked in.</p>
+          <p><strong>Exit criterion:</strong> If after three production runs you cannot consistently hit your target quality specifications, or if your job work partner cannot reliably deliver on time, either find a different job work partner or reconsider the product. Do not proceed to Stage 3 until production is reliable.</p>
+        </div>
+      </div>
+
+      <div class="ladder-stage">
+        <div class="ladder-left">
+          <div class="ladder-dot">3</div>
+          <div class="ladder-line"></div>
+        </div>
+        <div class="ladder-content">
+          <h4>Co-Manufacture — Embed in the Factory</h4>
+          <span class="capital">Capital commitment: ₹3–7 lakh additional · Timeline: 6–18 months</span>
+          <p>This stage is optional but high-value. If your job work relationship is working and you have consistent orders, consider negotiating a deeper arrangement with your production partner: you place a dedicated machine or dedicated shift, you have your own quality controller on the floor, and you are present during production runs.</p>
+          <p>This is not ownership — you are still not buying machines. But you are learning the production process from the inside. You learn what raw materials to specify, what machine settings produce the best output, what the failure modes are, and what a realistic production capacity looks like. This knowledge is irreplaceable. It is the difference between a trader who sells manufactured goods and a manufacturer who understands their product at the process level.</p>
+          <p>Co-manufacturing also allows you to negotiate better job work rates as your volumes grow — because you are now a committed, embedded partner rather than an occasional order.</p>
+          <p><strong>What you are proving:</strong> That you understand your own production process well enough to eventually run it yourself, and that your volumes are large enough to justify dedicated production capacity.</p>
+          <p><strong>Exit criterion:</strong> If your volumes are not large enough to justify a dedicated arrangement, stay at Stage 2 indefinitely. There is no shame in this — a profitable Stage 2 business is a successful business. Stage 3 and Stage 4 only make sense when volumes justify the investment.</p>
+        </div>
+      </div>
+
+      <div class="ladder-stage">
+        <div class="ladder-left">
+          <div class="ladder-dot">4</div>
+          <div class="ladder-line" style="display:none"></div>
+        </div>
+        <div class="ladder-content">
+          <h4>Own Manufacturing — Capital Equipment and Facility</h4>
+          <span class="capital">Capital commitment: ₹15–50 lakh+ · Timeline: 18–36 months from start</span>
+          <p>You reach this stage only when three conditions are simultaneously true: you have consistent, repeat orders from multiple buyers; your job work margins are being compressed because your partner's fixed costs are now a larger share of your COGS than they would be if you owned the equipment; and you have intimate knowledge of the production process from Stage 3.</p>
+          <p>At this point, buying equipment or leasing a factory is not a risk — it is a capital efficiency decision. You are not betting that there will be demand. You already have the demand. You are optimising your cost structure to capture more of the margin that currently goes to your job work partner.</p>
+          <p>Even at this stage, lease before you buy. Leasing a facility and hiring a few production staff is reversible. Buying a building is not. Keep your capital flexible as long as possible.</p>
+          <p><strong>MSME loans at this stage:</strong> Once you have 18–24 months of documented revenue, GST filings, and bank statements showing consistent turnover, you are eligible for MSME loans under the CGTMSE scheme (Credit Guarantee Fund Trust for Micro and Small Enterprises) — collateral-free loans up to ₹2 crore. Your personal capital at this stage should be equity in the business and a credibility signal to lenders, not the only source of capital.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="callout warn">
+      <p><strong>The single most common failure pattern:</strong> A first-time manufacturer skips Stages 1, 2, and 3. They find what looks like a promising product, spend ₹20 lakh on machinery, and then discover that buyers want a specification they cannot produce, or that the price point they assumed does not actually work, or that the market is more seasonal than they anticipated. By the time they know this, their capital is locked in equipment they cannot sell at full value. The ladder exists specifically to prevent this.</p>
+    </div>
+  </section>
+
+  <!-- TOOL 4 -->
+  <section id="tool4">
+    <div class="tool-header">
+      <span class="tool-label">Tool 4 of 6</span>
+      <h2>The First Order Playbook</h2>
+      <p class="tool-intro">Channel-by-channel, how to get your first paying order — with no existing network, no reputation, and no marketing budget. The playbook works for both domestic sales and export.</p>
+    </div>
+
+    <p>Getting your first order is the hardest part of any manufacturing business. Every buyer wants a supplier who already has other buyers. Every buyer wants references you do not yet have. Every buyer wants delivery certainty you cannot yet prove. This is the bootstrap problem of new manufacturing, and there is no elegant solution — only a set of specific channels that reduce the friction enough to get that first order through.</p>
+
+    <h3>Domestic Channels — In Order of Accessibility</h3>
+
+    <h4>Channel 1: Government e-Marketplace (GeM)</h4>
+    <p>GeM is India's national government procurement portal, and it is the most underutilised first-buyer channel available to small manufacturers. As of 2025, it has processed over ₹13.6 lakh crore in transactions. Every central and state government department, PSU, and autonomous institution is legally mandated to buy through GeM. More importantly: GeM does not ask for references. It asks for a GST registration, a PAN card, and a product listing.</p>
+    <p>Register at gem.gov.in. List your product. Respond to active tenders in your product category — these are posted publicly and you can see exactly what the government is looking for, in what quantity, at what price. Government payment is slow — typically 30–90 days — but it is reliable. A GeM order is proof of your existence as a supplier, which makes your next conversation with a private buyer substantially easier.</p>
+    <p><strong>The GeM advantage for new suppliers:</strong> The government actively reserves a portion of procurement for MSMEs and gives preference to products with "Made in India" classification. Register your product under the Make in India category if eligible — this gives you a structural advantage over importers competing for the same tender.</p>
+
+    <h4>Channel 2: IndiaMART — Active Inquiry Response</h4>
+    <p>IndiaMART generates millions of buyer inquiries. Most suppliers respond slowly, incompletely, or not at all. Your advantage as a new, motivated entrant is speed and completeness of response. Respond to every relevant buyer inquiry within two hours. Include your price, your minimum order quantity, your delivery timeline, and a sample offer in your first message. Most of your competitors will not do this.</p>
+    <p>Pay for a verified supplier listing — the cost is ₹25,000–50,000 per year and dramatically increases the visibility and credibility of your profile. This is one of the most cost-effective marketing spends available to a new manufacturer.</p>
+
+    <h4>Channel 3: Direct Outreach to Distributors and Traders</h4>
+    <p>In most industrial and FMCG product categories, there is a layer of distributors and traders between the manufacturer and the end buyer. These distributors are constantly looking for new suppliers who can offer better pricing, better delivery, or product variants that their current suppliers do not provide. Find them through IndiaMART (search "[your product] distributor"), through industry trade directories, or through Trade India.</p>
+    <p>Call them. Not email — call. Introduce yourself as a new manufacturer, explain what you are making and at what price, and ask for a meeting. Offer to send samples at no cost. The distributor's risk with a new supplier is low — they do not pay until they receive goods and sell them. Your risk is also low — you are sending samples, not committing to a large production run.</p>
+
+    <h3>Export Channels — In Order of Accessibility</h3>
+
+    <p>Export is harder than domestic selling at first, but the margin is usually better and the buyer relationship, once established, is more durable. The instinct to do domestic first and export later is correct — but "later" should be 6–12 months after your first domestic order, not years.</p>
+
+    <h4>Channel 1: FIEO — Federation of Indian Export Organisations</h4>
+    <p>FIEO is India's apex export promotion body, with a membership network of over 200,000 exporters. Membership costs ₹10,000–25,000 per year depending on your turnover. Members get access to Reverse Buyer-Seller Meets (RBSMs) — events where international importers come specifically to India to meet potential suppliers. These are vetted buyers with active sourcing mandates, not tyre-kickers. An RBSM is the fastest way for a new exporter to get in front of serious international buyers without a trade fair budget.</p>
+    <p>FIEO also runs the Indian Business Portal — <a href="https://indianbusinessportal.in" target="_blank">indianbusinessportal.in</a> — a B2B marketplace where international buyers search for Indian suppliers. Complete your profile with your product range, certifications, and export capacity. International buyers use this platform actively.</p>
+
+    <h4>Channel 2: Export Promotion Councils (EPCs)</h4>
+    <p>Every major product category in India has a dedicated Export Promotion Council — AEPC for apparel, EEPC for engineering, CHEMEXCIL for chemicals, EPCH for handicrafts, and so on. EPCs organise international trade missions, host foreign buyer delegations, facilitate subsidised booth space at international trade fairs, and maintain buyer directories not available to non-members. Join the relevant EPC for your category. Annual membership fees are typically ₹5,000–15,000.</p>
+    <p>The most valuable EPC resource for a new exporter is the buyer directory — lists of international importers, their sourcing requirements, and their contact details. Send samples to every importer on the list who buys your product category. Follow up once. Not ten times — once, professionally.</p>
+
+    <h4>Channel 3: Alibaba.com — Indian Supplier Profile</h4>
+    <p>Despite being a Chinese company, Alibaba.com is the primary search engine for international buyers looking for Asian manufacturers. Indian suppliers are significantly underrepresented on the platform relative to Chinese suppliers — which means your visibility as a credible Indian supplier is high if you maintain a complete, professional profile.</p>
+    <p>A Gold Supplier membership costs approximately ₹80,000–1.2 lakh per year. For an exporter with a genuine product, this is worth it. International buyers searching for your product category will find you. The key is to respond to every inquiry within 24 hours, provide complete product specifications, and offer samples with DHL tracking — the professionalism of your response is your first quality signal to the buyer.</p>
+
+    <h4>Channel 4: Trade Intelligence Platforms for Direct Buyer Outreach</h4>
+    <p>Platforms like Panjiva, ImportGenius, and Volza contain US and global import records with actual buyer names and contact details — companies that are currently importing products from China or other countries and who may be open to switching to or adding an Indian supplier. This is not a mass email strategy. It is targeted, professional outreach to buyers who already have proven demand for your product.</p>
+    <p>Identify 20–30 companies currently importing your product category. Find their procurement or sourcing contact on LinkedIn. Send a short, professional message: who you are, what you make, why your product is relevant to their existing sourcing, and an offer to send samples. Convert one of these 20–30 outreaches and you have your first export customer.</p>
+
+    <div class="callout">
+      <p><strong>The sample strategy:</strong> The fastest path to a first order in any channel is a free sample with professional packaging and complete product specifications. Budget ₹50,000–1 lakh for samples in your first six months. Every serious buyer you send a sample to should receive it with a covering note, a product data sheet, your pricing, your minimum order quantity, and your delivery timeline. The buyer's decision time after receiving a good sample is typically 2–8 weeks. Follow up once at the two-week mark if you have not heard back.</p>
+    </div>
+
+    <h3>Payment Terms for Your First Order</h3>
+
+    <p>New manufacturers frequently make one of two mistakes on payment terms: they offer credit they cannot afford (giving 60-day payment terms when they need the cash in 30 days to pay for the next production run), or they insist on 100% advance payment from buyers who do not know them and will not accept that risk.</p>
+
+    <p>The standard first-order terms that work:</p>
+
+    <ul class="arrow-list">
+      <li><strong>Domestic buyers:</strong> 50% advance on order, 50% on dispatch. This is standard practice and protects you from a buyer who places an order and then refuses to take delivery.</li>
+      <li><strong>Export buyers:</strong> Letter of Credit (LC) from a reputable bank, or 30% advance with the remaining 70% against shipping documents. Never ship export goods without confirmed payment arrangement in place.</li>
+      <li><strong>GeM orders:</strong> Payment is post-delivery and can take 30–90 days. Build this into your working capital plan — you need enough cash to fund production before GeM pays you.</li>
+    </ul>
+  </section>
+
+  <!-- TOOL 5 -->
+  <section id="tool5">
+    <div class="tool-header">
+      <span class="tool-label">Tool 5 of 6</span>
+      <h2>The Pre-Mortem Contract</h2>
+      <p class="tool-intro">A document you fill out on day one — before you have emotional investment — that tells you exactly when to stop. The kill switch only works if the criteria are set before you need them.</p>
+    </div>
+
+    <p>Every business failure has a moment — usually six to eighteen months before the final collapse — where the data was already telling the founder to stop. The money was still going in. The optimism was still there. The narrative was still "just one more month." But the signals were already clear.</p>
+
+    <p>The Pre-Mortem Contract is designed to prevent that. It is a written document that you create on the day you commit to entering a product category. It states, in advance, the specific conditions under which you will stop. Not "if things aren't working" — that is too vague and too easy to renegotiate with yourself. Specific numbers, specific timelines, specific actions.</p>
+
+    <p>The psychological principle is straightforward: decisions made under pressure are worse than decisions made without it. When you are six months in and have ₹8 lakh left, you will convince yourself that the next order is coming, that the buyer who went quiet will come back, that the quality problem is fixable. The Pre-Mortem Contract prevents this by making you commit to your exit criteria when you are rational, so you do not have to decide when you are not.</p>
+
+    <h3>The Standard Pre-Mortem Contract</h3>
+
+    <p>Below is the framework. Fill it in with your own specific numbers before you commit any capital. Keep it somewhere you will see it — not filed away.</p>
+
+    <div class="premortem">
+      <div class="premortem-header">Pre-Mortem Contract — [Your Name] — [Date] — [Product Category]</div>
+      <div class="premortem-body">
+
+        <div class="premortem-row">
+          <div class="premortem-condition">If no paying order — domestic or export — within 90 days of active selling at Stage 1</div>
+          <div class="premortem-action">STOP. Change the product category, not the timeline. Spending more time on a product no one is buying does not make it more appealing. Go back to Tool 1.</div>
+        </div>
+
+        <div class="premortem-row">
+          <div class="premortem-condition">If gross margin after materials, job work, and delivery is below 22% after three production runs at Stage 2</div>
+          <div class="premortem-action">STOP OR PIVOT. Either the product unit economics do not work at this scale, or your job work costs are too high. Investigate the cost breakdown before spending more capital. If the problem is job work costs, find a different partner. If the problem is raw material costs or pricing, the economics may not work at small scale — consider whether you need a different product.</div>
+        </div>
+
+        <div class="premortem-row">
+          <div class="premortem-condition">If your primary buyer stops reordering for two consecutive months without explanation</div>
+          <div class="premortem-action">INVESTIGATE IMMEDIATELY. Call them. Do not wait. A buyer who stops ordering without explanation has either found a cheaper supplier, had a quality issue they did not tell you about, or has a business problem of their own. Find out which and act accordingly. If you cannot get a clear answer, begin finding a replacement buyer before your cash runs out.</div>
+        </div>
+
+        <div class="premortem-row">
+          <div class="premortem-condition">If available capital drops below ₹4 lakh with no confirmed purchase order in hand</div>
+          <div class="premortem-action">STOP all new production commitments immediately. With ₹4 lakh you have enough to wind down cleanly — pay outstanding supplier bills, fulfil any committed orders, and exit without personal liability. At ₹2 lakh you are in a survival situation. Do not reach ₹2 lakh.</div>
+        </div>
+
+        <div class="premortem-row">
+          <div class="premortem-condition">If a quality control failure results in a buyer rejecting more than 10% of a shipment</div>
+          <div class="premortem-action">HALT PRODUCTION until the root cause is identified and fixed. Do not fulfil the next order from the same production run. A buyer who receives a rejected shipment will usually give you one chance to fix it. A buyer who receives two rejected shipments will not order again and will tell others. Quality is your only real asset as a new manufacturer with no reputation.</div>
+        </div>
+
+        <div class="premortem-row">
+          <div class="premortem-condition">If you have been at Stage 2 for 18 months with the same single buyer accounting for more than 70% of revenue</div>
+          <div class="premortem-action">This is not a stop criterion — it is a risk alert. You have built a business that is entirely dependent on one relationship. Begin actively finding a second buyer before the first one becomes a problem. Buyer concentration above 70% is a structural vulnerability, not a success story.</div>
+        </div>
+
+      </div>
+    </div>
+
+    <h3>How to Use the Pre-Mortem Contract</h3>
+
+    <p>Print it. Put it in a physical folder with your business documents. Set a calendar reminder to review it every 30 days. At each review, check your actual numbers against the contract conditions. The review takes ten minutes. It is the ten minutes that will save you from losing everything.</p>
+
+    <p>Share it with one other person — a spouse, a trusted friend, a mentor — who will hold you to it. The social commitment mechanism makes the contract more binding. It is easy to renegotiate a document with yourself. It is harder to renegotiate in front of someone who watched you write it.</p>
+
+    <div class="callout warn">
+      <p><strong>The hardest thing about the Pre-Mortem Contract:</strong> When the stop condition is triggered, your instinct will be to explain why this particular situation is different from what you imagined when you wrote the contract. It is almost never actually different. The contract is right. Your rationalisation is the problem. The contract exists to override the rationalisation. Use it.</p>
+    </div>
+
+    <h3>What Stopping Actually Looks Like</h3>
+
+    <p>Stopping is not failure. It is capital preservation — the ability to try again with what remains, rather than having nothing left to try with. The entrepreneurs who succeed over long careers are almost never the ones who succeeded on their first attempt. They are the ones who stopped quickly enough on their bad attempts to have capital remaining for their good ones.</p>
+
+    <p>A clean exit at Stage 1 or Stage 2 should cost you no more than ₹3–8 lakh of your original ₹25 lakh. That is expensive knowledge about one product category — but it is affordable knowledge. The same knowledge acquired after Stage 4 could cost you everything.</p>
+  </section>
+
+  <!-- TOOL 6 -->
+  <section id="tool6">
+    <div class="tool-header">
+      <span class="tool-label">Tool 6 of 6</span>
+      <h2>The Moat Builder</h2>
+      <p class="tool-intro">Five capital-light ways to make your position defensible once you have found something that works — because a visible opportunity will attract fast followers, and the manufacturer who builds moats early retains the margin while the manufacturer who doesn't gets competed away.</p>
+    </div>
+
+    <p>A moat is anything that makes it harder for a competitor to take your customers. In large manufacturing, moats are built through scale, proprietary technology, and exclusive raw material supply. At small scale, none of these are available. But there are five specific moats that are available to a small manufacturer with limited capital — and they are more durable than most people expect.</p>
+
+    <div class="moat-grid">
+
+      <div class="moat-card">
+        <div class="moat-num">01</div>
+        <div class="moat-title">The Certification Moat</div>
+        <p>Obtain mandatory or voluntary certifications — BIS, ISO 9001, FSSAI, export certifications — as soon as your first revenues allow. Certifications take 3–18 months and ₹1–5 lakh to obtain. Once you have them, a new entrant must spend the same time and money before they can sell to the same buyers. Your certification is a time-based moat — it creates a structural delay for anyone trying to follow you into your market. For export specifically, certifications like CE marking for European markets or FDA compliance for US markets are access tickets that most Indian small manufacturers do not have. If you have them and your competitor doesn't, you can charge more and still win the order.</p>
+      </div>
+
+      <div class="moat-card">
+        <div class="moat-num">02</div>
+        <div class="moat-title">The Relationship Moat</div>
+        <p>Your buyer knows you, has your number, trusts your quality, and has your bank details. A new entrant starts from zero with that buyer — they have to prove their quality, negotiate terms, pass through the buyer's supplier qualification process, and build the operational trust that you have already earned. The relationship moat is invisible in a spreadsheet but enormous in practice. Invest in it actively: visit your buyers. Know their business. Understand their pressures. When a buyer has a problem — a rush order, a quality requirement they haven't shared with you yet, a new product they're developing — be the supplier they call first. That position is not transferable to a competitor at any price.</p>
+      </div>
+
+      <div class="moat-card">
+        <div class="moat-num">03</div>
+        <div class="moat-title">The Speed Moat</div>
+        <p>You can fulfill in two weeks. A new entrant needs three months to set up supply chain, qualify suppliers, run production trials, and establish logistics. Your established production process, existing raw material supplier relationships, and known logistics routes are a speed advantage that a fast follower cannot eliminate immediately. Reinforce this moat by maintaining a small buffer inventory of your most critical raw materials — enough for one production run — so that you can respond to urgent orders faster than anyone who doesn't have established supply. Speed is a moat that requires discipline to maintain but costs almost nothing to build.</p>
+      </div>
+
+      <div class="moat-card">
+        <div class="moat-num">04</div>
+        <div class="moat-title">The Cluster Knowledge Moat</div>
+        <p>Deep knowledge of your local supplier network — who has the best raw material at the lowest price, who delivers reliably, who to avoid, who has excess capacity when you need a rush order — takes years to build and cannot be learned from the internet. This knowledge is embedded in relationships and in the specific experience of operating in a particular geography and product ecosystem. A new entrant in your product category, even one with more capital, will spend 12–18 months learning what you already know. Use that time to deepen your supplier relationships further, negotiate better terms, and explore adjacent raw materials that could allow you to expand your product range without a new supplier search.</p>
+      </div>
+
+      <div class="moat-card">
+        <div class="moat-num">05</div>
+        <div class="moat-title">The Private Label Moat</div>
+        <p>If a large buyer — a distributor, a retailer, an FMCG company — is selling your product under their own brand name, switching from you to a new supplier requires them to repackage, retest, and requalify the product. That process takes time, costs money, and creates business risk for them. The switching cost is your moat. Actively seek private label arrangements with your largest buyers. Offer to develop packaging to their specifications. Accept a slightly lower margin on private label business in exchange for contract commitments — a buyer who has committed to a supply contract is not going to switch for a 5% price reduction from a new entrant they don't know.</p>
+      </div>
+
+    </div>
+
+    <p style="grid-column: 1/-1">A sixth moat deserves separate mention because it is the most powerful and the most neglected:</p>
+
+    <h3>The Compliance Moat</h3>
+
+    <p>India's regulatory environment is genuinely complex. Most small manufacturers operate in the grey zone — partially compliant, with some documentation missing, some taxes not fully paid, some labour laws not perfectly followed. This is a fragile position. But it creates an opportunity for the manufacturer who operates with full compliance from the start.</p>
+
+    <p>A fully compliant manufacturer — GST filed correctly and on time, labour contracts in order, factory licenses current, environmental clearances obtained — can bid for government tenders, can export to regulated markets, and can attract international buyers who conduct compliance audits on their suppliers. These are markets that are entirely closed to non-compliant competitors.</p>
+
+    <p>Full compliance costs more and requires more administrative effort. But it eliminates a category of risk — regulatory shutdown, tax penalties, export rejection — that can destroy a non-compliant business at any moment. And it opens market segments — government procurement, regulated export markets, international brand supply chains — that are structurally more profitable and more stable than the unregulated domestic market.</p>
+
+    <div class="callout green">
+      <p><strong>The moat-building timeline:</strong> Do not try to build all six moats simultaneously. In Year 1, focus on relationships and speed — these cost nothing. In Year 2, obtain certifications as your revenues allow. In Year 3, pursue private label arrangements with your best buyers and deepen your compliance posture. By Year 3, a competitor entering your market will find a business that is certified, relationship-entrenched, fast, and serving buyers who have switching costs. That is a defensible position built entirely without patents, proprietary technology, or scale.</p>
+    </div>
+  </section>
+
+  <!-- CASE STUDIES -->
+  <section id="casestudies">
+    <div class="tool-header">
+      <span class="tool-label">The Toolkit in Practice</span>
+      <h2>Two Case Studies</h2>
+      <p class="tool-intro">Two product categories run through all six tools — not as prescriptions for what you should make, but as illustrations of how the framework operates on real markets. The specific numbers and market conditions will change over time. The method of reasoning does not.</p>
+    </div>
+
+    <div class="case-study">
+      <span class="case-study-label">Case Study A</span>
+      <h3>Stainless Steel Kitchen Components for Export</h3>
+
+      <p><strong>Tool 1 — Where to Look:</strong> India is the world's second-largest stainless steel producer and has a well-developed steel rolling and forming industry. ITC Trade Map shows that the EU and Middle East import significant volumes of stainless steel kitchenware and food service components from China and Turkey. India currently supplies a small fraction of this demand despite having cheaper raw steel and comparable labour costs. Domestic demand on IndiaMART for custom stainless components from institutional buyers — hotels, hospitals, canteens — is high and underserved outside of a few large manufacturers in Rajkot and Delhi.</p>
+
+      <p><strong>Tool 2 — Crowding Check:</strong> Existing Indian suppliers are fragmented — most are small workshops producing for the local or regional market with no export presence. The price gap between Chinese imports to the EU and what Indian manufacturers could offer is approximately 35–40% in India's favour once you account for tariff differentials. The EU-India FTA signed in January 2026 has created additional tariff advantage. BIS certification is not required for export stainless products, but CE marking helps for European buyers. The category passes all five crowding check questions.</p>
+
+      <p><strong>Tool 3 — Demand Ladder:</strong> Stage 1 involves sourcing standard stainless components from existing Rajkot manufacturers and offering them to institutional buyers domestically and to EU importers as an Indian-origin alternative to Chinese supply. Stage 2 involves job work with a Rajkot workshop for custom-specification components against confirmed export orders. The raw material — stainless steel sheet and rod — is available domestically at competitive prices from Tata and JSW without import dependency.</p>
+
+      <p><strong>Tool 4 — First Order:</strong> EEPC (Engineering Export Promotion Council) maintains a buyer directory of EU metal product importers. Alibaba.com has active EU buyers searching specifically for Indian stainless suppliers as a China alternative. The Niryat Mitra app profile, combined with an EEPC membership, puts you in front of vetted buyers at organised Reverse Buyer-Seller Meets.</p>
+
+      <p><strong>Tool 5 — Pre-Mortem trigger points:</strong> No export inquiry converts to a sample request within 90 days; gross margin on job work production below 25%; single buyer exceeds 65% of revenue for more than two quarters.</p>
+
+      <p><strong>Tool 6 — Moats:</strong> ISO 9001 quality certification (obtainable in 4–6 months, ₹1.5–2 lakh) as a buyer qualification requirement. Private label supply to an EU distributor who brands the product for food service retailers. Speed advantage from domestic steel sourcing versus Chinese competitors who import steel.</p>
+    </div>
+
+    <div class="case-study">
+      <span class="case-study-label">Case Study B</span>
+      <h3>Processed Agro-Inputs for Domestic Institutional Buyers</h3>
+
+      <p><strong>Tool 1 — Where to Look:</strong> India produces enormous volumes of agricultural commodities that are exported raw and re-imported as processed products — spice oleoresins, dehydrated vegetables, agricultural extracts. Specifically: India grows large volumes of turmeric, chilli, ginger, and fenugreek. The export of these in raw form is high-volume but low-value. Their processing into standardised, graded, packaged forms for institutional food manufacturers, FMCG companies, and export buyers commands a significantly higher price per kilogram. APEDA's Agri Exchange portal shows consistent export demand for standardised processed spice products from GCC, EU, and US markets.</p>
+
+      <p><strong>Tool 2 — Crowding Check:</strong> The large players — Everest, MDH, ITC — dominate branded consumer products but do not serve the bulk institutional segment with the agility that smaller buyers need. The institutional segment (food manufacturers who use spice extracts as ingredients, not finished products) is fragmented and price-sensitive in ways that large players cannot serve profitably. Minimum order sizes for institutional buyers are typically 100–500 kg per order — manageable at the initial capital level. FSSAI manufacturing license is required but obtainable in 2–4 months at ₹10,000–25,000.</p>
+
+      <p><strong>Tool 3 — Demand Ladder:</strong> Stage 1 involves buying standardised, graded product from an existing processor and reselling to institutional buyers — testing which specifications, which buyers, and which price points actually convert to repeat orders. Stage 2 involves a job work arrangement with a processing facility — standardising, grading, packaging, and labelling to your own brand specifications. Raw material sourcing directly from APMC mandis or through farmer producer organisations reduces input cost by 15–25% versus buying from traders.</p>
+
+      <p><strong>Tool 4 — First Order:</strong> GeM portal has consistent institutional buyer demand for processed food ingredients from government canteens, defence establishments, and educational institutions. Direct outreach to food manufacturers in your state who use spice ingredients — visit their purchase department with samples. APEDA organises international buyer-seller meets specifically for processed food exporters.</p>
+
+      <p><strong>Tool 5 — Pre-Mortem trigger points:</strong> No repeat order from an institutional buyer within 60 days of the first order; FSSAI compliance issue leading to a product recall; raw material price spike of more than 30% that cannot be passed through to buyers within the next order cycle.</p>
+
+      <p><strong>Tool 6 — Moats:</strong> FSSAI certification plus export APEDA registration creates a dual domestic-export eligibility that most small processors don't bother with. Traceability documentation — knowing exactly which farm lot went into which batch — is increasingly required by international food buyers and impossible to replicate without established supplier relationships. Private label supply to an FMCG company creates switching cost.</p>
+    </div>
+
+    <h3>What These Case Studies Are Actually Showing</h3>
+
+    <p>Neither case study is a prescription. The specific products may become more competitive or less so as market conditions change. What the case studies demonstrate is the <em>reasoning process</em> — starting from data signals, stress-testing the entry conditions, staging capital deployment, and identifying moats that are specific to the product and the market rather than generic.</p>
+
+    <p>Run your own product category through the same six questions. The answers will be different. The structure of the reasoning is the same regardless of what you are making, when you are reading this, or where in India you are operating from.</p>
+  </section>
+
+  <!-- FINAL -->
+  <section id="final">
+    <div class="tool-header">
+      <span class="tool-label">Before You Begin</span>
+      <h2>The First 30 Days</h2>
+    </div>
+
+    <p>Every tool in this kit requires time before it requires money. The first 30 days of your manufacturing journey should cost you almost nothing — and should tell you almost everything you need to know about whether your chosen product category is worth your ₹25 lakh.</p>
+
+    <ul class="step-list">
+      <li>
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <strong>Days 1–7: Run Tool 1</strong>
+          Spend one full working day on Trade Map, IndiaMART, and Zauba. Generate your shortlist of two or three product categories that pass the three-signal test. Write down your findings with specific numbers — import volumes, number of domestic suppliers, price levels. Do not trust your memory or your instinct at this stage. Write it down.
+        </div>
+      </li>
+      <li>
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <strong>Days 8–14: Run Tool 2</strong>
+          For each shortlisted category, answer the five Crowding Check questions with specific, sourced answers. Contact three existing suppliers as a potential buyer — get their prices, their minimum order quantities, and their delivery timelines. This conversation costs nothing and gives you market intelligence that would cost a consultant ₹2 lakh to produce.
+        </div>
+      </li>
+      <li>
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <strong>Days 15–21: Visit the cluster</strong>
+          India's manufacturing clusters are geographically concentrated. If your shortlisted category has a known cluster — Rajkot for stainless and engineering, Tirupur for textiles, Agra for leather, Surat for textiles, Pune for auto components — visit it. Spend two days. Walk the market. Talk to manufacturers. Talk to raw material suppliers. Talk to buyers who come to the cluster to source. You will learn more in two days in the cluster than in two months of online research.
+        </div>
+      </li>
+      <li>
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <strong>Days 22–30: Write your Pre-Mortem Contract</strong>
+          Before you commit any capital, write your Pre-Mortem Contract for the category you have decided to enter. Fill in the specific numbers — your margin floor, your timeline for first order, your capital floor for exit. Share it with one person who will hold you to it. Then, and only then, commit your first tranche of working capital to Stage 1 of the Demand Ladder.
+        </div>
+      </li>
+    </ul>
+
+    <div class="callout">
+      <p><strong>The 30-day test:</strong> If after 30 days you cannot identify a specific product category that passes Tool 1 and Tool 2, and cannot find a cluster worth visiting, the problem is not the toolkit. The problem is that you have not yet found your specific opportunity. Go back to Tool 1 with a different starting point. The opportunity exists. Finding it takes rigour, not speed.</p>
+    </div>
+
+    <blockquote>"₹25 lakh is enough to build something real. It is also enough to lose completely. The only thing that determines which outcome you get is the quality of your decisions in the first six months — before the emotional investment is too large to override."</blockquote>
+
+    <p>This document is in the public domain. Share it, adapt it, use it. If it helps one person build a manufacturing business that employs ten people and exports to one country, it has done its job. If it helps one person stop before they lose everything, it has done its job equally well.</p>
+  </section>
+
+</main>
+
+<footer>
+  <p>The Manufacturing Toolkit · Nayalab · Public domain · No rights reserved</p>
+  <p>Evidence-based · Updated as conditions change · <a href="../index.html">Back to Nayalab</a></p>
+</footer>
+
+<script>
+  // Scroll reveal
+  const sections = document.querySelectorAll('section');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.05 });
+  sections.forEach(s => observer.observe(s));
+
+  // Active nav
+  const navLinks = document.querySelectorAll('nav.page-nav a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => { if (window.scrollY >= s.offsetTop - 140) current = s.id; });
+    navLinks.forEach(a => {
+      const isActive = a.getAttribute('href') === '#' + current;
+      a.style.color = isActive ? 'var(--saffron)' : '';
+      a.style.borderBottomColor = isActive ? 'var(--saffron)' : '';
+    });
+  });
+</script>
+
+</body>
+</html>
