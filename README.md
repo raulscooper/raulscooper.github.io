@@ -1,6 +1,6 @@
 # Nayalab
 
-Open blueprints for India. Updated weekly. Public domain.
+Open blueprints for India. Updated weekly.
 
 **Live site:** https://raulscooper.github.io
 
@@ -130,3 +130,13 @@ Colours:
 
 No build tools. No npm. No frameworks. Pure HTML.
 One folder, one file, one card. That's it.
+
+---
+
+## Copyright
+
+© Nayalab 2026. All rights reserved.
+
+All content on this site — articles, strategies, playbooks, and toolkits — is the intellectual property of Nayalab. No part of this content may be reproduced, distributed, adapted, or used for commercial purposes without prior written permission.
+
+Viewing and sharing links to the site is permitted. Reproducing or commercialising the content is not.
